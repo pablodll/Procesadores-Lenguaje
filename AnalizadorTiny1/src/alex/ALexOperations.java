@@ -105,6 +105,9 @@ public class ALexOperations {
 	public UnidadLexica unidadReal() {
 		return new UnidadLexicaMultivaluada(alex.fila(), alex.columna(), ClaseLexica.REAL, alex.lexema());
 	}
+	public UnidadLexica unidadComa() {
+		return new UnidadLexicaUnivaluada(alex.fila(), alex.columna(), ClaseLexica.COMA);
+	}
 	public UnidadLexica unidadPuntoComa() {
 		return new UnidadLexicaUnivaluada(alex.fila(), alex.columna(), ClaseLexica.PUNTOCOMA);
 	}

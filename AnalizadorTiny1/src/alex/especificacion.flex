@@ -62,8 +62,8 @@ Cadena = \"[^\"\n\b\r]*\"
 Id = {letra}({letra}|{dig}|_)*
 Entero = (\+|\-)?(0|({digPos}{dig}*))
 Real = {Entero}({pDec}|{pExp}|({pDec}{pExp}))
-PuntoComa = ;
 Asig = \=
+Amp = &
 SepSec = &&
 Mas = \+
 Menos = \-
@@ -75,15 +75,16 @@ CAp = \[
 CCie = \]
 LlAp = \{
 LlCie = \}
-Punto = .
 Flecha = ->
-Amp = &
-Menor = <
-Mayor = >
+Menor = \<
+Mayor = \>
 MenIgual = <\=
 MayIgual = >\=
 Igual = \=\=
 Dist = \!\=
+PuntoComa = \;
+Coma = \,
+Punto = \.
 %%
 {Sep}			{}
 {Com}			{}
@@ -120,8 +121,8 @@ Dist = \!\=
 {Id}			{return ops.unidadId();}
 {Entero}		{return ops.unidadEnt();}
 {Real}			{return ops.unidadReal();}
-{PuntoComa}		{return ops.unidadPuntoComa();}
 {Asig}			{return ops.unidadAsig();}
+{Amp}			{return ops.unidadAmp();}
 {SepSec}		{return ops.unidadSepSec();}
 {Mas}			{return ops.unidadMas();}
 {Menos}			{return ops.unidadMenos();}
@@ -133,13 +134,14 @@ Dist = \!\=
 {CCie}			{return ops.unidadCCie();}
 {LlAp}			{return ops.unidadLlAp();}
 {LlCie}			{return ops.unidadLlCie();}
-{Punto}			{return ops.unidadPunto();}
 {Flecha}		{return ops.unidadFlecha();}
-{Amp}			{return ops.unidadAmp();}
 {Menor}			{return ops.unidadMenor();}
 {Mayor}			{return ops.unidadMayor();}
 {MenIgual}		{return ops.unidadMenIgual();}
 {MayIgual}		{return ops.unidadMayIgual();}
 {Igual}			{return ops.unidadIgual();}
 {Dist}			{return ops.unidadDist();}
+{PuntoComa}		{return ops.unidadPuntoComa();}
+{Coma}			{return ops.unidadComa();}
+{Punto}			{return ops.unidadPunto();}
 [^]				{ops.error();}
