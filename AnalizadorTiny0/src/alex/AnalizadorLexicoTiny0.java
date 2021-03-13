@@ -286,22 +286,4 @@ public class AnalizadorLexicoTiny0 {
 		System.err.println(" (fila: " + filaActual + ", columna: " + columnaActual + "): Caracter inesperado");
 		System.exit(1);
 	}
-	
-	public static void main(String arg[]) throws IOException {
-		if(arg.length <= 0) {
-			System.err.println("Falta argumento con fichero a analizar");
-			return;
-		}
-		
-		Reader input = new InputStreamReader(new FileInputStream(arg[0]));
-		AnalizadorLexicoTiny0 al = new AnalizadorLexicoTiny0(input);
-		UnidadLexica unidad;
-		do {
-			unidad = al.sigToken();
-			System.out.println(unidad);
-		} while(unidad.clase() != ClaseLexica.EOF);
-	}
-	
-	
-
 }
