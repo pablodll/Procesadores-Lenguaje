@@ -58,6 +58,8 @@ New = new
 Delete = delete
 Read = read
 Write = write
+Nl = nl
+Mod = \%
 Cadena = \"[^\"\n\b\r]*\"
 Id = {letra}({letra}|{dig}|_)*
 Entero = (\+|\-)?(0|({digPos}{dig}*))
@@ -117,6 +119,8 @@ Punto = \.
 {Delete}		{return ops.unidadDelete();}
 {Read}			{return ops.unidadRead();}
 {Write}			{return ops.unidadWrite();}
+{Nl}			{return ops.unidadNL();}
+{Mod}			{return ops.unidadMod();}
 {Cadena}		{return ops.unidadCadena();}
 {Id}			{return ops.unidadId();}
 {Entero}		{return ops.unidadEnt();}

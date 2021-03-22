@@ -93,8 +93,11 @@ public class ALexOperations {
     public UnidadLexica unidadWrite() {
     	return new UnidadLexicaUnivaluada(alex.fila(), alex.columna(), ClaseLexica.WRITE);
     }
+    public UnidadLexica unidadNL() {
+    	return new UnidadLexicaUnivaluada(alex.fila(), alex.columna(), ClaseLexica.NL);
+    }
     public UnidadLexica unidadCadena() {
-    	return new UnidadLexicaUnivaluada(alex.fila(), alex.columna(), ClaseLexica.CADENA);
+    	return new UnidadLexicaMultivaluada(alex.fila(), alex.columna(), ClaseLexica.CADENA, alex.lexema());
     }
     public UnidadLexica unidadId() {
     	return new UnidadLexicaMultivaluada(alex.fila(), alex.columna(), ClaseLexica.IDENTIF, alex.lexema());
@@ -129,6 +132,9 @@ public class ALexOperations {
 	public UnidadLexica unidadDiv() {
 		return new UnidadLexicaUnivaluada(alex.fila(),alex.columna(),ClaseLexica.DIV);     
 	}    
+	public UnidadLexica unidadMod() {
+		return new UnidadLexicaUnivaluada(alex.fila(), alex.columna(), ClaseLexica.MOD);
+	}
 	public UnidadLexica unidadPAp() {
 		return new UnidadLexicaUnivaluada(alex.fila(),alex.columna(),ClaseLexica.PAP);     
 	}    
@@ -179,6 +185,6 @@ public class ALexOperations {
 	}
  
 	public void error() {
-	    System.err.println("*** fila: "+alex.fila()+ ", columna: " + alex.columna() + " Caracter inexperado: "+ alex.lexema());
+	    System.err.println("*** fila: "+alex.fila()+ ", columna: " + alex.columna() + " Caracter inesperado: "+ alex.lexema());
 	}
 }
