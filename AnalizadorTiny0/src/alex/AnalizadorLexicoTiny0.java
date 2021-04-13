@@ -17,7 +17,7 @@ public class AnalizadorLexicoTiny0 {
 	private static String NL = System.getProperty("line.separator");
 	
 	private enum Estado {
-		INICIO, REC_PUNTOCOMA, REC_VARIABLE, REC_0, REC_ENT, REC_IDEC, REC_DEC, REC_0DEC, REC_IEXP, REC_NEGEXP, REC_EXP, REC_MAS, REC_MENOS,
+		INICIO, REC_PUNTOCOMA, REC_VARIABLE, REC_0, REC_ENT, REC_IDEC, REC_DEC, REC_0DEC, REC_IEXP, REC_NEGEXP, REC_POSEXP, REC_EXP, REC_MAS, REC_MENOS,
 		REC_POR, REC_DIV, REC_MAYOR, REC_MAYIGUAL, REC_MENOR, REC_MENIGUAL, REC_ASIG, REC_IGUAL, REC_PAP, REC_PCIE, REC_IDIST, REC_DIST,
 		REC_ISEP, REC_SEPSEC, REC_EOF
 	}
@@ -82,7 +82,8 @@ public class AnalizadorLexicoTiny0 {
 					break;
 				case REC_DEC:
 					if(hayDigitoPos()) transita(Estado.REC_DEC);
-					if(hayCero()) transita(Estado.REC_0DEC);
+					else if(hayExp()) transita(Estado.REC_IEXP);
+					else if(hayCero()) transita(Estado.REC_0DEC);
 					else return unidadReal();
 					break;
 				case REC_0DEC:
@@ -93,12 +94,16 @@ public class AnalizadorLexicoTiny0 {
 				case REC_IEXP:
 					if(hayDigitoPos()) transita(Estado.REC_EXP);
 					else if(hayMenos()) transita(Estado.REC_NEGEXP);
+					else if(hayMas()) transita(Estado.REC_POSEXP);
 					else error();
-					break;
+					break;					
 				case REC_NEGEXP:
 					if(hayDigitoPos()) transita(Estado.REC_EXP);
 					else error();
 					break;
+				case REC_POSEXP:
+					if(hayDigitoPos()) transita(Estado.REC_EXP);
+					else error();
 				case REC_EXP:
 					if(hayDigito()) transita(Estado.REC_EXP);
 					else return unidadReal();
