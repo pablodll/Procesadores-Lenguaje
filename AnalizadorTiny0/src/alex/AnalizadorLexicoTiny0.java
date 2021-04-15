@@ -1,12 +1,13 @@
 package alex;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.Reader;
+
+import errors.GestionErroresTiny0;
 
 public class AnalizadorLexicoTiny0 {
 	
+	private GestionErroresTiny0 errores;
 	private Reader input;
 	private StringBuffer lex;
 	private int sigCar;
@@ -25,6 +26,7 @@ public class AnalizadorLexicoTiny0 {
 	private Estado estado;
 	
 	public AnalizadorLexicoTiny0(Reader input) throws IOException {
+		errores = new GestionErroresTiny0();
 		this.input = input;
 		lex = new StringBuffer();
 		sigCar = input.read();
@@ -288,7 +290,6 @@ public class AnalizadorLexicoTiny0 {
 	}
    
 	private void error() {
-		System.err.println(" (fila: " + filaActual + ", columna: " + columnaActual + "): Caracter inesperado");
-		System.exit(1);
+		errores.errorLexico(filaActual, columnaActual, lex.toString());
 	}
 }
