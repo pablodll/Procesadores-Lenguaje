@@ -10,7 +10,7 @@ public class GestionErroresTiny0 {
 		System.exit(1);
 	}
 	
-	public void errorSintactico(int fila, int col, ClaseLexica encontrada, List<ClaseLexica> esperadas) {
+	public void errorSintactico(int fila, int col, ClaseLexica encontrada, ClaseLexica ... esperadas) {
 		System.err.println("ERROR fila " + fila + ", columna " + col + ": Encontrado " + encontrada + " Se esperaba: ");
 		for(ClaseLexica esperada : esperadas) {
 			System.err.println(esperada + " ");
@@ -19,4 +19,10 @@ public class GestionErroresTiny0 {
 		System.exit(1);
 	}
 	
+	
+	public void errorFatal(Exception e) {
+		System.err.println(e);
+		e.printStackTrace();
+		System.exit(1);
+	}
 }
