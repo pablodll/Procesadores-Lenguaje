@@ -26,12 +26,15 @@ public class AnalizadorLexicoTiny0 {
 	private Estado estado;
 	
 	public AnalizadorLexicoTiny0(Reader input) throws IOException {
-		errores = new GestionErroresTiny0();
 		this.input = input;
 		lex = new StringBuffer();
 		sigCar = input.read();
 		filaActual = 1;
 		columnaActual = 1;
+	}
+	
+	public void fijaGestionErrores(GestionErroresTiny0 err) {
+		this.errores = err;
 	}
 	
 	public UnidadLexica sigToken() throws IOException{

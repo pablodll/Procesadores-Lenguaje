@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
+import errors.GestionErroresTiny0;
+
 public class Main {
 	public static void main(String arg[]) throws IOException {
 		if(arg.length <= 0) {
@@ -14,10 +16,14 @@ public class Main {
 		}
 		
 		Reader input = new InputStreamReader(new FileInputStream(arg[0]));
-		AnalizadorLexicoTiny0 al = new AnalizadorLexicoTiny0(input);
+		AnalizadorLexicoTiny0 alex = new AnalizadorLexicoTiny0(input);
 		UnidadLexica unidad;
+		
+		GestionErroresTiny0 errores = new GestionErroresTiny0();
+		alex.fijaGestionErrores(errores);
+		
 		do {
-			unidad = al.sigToken();
+			unidad = alex.sigToken();
 			System.out.println(unidad);
 		} while(unidad.clase() != ClaseLexica.EOF);
 	}
