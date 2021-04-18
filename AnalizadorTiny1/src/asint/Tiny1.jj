@@ -1,0 +1,99 @@
+options  {
+  STATIC=false;
+}  
+PARSER_BEGIN(AnalizadorSintacticoTiny1)
+package asint;
+
+public class AnalizadorSintacticoTiny1 {}
+PARSER_END(AnalizadorSintacticoTiny1)
+
+	TOKEN:{<#letra:(["a"-"z"]|["A"-"Z"])>}
+	TOKEN:{<#digPos:["1"-"9"]>}
+	TOKEN:{<#dig:(<digPos>|"0")>}
+	TOKEN:{<#pDec:"."((<dig>)*<digPos>|"0")>}
+	TOKEN:{<#pExp:("e"|"E")("-")?<digPos>(<dig>)*>}
+	SKIP:{<[" ","\t","\r","\b","\n"]>}
+	SKIP:{<"#"(~["\n"])*>}
+	TOKEN:{<TipoInt:"int">}
+	TOKEN:{<TipoReal:"real">}
+	TOKEN:{<TipoBool:"bool">}
+	TOKEN:{<TipoString:"string">}
+	TOKEN:{<And:"and">}
+	TOKEN:{<Or:"or">}
+	TOKEN:{<Not:"not">}
+	TOKEN:{<True:"true">}
+	TOKEN:{<False:"false">}
+	TOKEN:{<Var:"var">}
+	TOKEN:{<Type:"type">}
+	TOKEN:{<Proc:"proc">}
+	TOKEN:{<Null:"null">}
+	TOKEN:{<If:"if">}
+	TOKEN:{<Then:"then">}
+	TOKEN:{<Else:"else">}
+	TOKEN:{<Endif:"endif">}
+	TOKEN:{<While:"while">}
+	TOKEN:{<Do:"do">}
+	TOKEN:{<Endwhile:"endwhile">}
+	TOKEN:{<Call:"call">}
+	TOKEN:{<Record:"record">}
+	TOKEN:{<Array:"array">}
+	TOKEN:{<Of:"of">}
+	TOKEN:{<Pointer:"pointer">}
+	TOKEN:{<New:"new">}
+	TOKEN:{<Delete:"delete">}
+	TOKEN:{<Read:"read">}
+	TOKEN:{<Write:"write">}
+	TOKEN:{<Nl:"nl">}
+	TOKEN:{<Cadena:"\""(~["\"","\n","\b","\r"])*"\"">}
+	TOKEN:{<Id:<letra>(<letra>|<dig>|"_")*>}
+	TOKEN:{<Entero:("+"|"-")?("0"|(<digPos>(<dig>)*))>}
+	TOKEN:{<Real:<Entero>(<pDec>|<pExp>|(<pDec><pExp>))>}
+	
+	void Sp()			: {} {S() <EOF>}
+	void S()			: {} {Decs() LInsts()}
+	void Decs()			: {} {LDecs() "&&" | {} }
+	void LDecs()		: {} {Dec() RLDecs()}
+	void RLDecs()		: {} {";" Dec() RLDecs() | {} }
+	void Dec()			: {} {<Var> Tipo() <Id> | <Type> Tipo() <Id> | <Proc> <Id> "(" ParamsF() ")" Bloque()}
+	void ParamsF()		: {} {LParamsF() | {} }
+	void LParamsF()		: {} {ParamF() RLParamsF()}
+	void RLParamsF()	: {} {"," ParamF() RLParamsF() | {} }
+	void ParamF()		: {} {Tipo() RParamF()}
+	void RParamF()		: {} {"&" <Id> | <Id> | {} }
+	void Tipo()			: {} {<TipoInt> | <TipoReal> | <TipoBool> | <TipoString> | <Id> | <Array> "[" <Entero> "]" <Of> Tipo() | <Record> "{" LTipos() "}" | <Pointer> Tipo()}
+	void LTipos()		: {} {Tipo() <Id> RLTipos()}
+	void RLTipos()		: {} {";" Tipo() <Id> RLTipos() | {} }
+	void LInsts()		: {} {Inst() RLInsts()}
+	void RLInsts()		: {} {";" Inst() RLInsts() | {} }
+	void Inst()			: {} {E0() "=" E0() | <If> E0() <Then> Insts() RInst() | <While> E0() <Do> Insts() <Endwhile> | <Read> E0() | <Write> E0() | <Nl> | <New> E0() | <Delete> E0() | <Call> <Id> "(" ParamsR() ")" | Bloque()}
+	void RInst()		: {} {<Endif> | <Else> Insts() <Endif>}
+	void ParamsR()		: {} {LParamsR() | {} }
+	void LParamsR()		: {} {E0() RParamsR()}
+	void RParamsR()		: {} {"," E0() RParamsR() | {} } 
+	void Insts()		: {} {LInsts() | {} }
+	void Bloque()		: {} {"{" RBloque()}
+	void RBloque()		: {} {S() "}" | {} "}"}
+	void E0()			: {} {E1() RE0()}
+	void RE0()			: {} {"+" E0() | "-" E0() | {} }
+	void E1()			: {} {E2() RE1()}
+	void RE1()			: {} {OpAI1() E2() RE1() | {} }
+	void E2()			: {} {E3() RE2()}
+	void RE2()			: {} {OpAI2() E3() RE2() | {} }
+	void E3()			: {} {E4() RE3()}
+	void RE3()			: {} {OpNA3() E4() | {} }
+	void E4()			: {} {"-" E5() | <Not> E4() | E5()}
+	void E5()			: {} {E6() RE5()}
+	void RE5()			: {} {OpPA5() RE5() | {} }
+	void E6()			: {} {"*" E6() | E7()}
+	void E7()			: {} {<Entero> | <Real> | <True> | <False> | <Cadena> | <Id> | <Null> | "(" E0() ")"}
+	void OpAI1()		: {} {<And> | <Or>}
+	void OpAI2()		: {} {"==" | "<" | ">" | "<=" | ">=" | "!="}
+	void OpNA3()		: {} {"*" | "/" | "%"}
+	void OpPA5()		: {} {OpIndex() | OpReg()}
+	void OpIndex()		: {} {"[" E0() "]"}
+	void OpReg()		: {} {"." <Id> | "->" <Id>}
+	
+	
+	
+	
+	
