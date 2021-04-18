@@ -25,7 +25,7 @@ package alex;
 letra = ([a-z]|[A-Z])
 digPos = [1-9]
 dig = ({digPos}|0)
-pDec = .(({dig}*{digPos})|0)
+pDec = \.(({dig}*{digPos})|0)
 pExp = (e|E)(\-)?{digPos}{dig}*
 Sep = (" "|\t|\r|\b|\n)
 Com = #[^\n]*
