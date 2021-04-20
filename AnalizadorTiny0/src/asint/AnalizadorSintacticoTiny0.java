@@ -150,7 +150,7 @@ public class AnalizadorSintacticoTiny0 {
 			case PCIE: case PUNTOCOMA: case EOF:
 				break;
 			default: errores.errorSintactico(anticipo.fila(), anticipo.columna(), anticipo.clase(), 
-				ClaseLexica.MAS, ClaseLexica.MENOS, ClaseLexica.PUNTOCOMA, ClaseLexica.EOF);
+				ClaseLexica.MAS, ClaseLexica.MENOS, ClaseLexica.EOF);
 		}
 	}
 	
@@ -176,8 +176,7 @@ public class AnalizadorSintacticoTiny0 {
 			case MAS: case MENOS: case PCIE: case PUNTOCOMA: case EOF:
 				break;
 			default: errores.errorSintactico(anticipo.fila(), anticipo.columna(), anticipo.clase(), 
-				ClaseLexica.AND, ClaseLexica.OR, ClaseLexica.MAS, ClaseLexica.MENOS, 
-				ClaseLexica.PUNTOCOMA, ClaseLexica.EOF);
+				ClaseLexica.AND, ClaseLexica.OR, ClaseLexica.MAS, ClaseLexica.MENOS, ClaseLexica.EOF);
 		}
 	}
 	
@@ -205,7 +204,7 @@ public class AnalizadorSintacticoTiny0 {
 			default: errores.errorSintactico(anticipo.fila(), anticipo.columna(), anticipo.clase(), 
 				ClaseLexica.IGUAL, ClaseLexica.DIST, ClaseLexica.MAYOR, ClaseLexica.MENOR,
 				ClaseLexica.MAYIGUAL, ClaseLexica.MENIGUAL, ClaseLexica.AND, ClaseLexica.OR,
-				ClaseLexica.MAS, ClaseLexica.MENOS, ClaseLexica.PUNTOCOMA, ClaseLexica.EOF);
+				ClaseLexica.MAS, ClaseLexica.MENOS, ClaseLexica.EOF);
 		}
 	}
 	
@@ -233,8 +232,7 @@ public class AnalizadorSintacticoTiny0 {
 			default: errores.errorSintactico(anticipo.fila(), anticipo.columna(), anticipo.clase(), 
 				ClaseLexica.DIV, ClaseLexica.POR, ClaseLexica.IGUAL, ClaseLexica.DIST, 
 				ClaseLexica.MAYOR, ClaseLexica.MENOR, ClaseLexica.MAYIGUAL, ClaseLexica.MENIGUAL, 
-				ClaseLexica.AND, ClaseLexica.OR, ClaseLexica.MAS, ClaseLexica.MENOS, 
-				ClaseLexica.PUNTOCOMA, ClaseLexica.EOF);
+				ClaseLexica.AND, ClaseLexica.OR, ClaseLexica.MAS, ClaseLexica.MENOS, ClaseLexica.EOF);
 		}
 	}
 	
