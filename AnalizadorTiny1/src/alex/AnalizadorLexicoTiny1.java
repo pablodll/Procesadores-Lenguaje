@@ -4,10 +4,12 @@
 
 package alex;
 
+import errors.GestionErroresTiny1;
+
 
 // See https://github.com/jflex-de/jflex/issues/222
 @SuppressWarnings("FallThrough")
-class AnalizadorLexicoTiny1 {
+public class AnalizadorLexicoTiny1 implements java_cup.runtime.Scanner {
 
   /** This character denotes the end of file. */
   public static final int YYEOF = -1;
@@ -394,14 +396,17 @@ class AnalizadorLexicoTiny1 {
   private boolean zzAtBOL = true;
 
   /** Whether the user-EOF-code has already been executed. */
-  @SuppressWarnings("unused")
   private boolean zzEOFDone;
 
   /* user code: */
   private ALexOperations ops;
+  private GestionErroresTiny1 errores;
   public String lexema() {return yytext();}
   public int fila() {return yyline+1;}
   public int columna() {return yycolumn+1;}
+  public void fijaGestionErrores(GestionErroresTiny1 errores) {
+  	this.errores = errores;
+  }
 
 
   /**
@@ -409,7 +414,7 @@ class AnalizadorLexicoTiny1 {
    *
    * @param   in  the java.io.Reader to read input from.
    */
-  AnalizadorLexicoTiny1(java.io.Reader in) {
+  public AnalizadorLexicoTiny1(java.io.Reader in) {
     ops = new ALexOperations(this);
     this.zzReader = in;
   }
@@ -648,6 +653,18 @@ class AnalizadorLexicoTiny1 {
   }
 
 
+  /**
+   * Contains user EOF-code, which will be executed exactly once,
+   * when the end of file is reached
+   */
+  private void zzDoEOF() throws java.io.IOException {
+    if (!zzEOFDone) {
+      zzEOFDone = true;
+    
+  yyclose();    }
+  }
+
+
 
 
   /**
@@ -657,7 +674,7 @@ class AnalizadorLexicoTiny1 {
    * @return the next token.
    * @exception java.io.IOException if any I/O-Error occurs.
    */
-  public UnidadLexica yylex() throws java.io.IOException {
+  @Override  public UnidadLexica next_token() throws java.io.IOException {
     int zzInput;
     int zzAction;
 
@@ -793,13 +810,14 @@ class AnalizadorLexicoTiny1 {
 
       if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
         zzAtEOF = true;
+            zzDoEOF();
           {   return ops.unidadEof();
  }
       }
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
-            { ops.error();
+            { errores.errorLexico(fila(),columna(),lexema());
             }
             // fall through
           case 61: break;

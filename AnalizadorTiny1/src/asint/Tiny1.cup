@@ -1,0 +1,62 @@
+package asint;
+
+import java_cup.runtime.*;
+import alex.AnalizadorLexicoTiny1;
+import alex.UnidadLexica;
+import errors.GestionErroresTiny1;
+
+scan with {: return getScanner().next_token(); :};
+parser code {:
+	private GestionErroresTiny1 errores;
+	public void syntax_error(Symbol unidadLexica) {
+		errores.errorSintactico((UnidadLexica) unidadLexica);
+	}
+:};
+init with {:
+	errores = new GestionErroresTiny1();
+	AnalizadorLexicoTiny1 alex = (AnalizadorLexicoTiny1) getScanner();
+	alex.fijaGestionErrores(errores);
+:};
+
+terminal	TIPOINT, TIPOREAL, TIPOBOOL, TIPOSTRING, AND, OR, NOT, TRUE, FALSE, 
+			VAR, TYPE, PROC, NULL, IF, THEN, ELSE, ENDIF, WHILE, DO, ENDWHILE, CALL, RECORD, 
+			ARRAY, OF, POINTER, NEW, DELETE, READ, WRITE, NL, CADENA, ID,
+			ENTERO, REAL, COMA, PUNTOCOMA, ASIG, SEPSEC, MAS, MENOS, POR, DIV, MOD, 
+			PAP, PCIE, CAP, CCIE, LLAP, LLCIE, PUNTO, FLECHA, AMP, MENOR, MAYOR, 
+			MENIGUAL, MAYIGUAL, IGUAL, DIST;
+			
+non terminal	S, Decs, LDecs, Dec, ParamsF, LParamsF, ParamF, Tipo, LTipos,
+				LInsts, Inst, ParamsR, LParamsR, Insts, Bloque, E0, E1, E2, E3, 
+				E4, E5, E6, E7, OpAI1, OpAI2, OpNA3, OpPA5, OpIndex, OpReg;
+				
+S			::= Decs LInsts;
+Decs		::= LDecs SEPSEC | ;
+LDecs		::= Dec | LDecs PUNTOCOMA Dec;
+Dec			::= VAR Tipo ID | TYPE Tipo ID | PROC ID PAP ParamsF PCIE Bloque;
+ParamsF		::= LParamsF | ;
+LParamsF	::= ParamF | LParamsF COMA ParamF;
+ParamF		::= Tipo AMP ID | Tipo ID;
+Tipo		::= TIPOINT | TIPOREAL | TIPOBOOL | TIPOSTRING | ID | ARRAY CAP ENTERO CCIE OF Tipo | RECORD LLAP LTipos LLCIE | POINTER Tipo;
+LTipos		::= Tipo ID | LTipos PUNTOCOMA Tipo ID;
+LInsts		::= Inst | LInsts PUNTOCOMA Inst;
+Inst		::= E0 ASIG E0 | IF E0 THEN Insts ENDIF | IF E0 THEN Insts ELSE Insts ENDIF | WHILE E0 DO Insts ENDWHILE | READ E0 | WRITE E0 | NL | NEW E0 | DELETE E0 | CALL ID PAP ParamsR PCIE | Bloque;
+ParamsR		::= LParamsR | ;
+LParamsR	::= E0 | LParamsR COMA E0;
+Insts		::= LInsts | ;
+Bloque		::= LLAP S LLCIE | LLAP LLCIE;
+E0			::= E1 MAS E0 | E1 MENOS E0 | E1;
+E1			::= E1 OpAI1 E2 | E2;
+E2			::= E2 OpAI2 E3 | E3;
+E3			::= E4 OpNA3 E4 | E4;
+E4			::= MENOS E5 | NOT E4 | E5;
+E5			::= E5 OpPA5 | E6;
+E6			::= POR E6 | E7;
+E7			::= ENTERO | REAL | TRUE | FALSE | CADENA | ID | NULL | PAP E0 PCIE;
+OpAI1		::= AND | OR;
+OpAI2		::= IGUAL | MENOR | MAYOR | MENIGUAL | MAYIGUAL | DIST;
+OpNA3		::= POR | DIV | MOD;
+OpPA5		::= OpIndex | OpReg;
+OpIndex		::= CAP E0 CCIE;
+OpReg		::= PUNTO ID | FLECHA ID;
+
+
