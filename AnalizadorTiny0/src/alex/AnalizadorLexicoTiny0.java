@@ -293,6 +293,6 @@ public class AnalizadorLexicoTiny0 {
 	}
    
 	private void error() {
-		errores.errorLexico(filaActual, columnaActual, lex.toString());
+		errores.errorLexico(filaActual, columnaActual, Character.toString(sigCar));
 	}
 }
