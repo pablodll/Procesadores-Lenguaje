@@ -142,9 +142,11 @@ public class AnalizadorSintacticoTiny0 {
 	private void RE0() {
 		switch(anticipo.clase()) {
 			case MAS:
+				empareja(ClaseLexica.MAS);
 				E0();
 				break;
 			case MENOS:
+				empareja(ClaseLexica.MENOS);
 				E1();
 				break;
 			case PCIE: case PUNTOCOMA: case EOF:
