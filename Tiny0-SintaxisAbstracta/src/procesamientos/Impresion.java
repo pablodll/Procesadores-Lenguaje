@@ -59,7 +59,7 @@ public class Impresion extends ProcesamientoPorDefecto{
    }
    public void procesa(Igual exp) {
 	   imprime_arg(exp.arg0(), 2);
-	   System.out.print(" = ");
+	   System.out.print(" == ");
 	   imprime_arg(exp.arg1(), 3);
    }
    public void procesa(Menor exp) {

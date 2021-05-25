@@ -205,7 +205,7 @@ public class AnalizadorLexicoTiny0 {
    	private boolean hayPAp() {return sigCar == '(';}
    	private boolean hayPCie() {return sigCar == ')';} 
    	private boolean hayIgual() {return sigCar == '=';}
-   	private boolean hayExclam() {return sigCar =='1';}
+   	private boolean hayExclam() {return sigCar =='!';}
    	private boolean hayBarra() {return sigCar == '_';}
    	private boolean hayPunto() {return sigCar == '.';}
    	private boolean hayPuntoComa() {return sigCar == ';';}

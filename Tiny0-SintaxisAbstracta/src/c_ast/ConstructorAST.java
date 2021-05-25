@@ -324,7 +324,7 @@ public class ConstructorAST {
 		switch(anticipo.clase()) {
 			case IGUAL:
 				empareja(ClaseLexica.IGUAL);
-				return "=";
+				return "==";
 			case MENOR:
 				empareja(ClaseLexica.MENOR);
 				return "<";
