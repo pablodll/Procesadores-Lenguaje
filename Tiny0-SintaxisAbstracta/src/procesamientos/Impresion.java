@@ -103,7 +103,7 @@ public class Impresion extends ProcesamientoPorDefecto{
    }
    public void procesa(Not exp) {
 	   System.out.print(" not ");
-	   imprime_arg(exp.arg(), 5);
+	   imprime_arg(exp.arg(), 4);
    }
    public void procesa(Entero exp) {
 	   System.out.print(exp.entero());
@@ -152,10 +152,10 @@ public class Impresion extends ProcesamientoPorDefecto{
 	   ldecs.ldecs().procesa(this);
 	   System.out.println(";");
 	   ldecs.dec().procesa(this);
-	   System.out.println();
    }
    public void procesa(Prog prog) {
 	   prog.ldecs().procesa(this);
+	   System.out.println();
 	   System.out.println("&&");
 	   prog.linsts().procesa(this);
    }
