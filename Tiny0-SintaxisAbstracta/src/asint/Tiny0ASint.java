@@ -454,7 +454,7 @@ public class Tiny0ASint {
      public Exp real(StringLocalizado real) {
     	 return new Real(real);
      }
-     public Exp varaible(StringLocalizado variable) {
+     public Exp variable(StringLocalizado variable) {
     	 return new Variable(variable);
      }
      public Exp _true() {
