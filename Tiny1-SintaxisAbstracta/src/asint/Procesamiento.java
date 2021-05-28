@@ -29,7 +29,6 @@ import asint.Tiny1Asint.Tipo_int;
 import asint.Tiny1Asint.Tipo_real;
 import asint.Tiny1Asint.Tipo_string;
 import asint.Tiny1Asint.True;
-import asint.Tiny1Asint.Variable;
 import asint.Tiny1Asint.Tipo_array;
 import asint.Tiny1Asint.Tipo_pointer;
 import asint.Tiny1Asint.Tipo_record;
@@ -91,12 +90,11 @@ public interface Procesamiento {
 	void procesa(Tipo_real tipo);
 	void procesa(Tipo_string tipo);  //
 	void procesa(Tipo_array tipo);	//
-	void procesa(LTipos_uno ltipos);
-	void procesa(LTipos_muchos ltipos);
+	void procesa(Tipos_uno ltipos);
+	void procesa(Tipos_muchos ltipos);
 	void procesa(Tipo_pointer tipo);	//
 	void procesa(Tipo_record tipo);	//
 	void procesa(Ref tipo);	//
-
 	void procesa(Paramf_valor paramf);	//
 	void procesa(Paramf_referencia paramf);	//
 	void procesa(Lparamsf_muchos lparamsf);	//

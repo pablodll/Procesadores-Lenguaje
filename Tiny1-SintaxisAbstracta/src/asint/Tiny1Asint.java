@@ -165,8 +165,6 @@ public class Tiny1Asint {
             return 3;
         }
     }
-    
-     
     public static class Mul extends ExpMultiplicativa {
         public Mul(Exp arg0, Exp arg1) {
             super(arg0,arg1);
@@ -192,8 +190,6 @@ public class Tiny1Asint {
         }     
     }
     
-    
-    
     public static abstract class ExpUn extends Exp {
     	private Exp arg;
     	public Exp arg() {return arg;}
@@ -202,7 +198,6 @@ public class Tiny1Asint {
     		this.arg = arg;
     	}
     }
-    
     private static abstract class ExpPrefijo extends ExpUn {
     	public ExpPrefijo(Exp arg) {
     		super(arg);
@@ -211,7 +206,6 @@ public class Tiny1Asint {
     		return 4;
     	}
     }
-    
     public static class Menos extends ExpPrefijo {
 		public Menos(Exp arg) {
 			super(arg);
@@ -229,7 +223,6 @@ public class Tiny1Asint {
          }    
     }
     
-    //public static class Indice extends ExpIndreg
     
     public static class Indirecto extends ExpUn{
     	public Indirecto(Exp arg) {
@@ -241,7 +234,48 @@ public class Tiny1Asint {
     	public final int prioridad() {
     		return 6;
     	}
-    	
+    }
+    
+    public static class Indice extends ExpBin{
+		public Indice(Exp arg0, Exp arg1) {
+			super(arg0, arg1);
+		}
+		public void procesa(Procesamiento p) {
+    		p.procesa(this);
+    	}
+    	public final int prioridad() {
+    		return 5;
+    	}
+    }
+    
+    public static abstract class ExpReg extends Exp{
+    	private Exp arg;
+    	private StringLocalizado id;
+    	public ExpReg(Exp arg, StringLocalizado id) {
+    		this.arg = arg;
+    		this.id = id;
+    	}
+    	public Exp arg() {return arg;}
+    	public StringLocalizado id() {return id;}
+    	public final int prioridad() {
+    		return 5;
+    	}
+    }
+    public static class Reg_punto extends ExpReg{
+    	public Reg_punto(Exp arg, StringLocalizado id) {
+    		super(arg, id);
+    	}
+    	public void procesa(Procesamiento p) {
+    		p.procesa(this);
+    	}
+    }
+    public static class Reg_flecha extends ExpReg{
+    	public Reg_flecha(Exp arg, StringLocalizado id) {
+    		super(arg, id);
+    	}
+    	public void procesa(Procesamiento p) {
+    		p.procesa(this);
+    	}
     }
     
     public static class Entero extends Exp {
@@ -272,21 +306,7 @@ public class Tiny1Asint {
     		return 7;
     	}
     }
-   /* public static class Variable extends Exp {
-    	private StringLocalizado variable;
-    	public Variable(StringLocalizado variable) {
-    		super();
-    		this.variable = variable;
-    	}
-    	public StringLocalizado variable() {return variable;}
-    	public void procesa(Procesamiento p) {
-    		p.procesa(this);
-    	}
-    	public final int prioridad() {
-    		return 5;
-    	}
-    }
-    */
+    
     public static class True extends Exp {
     	public True() {
     		super();
@@ -316,29 +336,28 @@ public class Tiny1Asint {
     		super();
     		this.cadena = cadena;
     	}
-    	
-    	
-    	
+    	public StringLocalizado cadena() {return cadena;}
     	public void procesa(Procesamiento p) {
     		p.procesa(this);
     	}
     	public final int prioridad() {
     		return 7;
     	}
-    	
     }
     
     public static class Identif extends Exp{
-    	public Identif() {
+    	private StringLocalizado id;
+    	public Identif(StringLocalizado id) {
     		super();
+    		this.id = id;
     	}
+    	public StringLocalizado id() {return id;}
     	public void procesa(Procesamiento p) {
     		p.procesa(this);
     	}
     	public final int prioridad() {
     		return 7;
     	}
-    		
     }
     
     public static class Null extends Exp{
@@ -351,12 +370,16 @@ public class Tiny1Asint {
     	public final int prioridad() {
     		return 7;
     	}
-    	
     }
     
+    public static abstract class Bloque{
+    	public Bloque() {}
+    	public abstract void procesa(Procesamiento p);
+    }
     public static class Bloque_no_vacio extends Bloque{
     	private Prog prog;
     	public Bloque_no_vacio(Prog prog) {
+    		super();
     		this.prog = prog;
     	}
     	public Prog prog() {return prog;}
@@ -364,20 +387,23 @@ public class Tiny1Asint {
     		p.procesa(this);
     	}
     }
-    
     public static class Bloque_vacio extends Bloque{
+    	public Bloque_vacio() {
+    		super();
+    	}
     	public void procesa(Procesamiento p) {
     		p.procesa(this);
     	}
     }
-    
-    public static abstract class Bloque{
+        
+    public static abstract class Insts{
+    	public Insts() {}
     	public abstract void procesa(Procesamiento p);
     }
-    
     public static class Insts_no_vacia extends Insts{
     	private LInsts linsts;
     	public Insts_no_vacia(LInsts linsts) {
+    		super();
     		this.linsts = linsts;
     	}
     	public LInsts linsts() {return linsts;}
@@ -385,25 +411,24 @@ public class Tiny1Asint {
     		p.procesa(this);
     	}
     }
-    
     public static class Insts_vacia extends Insts{
-    	public Insts_vacia() {}
+    	public Insts_vacia() {
+    		super();
+    	}
     	public void procesa(Procesamiento p) {
     		p.procesa(this);
     	}
     }
-    public static abstract class Insts{
-    	public abstract void procesa(Procesamiento p);
-    }
+
     public static abstract class Lparamsr {
-    	public Lparamsr() {
-    	}
+    	public Lparamsr() {}
     	public abstract void procesa(Procesamiento p);
     }
     public static class Lparamsr_uno extends Lparamsr {
         private Exp exp; 
         public Lparamsr_uno(Exp exp) {
-           this.exp = exp;
+        	super();
+        	this.exp = exp;
         }   
         public Exp exp() {return exp;}
         public void procesa(Procesamiento p) {
@@ -424,8 +449,13 @@ public class Tiny1Asint {
          }     
      }
     
+     public static abstract class Paramsr{
+    	 public Paramsr() {}
+    	 public abstract void procesa(Procesamiento p);
+     }
     public static class Paramsr_vacio extends Paramsr{
     	public Paramsr_vacio() {
+    		super();
     	}
     	public void procesa(Procesamiento p) {
     		p.procesa(this);
@@ -433,8 +463,8 @@ public class Tiny1Asint {
     }
     public static class Paramsr_no_vacio extends Paramsr{
     	private Lparamsr lparams;
-    	
     	public Paramsr_no_vacio(Lparamsr lparams) {
+    		super();
     		this.lparams = lparams;
     	}
     	public Lparamsr lparams() {return lparams;}
@@ -442,62 +472,59 @@ public class Tiny1Asint {
     		p.procesa(this);
     	}
     }
-    public static abstract class Paramsr{
-    	
-    }
     
     public static abstract class Inst {
-    	public Inst() {
-    	}
+    	public Inst() {}
     	public abstract void procesa(Procesamiento p);
     }
     public static class Inst_asig extends Inst{
-    	private StringLocalizado variable;
-    	private Exp arg;
-    	public Inst_asig(StringLocalizado variable, Exp arg) {
-    		this.variable = variable;
-    		this.arg = arg;
+    	private Exp arg0, arg1;
+    	public Inst_asig(Exp arg0, Exp arg1) {
+    		super();
+    		this.arg0 = arg0;
+    		this.arg1 = arg1;
     	}
-    	public StringLocalizado variable() {return variable;}
-    	public Exp arg() {return arg;}
+    	public Exp arg0() {return arg0;}
+    	public Exp arg1() {return arg1;}
     	public void procesa(Procesamiento p) {
     		p.procesa(this);
     	}
     }
     public static class Inst_if extends Inst{
     	private Exp exp;
-    	private Inst inst;
-    	public Inst_if(Exp exp, Inst inst) {
+    	private Insts inst;
+    	public Inst_if(Exp exp, Insts inst) {
+    		super();
     		this.exp = exp;
     		this.inst = inst;
     	}
     	public Exp exp() { return exp;}
-    	public Inst inst() {return inst;}
+    	public Insts inst() {return inst;}
     	public void procesa(Procesamiento p) {
     		p.procesa(this);
     	}
     }
-    
     public static class Inst_if_else extends Inst{
     	private Exp exp;
-    	private Inst inst1,inst2;
-    	public Inst_if_else(Exp exp, Inst inst1,Inst inst2) {
+    	private Insts inst1, inst2;
+    	public Inst_if_else(Exp exp, Insts inst1, Insts inst2) {
+    		super();
     		this.exp = exp;
     		this.inst1 = inst1;
     		this.inst2 = inst2;
     	}
-    	public Exp exp() { return exp;}
-    	public Inst inst1() {return inst1;}
-    	public Inst inst2() {return inst2;}
+    	public Exp exp() {return exp;}
+    	public Insts inst1() {return inst1;}
+    	public Insts inst2() {return inst2;}
     	public void procesa(Procesamiento p) {
     		p.procesa(this);
     	}
     }
-    
     public static class Inst_while extends Inst{
     	private Exp exp;
     	private Inst inst;
     	public Inst_while(Exp exp, Inst inst) {
+    		super();
     		this.exp = exp;
     		this.inst = inst;
     	}
@@ -510,6 +537,7 @@ public class Tiny1Asint {
     public static class Inst_read extends Inst{
     	private Exp exp;
     	public Inst_read(Exp exp) {
+    		super();
     		this.exp = exp;
     	}
     	public Exp exp() {return exp;}
@@ -520,6 +548,7 @@ public class Tiny1Asint {
     public static class Inst_write extends Inst{
     	private Exp exp;
     	public Inst_write(Exp exp) {
+    		super();
     		this.exp = exp;
     	}
     	public Exp exp() {return exp;}
@@ -528,6 +557,9 @@ public class Tiny1Asint {
     	}
     }
     public static class Inst_nl extends Inst{
+    	public Inst_nl() {
+    		super();
+    	}
     	public void procesa(Procesamiento p) {
     		p.procesa(this);
     	}
@@ -535,6 +567,7 @@ public class Tiny1Asint {
     public static class Inst_new extends Inst{
     	private Exp exp;
     	public Inst_new(Exp exp) {
+    		super();
     		this.exp = exp;
     	}
     	public Exp exp() {return exp;}
@@ -545,6 +578,7 @@ public class Tiny1Asint {
     public static class Inst_delete extends Inst{
     	private Exp exp;
     	public Inst_delete(Exp exp) {
+    		super();
     		this.exp = exp;
     	}
     	public Exp exp() {return exp;}
@@ -556,6 +590,7 @@ public class Tiny1Asint {
     	private StringLocalizado identif;
     	private Paramsr paramsr;
     	public Inst_call(StringLocalizado identif, Paramsr paramsr) {
+    		super();
     		this.identif = identif;
     		this.paramsr = paramsr;
     	}
@@ -565,10 +600,10 @@ public class Tiny1Asint {
     		p.procesa(this);
     	}
     }
-    
     public static class Inst_bloque extends Inst{
     	private Bloque bloque;
     	public Inst_bloque(Bloque bloque) {
+    		super();
     		this.bloque = bloque;
     	}
     	public Bloque bloque() {return bloque;}
@@ -596,6 +631,7 @@ public class Tiny1Asint {
     	private Inst inst;
     	private LInsts linsts;
     	public Insts_muchas(LInsts linsts, Inst inst) {
+    		super();
     		this.inst = inst;
     		this.linsts = linsts;
     	}
@@ -645,14 +681,14 @@ public class Tiny1Asint {
     }
     
     public static class Tipo_array extends Tipo {
-    	private Entero entero;
+    	private StringLocalizado tam;
     	private Tipo tipo;
-    	public Tipo_array(Entero entero,Tipo tipo) {
+    	public Tipo_array(StringLocalizado tam,Tipo tipo) {
     		super();
-    		this.entero = entero;
+    		this.tam = tam;
     		this.tipo = tipo;
     	}
-    	public Entero entero() {return entero;}
+    	public StringLocalizado entero() {return tam;}
     	public Tipo tipo() {return tipo;}
     	public void procesa(Procesamiento p) {
     		p.procesa(this);
@@ -671,33 +707,39 @@ public class Tiny1Asint {
     }
     
     public static abstract class LTipos{
-    	public LTipos() {
-    		
-    	}
+    	public LTipos() {}
     	public abstract void procesa(Procesamiento p);
     }
-    public static class LTipos_uno extends LTipos {
+    public static class Tipos_uno extends LTipos {
         private Tipo tipo; 
-        public LTipos_uno(Tipo tipo) {
-           this.tipo = tipo;
+        private StringLocalizado id;
+        public Tipos_uno(Tipo tipo, StringLocalizado id) {
+        	super();
+        	this.tipo = tipo;
+        	this.id = id;
         }   
         public Tipo tipo() {return tipo;}
+        public StringLocalizado id() {return id;}
         public void procesa(Procesamiento p) {
             p.procesa(this); 
-         }     
+        }     
      }
-     public static class LTipos_muchos extends LTipos {
+     public static class Tipos_muchos extends LTipos {
         private Tipo tipo;
         private LTipos ltipos;
-        public LTipos_muchos(LTipos ltipos, Tipo tipo) {
-           this.tipo = tipo;
-           this.ltipos = ltipos;
+        private StringLocalizado id;
+        public Tipos_muchos(LTipos ltipos, Tipo tipo, StringLocalizado id) {
+        	super();
+        	this.tipo = tipo;
+        	this.ltipos = ltipos;
+        	this.id = id;
         }
         public Tipo tipo() {return tipo;}
         public LTipos ltipos() {return ltipos;}
+        public StringLocalizado id() {return id;}
         public void procesa(Procesamiento p) {
             p.procesa(this); 
-         }     
+        }     
      }
     
     public static class Tipo_record extends Tipo {
@@ -711,43 +753,47 @@ public class Tiny1Asint {
     		p.procesa(this);
     	}
     }
+    
     public static class Ref extends Tipo {
-    	public Ref() {
+    	private StringLocalizado id;
+    	public Ref(StringLocalizado id) {
     		super();
+    		this.id = id;
     	}
-    	public void procesa(Procesamiento p) {
-    		p.procesa(this);
-    	}
-    }
-    public static class Paramf_valor extends Paramf{
-    	private StringLocalizado variable;
-    	public Paramf_valor(Tipo tipo, StringLocalizado variable) {
-    		super(tipo);
-    		this.variable = variable;
-    	}
+    	public StringLocalizado id() {return id;}
     	public void procesa(Procesamiento p) {
     		p.procesa(this);
     	}
     }
     
-    public static class Paramf_referencia extends Paramf{
-    	private StringLocalizado variable;
-    	public Paramf_referencia(Tipo tipo, StringLocalizado variable) {
-    		super(tipo);
-    		this.variable = variable;
-    	}
-    	public void procesa(Procesamiento p) {
-    		p.procesa(this);
-    	}
-    }
     public static abstract class Paramf{
     	private Tipo tipo;
-    	public Paramf(Tipo tipo) {
+    	private StringLocalizado id;
+    	public Paramf(Tipo tipo, StringLocalizado id) {
     		this.tipo = tipo;
+    		this.id = id;
     	}
+    	public Tipo tipo() {return tipo;}
+    	public StringLocalizado id() {return id;}
     	public abstract void procesa(Procesamiento p);
     }
-    
+    public static class Paramf_valor extends Paramf{
+    	public Paramf_valor(Tipo tipo, StringLocalizado id) {
+    		super(tipo, id);
+    	}
+    	public void procesa(Procesamiento p) {
+    		p.procesa(this);
+    	}
+    }
+    public static class Paramf_referencia extends Paramf{
+    	public Paramf_referencia(Tipo tipo, StringLocalizado id) {
+    		super(tipo, id);
+    	}
+    	public void procesa(Procesamiento p) {
+    		p.procesa(this);
+    	}
+    }
+
     public static abstract class Lparamsf {
     	public Lparamsf() {
     	}
@@ -779,8 +825,13 @@ public class Tiny1Asint {
          }     
      }
     
+     public static abstract class Paramsf{
+    	 public Paramsf() {}
+     	public abstract void procesa(Procesamiento p);
+     }
     public static class Paramsf_vacio extends Paramsf{
     	public Paramsf_vacio() {
+    		super();
     	}
     	public void procesa(Procesamiento p) {
     		p.procesa(this);
@@ -788,8 +839,8 @@ public class Tiny1Asint {
     }
     public static class Paramsf_no_vacio extends Paramsf{
     	private Lparamsf lparams;
-    	
     	public Paramsf_no_vacio(Lparamsf lparams) {
+    		super();
     		this.lparams = lparams;
     	}
     	public Lparamsf lparams() {return lparams;}
@@ -797,46 +848,12 @@ public class Tiny1Asint {
     		p.procesa(this);
     	}
     }
-    public static abstract class Paramsf{
+    
+    public abstract static class Dec{
+    	public Dec() {}
     	public abstract void procesa(Procesamiento p);
     }
     
-    public static class Dec_proc extends Dec{
-    	private StringLocalizado variable;
-    	private Paramsf paramsf;
-    	private Bloque bloque;
-    	
-    	public Dec_proc(StringLocalizado variable, Paramsf paramsf, Bloque bloque) {
-    		this.variable = variable;
-    		this.paramsf = paramsf;
-    		this.bloque = bloque;
-    	}
-    	public StringLocalizado variable(){return variable;}
-    	public Paramsf paramsf() {return paramsf;}
-    	public Bloque bloque() {return bloque;}
-    	public void procesa(Procesamiento p) {
-    		p.procesa(this);
-    	}
-    }
-    
-    public static class Dec_var extends Dec_id{
-
-    	public Dec_var(Tipo tipo, StringLocalizado variable) {
-    		super(tipo,variable);
-    	}
-    	public void procesa(Procesamiento p) {
-    		p.procesa(this);
-    	}
-    }
-    public static class Dec_type extends Dec_id{
-
-    	public Dec_type(Tipo tipo, StringLocalizado variable) {
-    		super(tipo,variable);
-    	}
-    	public void procesa(Procesamiento p) {
-    		p.procesa(this);
-    	}
-    }
     public abstract static class Dec_id extends Dec{
     	private StringLocalizado variable;
     	private Tipo tipo;
@@ -846,16 +863,44 @@ public class Tiny1Asint {
     	}
     	public StringLocalizado variable() {return variable;}
     	public Tipo tipo() {return tipo;}
-
+    }
+    public static class Dec_var extends Dec_id{
+    	public Dec_var(Tipo tipo, StringLocalizado variable) {
+    		super(tipo,variable);
+    	}
+    	public void procesa(Procesamiento p) {
+    		p.procesa(this);
+    	}
+    }
+    public static class Dec_type extends Dec_id{
+    	public Dec_type(Tipo tipo, StringLocalizado variable) {
+    		super(tipo,variable);
+    	}
+    	public void procesa(Procesamiento p) {
+    		p.procesa(this);
+    	}
     }
     
-    public abstract static class Dec{
-    	public abstract void procesa(Procesamiento p);
+    public static class Dec_proc extends Dec{
+    	private StringLocalizado id;
+    	private Paramsf paramsf;
+    	private Bloque bloque;
+    	public Dec_proc(StringLocalizado id, Paramsf paramsf, Bloque bloque) {
+    		super();
+    		this.id = id;
+    		this.paramsf = paramsf;
+    		this.bloque = bloque;
+    	}
+    	public StringLocalizado id(){return id;}
+    	public Paramsf paramsf() {return paramsf;}
+    	public Bloque bloque() {return bloque;}
+    	public void procesa(Procesamiento p) {
+    		p.procesa(this);
+    	}
     }
     
     public static abstract class LDecs {
-    	public LDecs() {
-    	}
+    	public LDecs() {}
     	public abstract void procesa(Procesamiento p);
     }
     public static class Decs_una extends LDecs {
@@ -888,6 +933,7 @@ public class Tiny1Asint {
     	 private LDecs ldecs;
     	 private LInsts linsts;
     	 public Prog_con_decs(LDecs ldecs, LInsts linsts) {
+    		 super();
     		 this.ldecs = ldecs;
     		 this.linsts = linsts;
     	 }
@@ -902,6 +948,7 @@ public class Tiny1Asint {
      public static class Prog_sin_decs extends Prog{
     	 private LInsts linsts;
     	 public Prog_sin_decs(LInsts linsts) {
+    		 super();
     		 this.linsts = linsts;
     	 }
     	 public LInsts linsts() {return linsts;}
@@ -915,17 +962,12 @@ public class Tiny1Asint {
      }
      
      // Constructoras
-     /*public Prog prog(LDecs ldecs, LInsts linsts) {
-    	 return new Prog(ldecs, linsts);
-     }*/
-     
      public Prog_sin_decs prog_sin_decs(LInsts linsts) {
     	 return new Prog_sin_decs(linsts);
      }
      public Prog_con_decs prog_con_decs(LDecs ldecs, LInsts linsts) {
     	 return new Prog_con_decs(ldecs, linsts);
      }
-     
      public LDecs decs_una(Dec dec) {
     	 return new Decs_una(dec);
      }
@@ -941,11 +983,11 @@ public class Tiny1Asint {
      public Dec dec_proc(StringLocalizado variable,Paramsf paramsf, Bloque bloque) {
     	 return new Dec_proc(variable,paramsf,bloque);
      }
-     public Paramsf paramsf_no_vacio(Lparamsf lparamsf) {
-    	 return new Paramsf_no_vacio(lparamsf);
-     }
      public Paramsf paramsf_vacio() {
     	 return new Paramsf_vacio();
+     }
+     public Paramsf paramsf_no_vacio(Lparamsf lparamsf) {
+    	 return new Paramsf_no_vacio(lparamsf);
      }
      public Lparamsf lparamsf_uno(Paramf paramf) {
     	 return new Lparamsf_uno(paramf);
@@ -953,11 +995,11 @@ public class Tiny1Asint {
      public Lparamsf lparamsf_muchos(Lparamsf lparamsf,Paramf paramf) {
     	 return new Lparamsf_muchos(lparamsf,paramf);
      }
-     public Paramf paramf_valor(Tipo tipo, StringLocalizado str) {
-    	 return new Paramf_valor(tipo,str);
-     }
      public Paramf paramf_referencia(Tipo tipo, StringLocalizado str) {
     	 return new Paramf_referencia(tipo,str);
+     }
+     public Paramf paramf_valor(Tipo tipo, StringLocalizado str) {
+    	 return new Paramf_valor(tipo,str);
      }
      public Tipo tipo_int() {
     	 return new Tipo_int();
@@ -971,37 +1013,40 @@ public class Tiny1Asint {
      public Tipo tipo_string() {
     	 return new Tipo_string();
      }
+     public Tipo tipo_array(StringLocalizado tam, Tipo tipo) {
+    	 return new Tipo_array(tam,tipo);
+     }
      public Tipo tipo_pointer(Tipo tipo) {
     	 return new Tipo_pointer(tipo);
      }
      public Tipo tipo_record(LTipos ltipos) {
     	 return new Tipo_record(ltipos);
      }
-     public Tipo tipo_array(Entero entero, Tipo tipo) {
-    	 return new Tipo_array(entero,tipo);
+     public Tipo ref(StringLocalizado id) {
+    	 return new Ref(id);
      }
-     public LTipos ltipos_uno(Tipo tipo) {
-    	 return new LTipos_uno(tipo);
+     public LTipos tipos_uno(Tipo tipo, StringLocalizado id) {
+    	 return new Tipos_uno(tipo, id);
      }
-     public LTipos ltipos_muchos(LTipos ltipos, Tipo tipo) {
-    	 return new LTipos_muchos(ltipos, tipo);
+     public LTipos tipos_muchos(LTipos ltipos, Tipo tipo, StringLocalizado id) {
+    	 return new Tipos_muchos(ltipos, tipo, id);
      }
-     public LInsts inst_una(Inst inst) {
+     public LInsts insts_una(Inst inst) {
     	 return new Insts_una(inst);
      }
-     public LInsts inst_muchas(LInsts linsts, Inst inst) {
+     public LInsts insts_muchas(LInsts linsts,Inst inst) {
     	 return new Insts_muchas(linsts, inst);
      }
-     public Inst Inst_asig(StringLocalizado variable, Exp arg) {
-    	 return new Inst_asig(variable, arg);
+     public Inst inst_asig(Exp arg0, Exp arg1) {
+    	 return new Inst_asig(arg0, arg1);
      }
-     public Inst inst_if(Exp exp, Inst inst) {
+     public Inst inst_if(Exp exp, Insts inst) {
     	 return new Inst_if(exp,inst);
      }
-     public Inst inst_if_else(Exp exp, Inst inst1, Inst inst2) {
+     public Inst inst_if_else(Exp exp, Insts inst1, Insts inst2) {
     	 return new Inst_if_else(exp,inst1,inst2);
      }
-     public Inst inst_while(Exp exp, Inst inst) {
+     public Inst inst_while(Exp exp, Insts inst) {
     	 return new Inst_if(exp,inst);
      }
      public Inst inst_read(Exp exp) {
@@ -1024,12 +1069,6 @@ public class Tiny1Asint {
      }
      public Inst inst_bloque(Bloque bloque) {
     	 return new Inst_bloque(bloque);
-     }
-     public LInsts insts_una(Inst inst) {
-    	 return new Insts_una(inst);
-     }
-     public LInsts insts_muchas(LInsts linsts,Inst inst) {
-    	 return new Insts_muchas(linsts, inst);
      }
      public Paramsr paramsr_vacio() {
     	 return new Paramsr_vacio();
@@ -1061,20 +1100,17 @@ public class Tiny1Asint {
      public Exp real(StringLocalizado real) {
     	 return new Real(real);
      }
-   /*  public Exp varaible(StringLocalizado variable) {
-    	 return new Variable(variable);
-     }*/
      public Exp _true() {
     	 return new True();
      }
      public Exp _false() {
     	 return new False();
      }
-     public Exp cadena(StringLocalizado str) {
-    	 return new Cadena(str);
+     public Exp cadena(StringLocalizado cadena) {
+    	 return new Cadena(cadena);
      }
-     public Exp identif() {
-    	 return new Identif();
+     public Exp identif(StringLocalizado id) {
+    	 return new Identif(id);
      }
      public Exp _null() {
     	 return new Null();
@@ -1121,11 +1157,20 @@ public class Tiny1Asint {
      public Exp not(Exp arg) {
     	 return new Not(arg);
      }
+     public Exp menos(Exp arg) {
+    	 return new Menos(arg);
+     }
      public Exp indirecto(Exp exp) {
     	 return new Indirecto(exp);
      }
-     public Exp menos(Exp arg) {
-    	 return new Menos(arg);
+     public Exp indice(Exp arg0, Exp arg1) {
+    	 return new Indice(arg0, arg1);
+     }
+     public Exp reg_punto(Exp arg, StringLocalizado id) {
+    	 return new Reg_punto(arg, id);
+     }
+     public Exp reg_flecha(Exp arg, StringLocalizado id) {
+    	 return new Reg_flecha(arg, id);
      }
      
      public StringLocalizado str(String s, int fila, int col) {

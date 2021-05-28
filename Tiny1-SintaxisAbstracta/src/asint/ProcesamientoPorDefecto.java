@@ -15,6 +15,7 @@ import asint.Tiny1Asint.Entero;
 import asint.Tiny1Asint.False;
 import asint.Tiny1Asint.Identif;
 import asint.Tiny1Asint.Igual;
+import asint.Tiny1Asint.Indice;
 import asint.Tiny1Asint.Indirecto;
 import asint.Tiny1Asint.Inst_asig;
 import asint.Tiny1Asint.Inst_bloque;
@@ -31,8 +32,8 @@ import asint.Tiny1Asint.Insts_muchas;
 import asint.Tiny1Asint.Insts_no_vacia;
 import asint.Tiny1Asint.Insts_una;
 import asint.Tiny1Asint.Insts_vacia;
-import asint.Tiny1Asint.LTipos_muchos;
-import asint.Tiny1Asint.LTipos_uno;
+import asint.Tiny1Asint.Tipos_muchos;
+import asint.Tiny1Asint.Tipos_uno;
 import asint.Tiny1Asint.Lparamsf_muchos;
 import asint.Tiny1Asint.Lparamsf_uno;
 import asint.Tiny1Asint.Lparamsr_muchos;
@@ -57,6 +58,8 @@ import asint.Tiny1Asint.Prog_con_decs;
 import asint.Tiny1Asint.Prog_sin_decs;
 import asint.Tiny1Asint.Real;
 import asint.Tiny1Asint.Ref;
+import asint.Tiny1Asint.Reg_flecha;
+import asint.Tiny1Asint.Reg_punto;
 import asint.Tiny1Asint.Resta;
 import asint.Tiny1Asint.Suma;
 import asint.Tiny1Asint.Tipo_array;
@@ -162,24 +165,6 @@ public class ProcesamientoPorDefecto implements Procesamiento {
 
 	@Override
 	public void procesa(Indirecto exp) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void procesa(Indice exp) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void procesa(Reg_punto exp) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void procesa(Reg_flecha exp) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -383,13 +368,13 @@ public class ProcesamientoPorDefecto implements Procesamiento {
 	}
 
 	@Override
-	public void procesa(LTipos_uno ltipos) {
+	public void procesa(Tipos_uno ltipos) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(LTipos_muchos ltipos) {
+	public void procesa(Tipos_muchos ltipos) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -486,6 +471,24 @@ public class ProcesamientoPorDefecto implements Procesamiento {
 
 	@Override
 	public void procesa(Prog_sin_decs prog) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void procesa(Indice exp) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void procesa(Reg_punto exp) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void procesa(Reg_flecha exp) {
 		// TODO Auto-generated method stub
 		
 	}
