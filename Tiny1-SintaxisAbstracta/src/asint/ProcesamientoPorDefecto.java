@@ -57,7 +57,6 @@ import asint.Tiny1Asint.Paramsr_vacio;
 import asint.Tiny1Asint.Prog_con_decs;
 import asint.Tiny1Asint.Prog_sin_decs;
 import asint.Tiny1Asint.Real;
-import asint.Tiny1Asint.Ref;
 import asint.Tiny1Asint.Reg_flecha;
 import asint.Tiny1Asint.Reg_punto;
 import asint.Tiny1Asint.Resta;
@@ -68,6 +67,7 @@ import asint.Tiny1Asint.Tipo_int;
 import asint.Tiny1Asint.Tipo_pointer;
 import asint.Tiny1Asint.Tipo_real;
 import asint.Tiny1Asint.Tipo_record;
+import asint.Tiny1Asint.Tipo_ref;
 import asint.Tiny1Asint.Tipo_string;
 import asint.Tiny1Asint.True;
 
@@ -392,7 +392,7 @@ public class ProcesamientoPorDefecto implements Procesamiento {
 	}
 
 	@Override
-	public void procesa(Ref tipo) {
+	public void procesa(Tipo_ref tipo) {
 		// TODO Auto-generated method stub
 		
 	}

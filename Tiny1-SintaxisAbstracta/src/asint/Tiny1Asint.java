@@ -754,9 +754,9 @@ public class Tiny1Asint {
     	}
     }
     
-    public static class Ref extends Tipo {
+    public static class Tipo_ref extends Tipo {
     	private StringLocalizado id;
-    	public Ref(StringLocalizado id) {
+    	public Tipo_ref(StringLocalizado id) {
     		super();
     		this.id = id;
     	}
@@ -1022,8 +1022,8 @@ public class Tiny1Asint {
      public Tipo tipo_record(LTipos ltipos) {
     	 return new Tipo_record(ltipos);
      }
-     public Tipo ref(StringLocalizado id) {
-    	 return new Ref(id);
+     public Tipo tipo_ref(StringLocalizado id) {
+    	 return new Tipo_ref(id);
      }
      public LTipos tipos_uno(Tipo tipo, StringLocalizado id) {
     	 return new Tipos_uno(tipo, id);
@@ -1073,7 +1073,7 @@ public class Tiny1Asint {
      public Paramsr paramsr_vacio() {
     	 return new Paramsr_vacio();
      }
-     public Paramsr paramasr_no_vacio(Lparamsr lparams) {
+     public Paramsr paramsr_no_vacio(Lparamsr lparams) {
     	 return new Paramsr_no_vacio(lparams);
      }
      public Lparamsr lparamsr_uno(Exp exp) {
