@@ -1,0 +1,119 @@
+options  {
+  STATIC=false;
+}  
+PARSER_BEGIN(AnalizadorSintacticoTiny1JavaCC)
+package asint;
+
+public class AnalizadorSintacticoTiny1JavaCC {
+	private SemOps sem = new SemOps();
+}
+PARSER_END(AnalizadorSintacticoTiny1JavaCC)
+
+	TOKEN:{<#letra:(["a"-"z"]|["A"-"Z"])>}
+	TOKEN:{<#digPos:["1"-"9"]>}
+	TOKEN:{<#dig:(<digPos>|"0")>}
+	TOKEN:{<#pDec:"."((<dig>)*<digPos>|"0")>}
+	TOKEN:{<#pExp:("e"|"E")("-")?<digPos>(<dig>)*>}
+	SKIP:{<[" ","\t","\r","\b","\n"]>}
+	SKIP:{<"#"(~["\n"])*>}
+	TOKEN:{<TipoInt:"int">}
+	TOKEN:{<TipoReal:"real">}
+	TOKEN:{<TipoBool:"bool">}
+	TOKEN:{<TipoString:"string">}
+	TOKEN:{<And:"and">}
+	TOKEN:{<Or:"or">}
+	TOKEN:{<Not:"not">}
+	TOKEN:{<True:"true">}
+	TOKEN:{<False:"false">}
+	TOKEN:{<Var:"var">}
+	TOKEN:{<Type:"type">}
+	TOKEN:{<Proc:"proc">}
+	TOKEN:{<Null:"null">}
+	TOKEN:{<If:"if">}
+	TOKEN:{<Then:"then">}
+	TOKEN:{<Else:"else">}
+	TOKEN:{<Endif:"endif">}
+	TOKEN:{<While:"while">}
+	TOKEN:{<Do:"do">}
+	TOKEN:{<Endwhile:"endwhile">}
+	TOKEN:{<Call:"call">}
+	TOKEN:{<Record:"record">}
+	TOKEN:{<Array:"array">}
+	TOKEN:{<Of:"of">}
+	TOKEN:{<Pointer:"pointer">}
+	TOKEN:{<New:"new">}
+	TOKEN:{<Delete:"delete">}
+	TOKEN:{<Read:"read">}
+	TOKEN:{<Write:"write">}
+	TOKEN:{<Nl:"nl">}
+	TOKEN:{<Cadena:"\""(~["\"","\n","\b","\r"])*"\"">}
+	TOKEN:{<Id:<letra>(<letra>|<dig>|"_")*>}
+	TOKEN:{<Entero:("+"|"-")?("0"|(<digPos>(<dig>)*))>}
+	TOKEN:{<Real:<Entero>(<pDec>|<pExp>|(<pDec><pExp>))>}
+	
+	Prog Sp()			: {Prog prog;} {prog = S() <EOF> {return prog;}}
+	Prog S()			: {Decs decs; LInsts linsts;} {decs = Decs() linsts = LInsts() {return sem.prog(decs,linsts);}}
+	LDecs Decs()		: {LDecs decs;} {decs = LDecs() "&&" {return decs;}| {} {return null;}}
+	LDecs LDecs()		: {LDecs ldecs; Dec dec;} {dec = Dec() ldecs =RLDecs(sem.decs_una(dec)) {return ldecs;}}
+	LDecs RLDecs(LDecs ldecsh)		: {Ldecs decs; Dec dec;} {";" dec =Dec() ldecs=RLDecs(sem.decs_muchas(ldecsh,dec)) {return ldecs;} | {} {return ldecsh;} }
+	Dec Dec()			: {Tipo tipo; Token id; Paramsf paramsf; Bloque bloque;} {<Var> tipo = Tipo() id =<Id> {return sem.dec_var(tipo,sem.str(id.image,id.beginLine,id.beginColumn));}|
+																					<Type> tipo=Tipo() id=<Id> {return sem.dec_type(tipo,sem.str(id.image,id.beginLine,id.beginColumn));}|
+																					<Proc> id =<Id> "(" paramsf = ParamsF() ")" bloque=Bloque() {return sem.dec_proc(sem.str(id.image,id.beginLine,id.beginColumn),paramsf,bloque);}}
+	LparamsF ParamsF()		: {LparamsF lparamsf;} {lparamsf = LParamsF() {return lparamsf;} | {} {return sem.paramsf_vacio();}}
+	LparamsF LParamsF()		: {ParamF paramf; LparamsF lparamsf;} {paramf=ParamF() lparamsf=RLParamsF(sem.lparamsf_uno(paramf)) {return lparamsf;}}
+	LparamsF RLParamsF(LparamsF lparamsfh)	: {LparamsF lparamsf; ParamF paramf;}
+											{"," paramf =ParamF() lparamsf = RLParamsF(sem.lparamsf_muchos(lparamsfh,paramf)) {return lparamsf;} | {} {return lparamsfh;} }
+	ParamF ParamF()		: {Tipo tipo; ParamF paramf;} {tipo = Tipo() paramf = RParamF(tipo) {return paramf;}}
+	ParamF RParamF(Tipo tipo)		: {Token id;} {"&" id=<Id> {return sem.paramf_referencia(tipo, sem.str(id.image,id.beginLine,id.beginColumn));}|
+														id=<Id> {return sem.paramf_valor(tipo,sem.str(id.image,id.beginLine,id.beginColumn));}|
+														{} {return null;} }
+	Tipo Tipo()			: {Token id; Tipo tipo; LTipos ltipos;} {<TipoInt> {return sem.tipo_int();}| <TipoReal> {return sem.tipo_real();}|
+																	<TipoBool> {return sem.tipo_bool();}| <TipoString> {return sem.tipo_string();} |
+																	id=<Id> {return sem.tipo_ref(sem.str(id.image,id.beginLine,id.beginColumn));}|
+																	<Array> "[" id=<Entero> "]" <Of> tipo=Tipo() {return sem.tipo_array(sem.str(id.image,id.beginLine,id.beginColumn),tipo);} |
+																	<Record> "{" ltipos=LTipos() "}" {return sem.record(ltipos);}|
+																	<Pointer> tipo=Tipo() {return sem.tipo_pointer(tipo);}}
+	LTipos LTipos()		: {LTipos ltipos; Tipo tipo;} {tipo = Tipo() <Id> ltipos=RLTipos(sem.tipos_uno(tipo)) {return ltipos;}}
+	LTipos RLTipos(LTipos ltiposh)		: {LTipos ltipos; Tipo tipo;} {";" tipo=Tipo() <Id> ltipos=RLTipos(sem.tipos_muchos(ltiposh)) {return ltipos;}| {} {return ltiposh;}}
+	LInsts LInsts()		: {Inst inst; LInsts linsts;} {inst=Inst() linsts=RLInsts(sem.insts_una(inst)) {return linsts;}}
+	LInsts RLInsts(LInsts linstsh)		: {Inst inst; LInsts linsts;} {";" inst=Inst() linsts=RLInsts(sem.insts_muchas(linstsh)) {return linsts;}| {} {return linstsh;}}
+	Inst Inst()			: {Exp exp0; Exp exp1; Insts insts; Bloque bloque; Paramsr paramsr; Token id; Inst inst;} 
+															{exp0=E0() "=" exp1=E0() {return sem.inst_asig(exp0,exp1);}|
+															<If> exp0=E0() <Then> insts=Insts() inst=RInst(exp,insts) {return inst;}|
+															<While> exp0=E0() <Do> insts=Insts() <Endwhile> {return sem.inst_while(exp0,insts);}|
+															<Read> exp0=E0() {return sem.inst_read(exp0);}| <Write> exp0=E0() {return sem.write(exp0);}|
+															<Nl> {return sem.inst_nl();}| <New> exp0=E0() {return sem.inst_new(exp0);}|
+															<Delete> exp0=E0() {return sem.inst_delete(exp0);}|
+															<Call> id=<Id> "(" paramsr=ParamsR() ")" {return sem.inst_call(sem.str(id.image,id.beginLine,id.beginColumn),paramsr);}|
+															bloque=Bloque() {return sem.inst_bloque(bloque);}}
+	Inst RInst(Exp exp, Insts insts)		: {Insts insts1;} {<Endif> {return sem.inst_if(exp,insts);}| <Else> insts1=Insts() <Endif> {return sem.inst_if_else(exp,insts,insts1);}}
+	Paramsr ParamsR()		: {Paramsr paramsr;} {paramsr=LParamsR() {return paramsr;}| {} {return paramsr_vacio();}}
+	Lparamsr LParamsR()		: {Exp exp; Lparamsr lparamsr;} {exp=E0() lparamsr=RParamsR(sem.lparamsr_uno(exp)) {return lparamsr;}}
+	Lparamsr RParamsR(Lparamsr lparamsrh)		: {Exp exp; Lparamsr lparamsr;} {"," exp=E0() lparamsr=RParamsR(sem.lparamsr_muchos(lparamsrh,exp)) {return lparamsr;}| {} {return lparamsrh;}} 
+	Insts Insts()		: {LInsts linsts;} {linsts = LInsts() {return linsts;} | {} {return insts_vacia();}}
+	Bloque Bloque()		: {Bloque bloque;} {"{" bloque=RBloque() {return bloque;}}
+	Bloque RBloque()		: {Bloque bloque;} {bloque=S() "}" {return sem.bloque_no_vacio(bloque);}| {} {return sem.bloque_vacio();}"}"}
+	Exp E0()			: {Exp exp; Exp exp0;} {exp0=E1() exp=RE0(exp) {return exp;}}
+	Exp RE0(Exp exph)			: {Exp exp;} {"+" exp=E0() {return sem.exp("+",exph, exp);}| "-" exp=E0() {return sem.exp("-",exph,exp);}| {} {return exph;}}
+	Exp E1()			: {Exp exp0; Exp exp;} {exp0=E2() exp=RE1(exp0) {return exp;}}
+	Exp RE1(Exp exph)			: {Exp exp2; Exp exp;String op;} {op=OpAI1() exp2=E2() exp=RE1(sem.exp(op,exph,exp2)) {return exp;}| {} {return exph;}}
+	Exp E2()			: {Exp exp; Exp exp0;} {exp0=E3() exp=RE2(exp0) {return exp;}}
+	Exp RE2(Exp exph)			: {String op; Exp exp; Exp exp2;} {op = OpAI2() exp2=E3() exp=RE2(sem.exp(op,exph,exp2)) {return exp;} | {} {return exph;}}
+	Exp E3()			: {Exp exp0; Exp exp;} {exp0=E4() exp=RE3(exp0) {return exp;}}
+	Exp RE3(Exp exph)			: {String op; Exp exp0;} {op=OpNA3() exp0=E4() {return sem.exp(op,exph,exp0);}| {} {return exph;} }
+	Exp E4()			: {Exp exp;} {"-" exp=E5() {return sem.menos(exp);}| <Not> exp=E4() {return sem.not(exp);}| exp=E5() {}}
+	Exp E5()			: {Exp exp; Exp exp0;} {exp0=E6() exp=RE5(exp0) {return exp;}}
+	Exp RE5(Exp exph)			: {Exp exp0; Token id;} {"." id=<Id> {return sem.reg_punto(exph,sem.str(id.image,id.beginLine,id.beginColumn));}|
+														 "->" id=<Id> {return sem.reg_flecha(exph,sem.str(id.image,id.beginLine,id.beginColumn));} |
+														 "[" exp0=E0() "]" {return sem.indice(exph,rexp0);}|  {} {return exph;} }
+	Exp E6()			: {Exp exp;} {"*" exp=E6() {return sem.indirecto(exp);}| exp=E7() {return exp;}}
+	Exp E7()			: {Token t;Exp exp;} {t=<Entero> {return sem.entero(sem.str(t.image,t.beginLine,t.beginColumn));}|
+												t=<Real> {return sem.real(sem.str(t.image,t.beginLine,t.beginColumn));}|
+												<True>  {return sem._true();}| <False> {return sem._false();}|
+												t = <Cadena> {return sem.cadena(str);}|
+												t = <Id> {return sem.identif(sem.str(t.image,t.beginLine,t.beginColumn));}|
+												<Null> {return sem._null();} | "(" exp = E0() ")" {return exp;}}
+	String OpAI1()		: {} {<And> {return "and";}| <Or> {return "or";}}
+	String OpAI2()		: {} {"==" {return "=";}| "<" {return "<";} | ">" {return ">";}| "<=" {return "<=";}| ">=" {return ">=";}| "!=" {return "!=";}}
+	String OpNA3()		: {} {"*" {return "*";}| "/" {return "/";}| "%" {return "%";}}
+	
