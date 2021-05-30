@@ -528,14 +528,14 @@ public class Tiny1Asint {
     }
     public static class Inst_while extends Inst{
     	private Exp exp;
-    	private Inst insts;
-    	public Inst_while(Exp exp, Inst inst) {
+    	private Insts insts;
+    	public Inst_while(Exp exp, Insts inst) {
     		super();
     		this.exp = exp;
     		this.insts = inst;
     	}
     	public Exp exp() { return exp;}
-    	public Inst insts() {return insts;}
+    	public Insts insts() {return insts;}
     	public void procesa(Procesamiento p) {
     		p.procesa(this);
     	}
@@ -1053,7 +1053,7 @@ public class Tiny1Asint {
     	 return new Inst_if_else(exp,inst1,inst2);
      }
      public Inst inst_while(Exp exp, Insts inst) {
-    	 return new Inst_if(exp,inst);
+    	 return new Inst_while(exp,inst);
      }
      public Inst inst_read(Exp exp) {
     	 return new Inst_read(exp);

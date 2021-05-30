@@ -274,7 +274,7 @@ public class Impresion extends ProcesamientoPorDefecto{
 	public void procesa(Inst_while inst) {
 		System.out.print("while ");
 		inst.exp().procesa(this);
-		System.out.println("do");
+		System.out.println(" do");
 		inst.insts().procesa(this);
 		System.out.println();
 		System.out.println("endwhile");
