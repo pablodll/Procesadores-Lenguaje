@@ -104,7 +104,7 @@ Punto = \.
 {TipoString}	{return ops.token(ClaseLexica.TIPOSTRING);}
 {And}			{return ops.token(ClaseLexica.AND);}
 {Or}			{return ops.token(ClaseLexica.OR);}
-{Not}			{return ops.token(ClaseLexica.OR);}
+{Not}			{return ops.token(ClaseLexica.NOT);}
 {True}			{return ops.token(ClaseLexica.TRUE);}
 {False}			{return ops.token(ClaseLexica.FALSE);}
 {Var}			{return ops.token(ClaseLexica.VAR);}

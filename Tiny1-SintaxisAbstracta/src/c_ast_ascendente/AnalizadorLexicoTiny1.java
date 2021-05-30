@@ -105,14 +105,14 @@ public class AnalizadorLexicoTiny1 implements java_cup.runtime.Scanner {
     "\1\25\1\26\1\27\1\0\1\30\1\31\1\32\2\0"+
     "\1\33\1\34\1\35\5\22\1\36\3\22\1\37\2\22"+
     "\1\40\2\22\1\41\1\42\12\22\1\43\1\0\1\43"+
-    "\1\44\7\22\1\45\1\46\11\22\1\47\2\22\1\0"+
-    "\1\22\1\50\1\51\1\22\1\52\3\22\1\53\1\22"+
-    "\1\54\1\55\1\56\2\22\1\57\1\60\1\61\2\22"+
-    "\1\62\1\22\1\63\1\22\1\64\3\22\1\65\1\66"+
-    "\1\67\2\22\1\70\1\71\1\22\1\72\1\73";
+    "\1\44\7\22\1\45\1\46\1\47\11\22\1\50\2\22"+
+    "\1\0\1\22\1\51\1\52\1\22\1\53\3\22\1\54"+
+    "\1\22\1\55\1\56\1\57\2\22\1\60\1\61\1\62"+
+    "\2\22\1\63\1\22\1\64\1\22\1\65\3\22\1\66"+
+    "\1\67\1\70\2\22\1\71\1\72\1\22\1\73\1\74";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[143];
+    int [] result = new int[144];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -148,16 +148,16 @@ public class AnalizadorLexicoTiny1 implements java_cup.runtime.Scanner {
     "\0\u028a\0\u0802\0\u0834\0\u028a\0\u028a\0\u0866\0\u0898\0\u08ca"+
     "\0\u08fc\0\u092e\0\u0960\0\u0992\0\u09c4\0\u09f6\0\u0a28\0\u0a5a"+
     "\0\u0a8c\0\u0abe\0\u028a\0\u0af0\0\u0b22\0\u0b54\0\u0b86\0\u0bb8"+
-    "\0\u0bea\0\u0c1c\0\u028a\0\u028a\0\u0c4e\0\u0c80\0\u0cb2\0\u0ce4"+
-    "\0\u0d16\0\u0d48\0\u0d7a\0\u0dac\0\u0dde\0\u028a\0\u0e10\0\u0e42"+
-    "\0\u0e74\0\u0ea6\0\u028a\0\u028a\0\u0ed8\0\u028a\0\u0f0a\0\u0f3c"+
-    "\0\u0f6e\0\u028a\0\u0fa0\0\u028a\0\u028a\0\u028a\0\u0fd2\0\u1004"+
-    "\0\u028a\0\u028a\0\u028a\0\u1036\0\u1068\0\u028a\0\u109a\0\u028a"+
-    "\0\u10cc\0\u028a\0\u10fe\0\u1130\0\u1162\0\u028a\0\u028a\0\u028a"+
-    "\0\u1194\0\u11c6\0\u028a\0\u028a\0\u11f8\0\u028a\0\u028a";
+    "\0\u0bea\0\u0c1c\0\u028a\0\u028a\0\u028a\0\u0c4e\0\u0c80\0\u0cb2"+
+    "\0\u0ce4\0\u0d16\0\u0d48\0\u0d7a\0\u0dac\0\u0dde\0\u028a\0\u0e10"+
+    "\0\u0e42\0\u0e74\0\u0ea6\0\u028a\0\u028a\0\u0ed8\0\u028a\0\u0f0a"+
+    "\0\u0f3c\0\u0f6e\0\u028a\0\u0fa0\0\u028a\0\u028a\0\u028a\0\u0fd2"+
+    "\0\u1004\0\u028a\0\u028a\0\u028a\0\u1036\0\u1068\0\u028a\0\u109a"+
+    "\0\u028a\0\u10cc\0\u028a\0\u10fe\0\u1130\0\u1162\0\u028a\0\u028a"+
+    "\0\u028a\0\u1194\0\u11c6\0\u028a\0\u028a\0\u11f8\0\u028a\0\u028a";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[143];
+    int [] result = new int[144];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -221,56 +221,56 @@ public class AnalizadorLexicoTiny1 implements java_cup.runtime.Scanner {
     "\12\27\1\132\12\27\23\0\2\27\4\0\2\27\2\0"+
     "\20\27\1\133\4\27\23\0\2\27\4\0\2\27\2\0"+
     "\23\27\1\134\1\27\23\0\2\27\4\0\2\27\2\0"+
-    "\20\27\1\105\4\27\23\0\2\27\4\0\2\27\2\0"+
-    "\12\27\1\135\12\27\23\0\2\27\4\0\2\27\2\0"+
-    "\11\27\1\136\13\27\23\0\2\27\4\0\2\27\2\0"+
-    "\14\27\1\137\10\27\23\0\2\27\4\0\2\27\2\0"+
-    "\1\27\1\140\1\27\1\141\21\27\23\0\2\27\4\0"+
-    "\2\27\2\0\16\27\1\142\6\27\23\0\2\27\4\0"+
-    "\2\27\2\0\5\27\1\143\17\27\23\0\2\27\4\0"+
-    "\2\27\2\0\21\27\1\144\3\27\23\0\2\27\4\0"+
-    "\2\27\2\0\15\27\1\145\7\27\23\0\2\27\4\0"+
-    "\2\27\2\0\16\27\1\146\6\27\23\0\2\27\4\0"+
-    "\2\27\2\0\11\27\1\147\13\27\23\0\2\27\4\0"+
-    "\2\27\2\0\11\27\1\150\13\27\23\0\1\151\1\120"+
+    "\20\27\1\135\4\27\23\0\2\27\4\0\2\27\2\0"+
+    "\12\27\1\136\12\27\23\0\2\27\4\0\2\27\2\0"+
+    "\11\27\1\137\13\27\23\0\2\27\4\0\2\27\2\0"+
+    "\14\27\1\140\10\27\23\0\2\27\4\0\2\27\2\0"+
+    "\1\27\1\141\1\27\1\142\21\27\23\0\2\27\4\0"+
+    "\2\27\2\0\16\27\1\143\6\27\23\0\2\27\4\0"+
+    "\2\27\2\0\5\27\1\144\17\27\23\0\2\27\4\0"+
+    "\2\27\2\0\21\27\1\145\3\27\23\0\2\27\4\0"+
+    "\2\27\2\0\15\27\1\146\7\27\23\0\2\27\4\0"+
+    "\2\27\2\0\16\27\1\147\6\27\23\0\2\27\4\0"+
+    "\2\27\2\0\11\27\1\150\13\27\23\0\2\27\4\0"+
+    "\2\27\2\0\11\27\1\151\13\27\23\0\1\152\1\120"+
     "\5\0\1\61\7\0\1\61\43\0\1\122\60\0\2\122"+
-    "\60\0\2\27\4\0\2\27\2\0\1\27\1\152\23\27"+
-    "\23\0\2\27\4\0\2\27\2\0\12\27\1\153\12\27"+
+    "\60\0\2\27\4\0\2\27\2\0\1\27\1\153\23\27"+
     "\23\0\2\27\4\0\2\27\2\0\12\27\1\154\12\27"+
-    "\23\0\2\27\4\0\2\27\2\0\5\27\1\155\17\27"+
+    "\23\0\2\27\4\0\2\27\2\0\12\27\1\155\12\27"+
     "\23\0\2\27\4\0\2\27\2\0\5\27\1\156\17\27"+
-    "\23\0\2\27\4\0\2\27\2\0\11\27\1\157\11\27"+
-    "\1\160\1\27\23\0\2\27\4\0\2\27\2\0\17\27"+
-    "\1\161\5\27\23\0\2\27\4\0\2\27\2\0\12\27"+
-    "\1\162\12\27\23\0\2\27\4\0\2\27\2\0\13\27"+
-    "\1\163\11\27\23\0\2\27\4\0\2\27\2\0\3\27"+
-    "\1\164\21\27\23\0\2\27\4\0\2\27\2\0\4\27"+
-    "\1\165\5\27\1\166\12\27\23\0\2\27\4\0\2\27"+
-    "\2\0\14\27\1\167\10\27\23\0\2\27\4\0\2\27"+
-    "\2\0\11\27\1\170\13\27\23\0\2\27\4\0\2\27"+
-    "\2\0\13\27\1\171\11\27\23\0\2\27\4\0\2\27"+
-    "\2\0\5\27\1\172\17\27\23\0\2\27\4\0\2\27"+
+    "\23\0\2\27\4\0\2\27\2\0\5\27\1\157\17\27"+
+    "\23\0\2\27\4\0\2\27\2\0\11\27\1\160\11\27"+
+    "\1\161\1\27\23\0\2\27\4\0\2\27\2\0\17\27"+
+    "\1\162\5\27\23\0\2\27\4\0\2\27\2\0\12\27"+
+    "\1\163\12\27\23\0\2\27\4\0\2\27\2\0\13\27"+
+    "\1\164\11\27\23\0\2\27\4\0\2\27\2\0\3\27"+
+    "\1\165\21\27\23\0\2\27\4\0\2\27\2\0\4\27"+
+    "\1\166\5\27\1\167\12\27\23\0\2\27\4\0\2\27"+
+    "\2\0\14\27\1\170\10\27\23\0\2\27\4\0\2\27"+
+    "\2\0\11\27\1\171\13\27\23\0\2\27\4\0\2\27"+
+    "\2\0\13\27\1\172\11\27\23\0\2\27\4\0\2\27"+
     "\2\0\5\27\1\173\17\27\23\0\2\27\4\0\2\27"+
-    "\2\0\12\27\1\174\12\27\23\0\2\27\4\0\2\27"+
-    "\2\0\20\27\1\175\4\27\23\0\1\151\1\120\60\0"+
-    "\2\27\4\0\2\27\2\0\24\27\1\176\23\0\2\27"+
-    "\4\0\2\27\2\0\20\27\1\177\4\27\23\0\2\27"+
-    "\4\0\2\27\2\0\6\27\1\200\16\27\23\0\2\27"+
-    "\4\0\2\27\2\0\10\27\1\201\14\27\23\0\2\27"+
-    "\4\0\2\27\2\0\5\27\1\202\17\27\23\0\2\27"+
-    "\4\0\2\27\2\0\20\27\1\203\4\27\23\0\2\27"+
-    "\4\0\2\27\2\0\16\27\1\204\6\27\23\0\2\27"+
-    "\4\0\2\27\2\0\13\27\1\205\11\27\23\0\2\27"+
-    "\4\0\2\27\2\0\5\27\1\206\17\27\23\0\2\27"+
+    "\2\0\5\27\1\174\17\27\23\0\2\27\4\0\2\27"+
+    "\2\0\12\27\1\175\12\27\23\0\2\27\4\0\2\27"+
+    "\2\0\20\27\1\176\4\27\23\0\1\152\1\120\60\0"+
+    "\2\27\4\0\2\27\2\0\24\27\1\177\23\0\2\27"+
+    "\4\0\2\27\2\0\20\27\1\200\4\27\23\0\2\27"+
+    "\4\0\2\27\2\0\6\27\1\201\16\27\23\0\2\27"+
+    "\4\0\2\27\2\0\10\27\1\202\14\27\23\0\2\27"+
+    "\4\0\2\27\2\0\5\27\1\203\17\27\23\0\2\27"+
+    "\4\0\2\27\2\0\20\27\1\204\4\27\23\0\2\27"+
+    "\4\0\2\27\2\0\16\27\1\205\6\27\23\0\2\27"+
+    "\4\0\2\27\2\0\13\27\1\206\11\27\23\0\2\27"+
     "\4\0\2\27\2\0\5\27\1\207\17\27\23\0\2\27"+
     "\4\0\2\27\2\0\5\27\1\210\17\27\23\0\2\27"+
-    "\4\0\2\27\2\0\11\27\1\211\13\27\23\0\2\27"+
-    "\4\0\2\27\2\0\5\27\1\212\17\27\23\0\2\27"+
-    "\4\0\2\27\2\0\4\27\1\213\20\27\23\0\2\27"+
-    "\4\0\2\27\2\0\7\27\1\214\15\27\23\0\2\27"+
-    "\4\0\2\27\2\0\12\27\1\215\12\27\23\0\2\27"+
-    "\4\0\2\27\2\0\16\27\1\216\6\27\23\0\2\27"+
-    "\4\0\2\27\2\0\5\27\1\217\17\27\2\0";
+    "\4\0\2\27\2\0\5\27\1\211\17\27\23\0\2\27"+
+    "\4\0\2\27\2\0\11\27\1\212\13\27\23\0\2\27"+
+    "\4\0\2\27\2\0\5\27\1\213\17\27\23\0\2\27"+
+    "\4\0\2\27\2\0\4\27\1\214\20\27\23\0\2\27"+
+    "\4\0\2\27\2\0\7\27\1\215\15\27\23\0\2\27"+
+    "\4\0\2\27\2\0\12\27\1\216\12\27\23\0\2\27"+
+    "\4\0\2\27\2\0\16\27\1\217\6\27\23\0\2\27"+
+    "\4\0\2\27\2\0\5\27\1\220\17\27\2\0";
 
   private static int [] zzUnpackTrans() {
     int [] result = new int[4650];
@@ -318,11 +318,11 @@ public class AnalizadorLexicoTiny1 implements java_cup.runtime.Scanner {
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
     "\1\0\2\11\3\1\1\11\1\1\3\11\1\1\1\11"+
     "\1\1\2\11\2\1\1\11\4\1\2\11\17\1\3\11"+
-    "\1\0\3\11\2\0\3\11\34\1\1\0\27\1\1\0"+
+    "\1\0\3\11\2\0\3\11\34\1\1\0\30\1\1\0"+
     "\46\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[143];
+    int [] result = new int[144];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -820,297 +820,302 @@ public class AnalizadorLexicoTiny1 implements java_cup.runtime.Scanner {
             { errores.errorLexico(fila(),col(),lexema());
             }
             // fall through
-          case 60: break;
+          case 61: break;
           case 2:
             { 
             }
             // fall through
-          case 61: break;
+          case 62: break;
           case 3:
             { return ops.token(ClaseLexica.MOD);
             }
             // fall through
-          case 62: break;
+          case 63: break;
           case 4:
             { return ops.token(ClaseLexica.AMP);
             }
             // fall through
-          case 63: break;
+          case 64: break;
           case 5:
             { return ops.token(ClaseLexica.PAP);
             }
             // fall through
-          case 64: break;
+          case 65: break;
           case 6:
             { return ops.token(ClaseLexica.PCIE);
             }
             // fall through
-          case 65: break;
+          case 66: break;
           case 7:
             { return ops.token(ClaseLexica.POR);
             }
             // fall through
-          case 66: break;
+          case 67: break;
           case 8:
             { return ops.token(ClaseLexica.MAS);
             }
             // fall through
-          case 67: break;
+          case 68: break;
           case 9:
             { return ops.token(ClaseLexica.COMA);
             }
             // fall through
-          case 68: break;
+          case 69: break;
           case 10:
             { return ops.token(ClaseLexica.MENOS);
             }
             // fall through
-          case 69: break;
+          case 70: break;
           case 11:
             { return ops.token(ClaseLexica.PUNTO);
             }
             // fall through
-          case 70: break;
+          case 71: break;
           case 12:
             { return ops.token(ClaseLexica.DIV);
             }
             // fall through
-          case 71: break;
+          case 72: break;
           case 13:
             { return ops.token(ClaseLexica.ENTERO);
             }
             // fall through
-          case 72: break;
+          case 73: break;
           case 14:
             { return ops.token(ClaseLexica.PUNTOCOMA);
             }
             // fall through
-          case 73: break;
+          case 74: break;
           case 15:
             { return ops.token(ClaseLexica.MENOR);
             }
             // fall through
-          case 74: break;
+          case 75: break;
           case 16:
             { return ops.token(ClaseLexica.ASIG);
             }
             // fall through
-          case 75: break;
+          case 76: break;
           case 17:
             { return ops.token(ClaseLexica.MAYOR);
             }
             // fall through
-          case 76: break;
+          case 77: break;
           case 18:
             { return ops.token(ClaseLexica.ID);
             }
             // fall through
-          case 77: break;
+          case 78: break;
           case 19:
             { return ops.token(ClaseLexica.CAP);
             }
             // fall through
-          case 78: break;
+          case 79: break;
           case 20:
             { return ops.token(ClaseLexica.CCIE);
             }
             // fall through
-          case 79: break;
+          case 80: break;
           case 21:
             { return ops.token(ClaseLexica.LLAP);
             }
             // fall through
-          case 80: break;
+          case 81: break;
           case 22:
             { return ops.token(ClaseLexica.LLCIE);
             }
             // fall through
-          case 81: break;
+          case 82: break;
           case 23:
             { return ops.token(ClaseLexica.DIST);
             }
             // fall through
-          case 82: break;
+          case 83: break;
           case 24:
             { return ops.token(ClaseLexica.CADENA);
             }
             // fall through
-          case 83: break;
+          case 84: break;
           case 25:
             { return ops.token(ClaseLexica.SEPSEC);
             }
             // fall through
-          case 84: break;
+          case 85: break;
           case 26:
             { return ops.token(ClaseLexica.FLECHA);
             }
             // fall through
-          case 85: break;
+          case 86: break;
           case 27:
             { return ops.token(ClaseLexica.MENIGUAL);
             }
             // fall through
-          case 86: break;
+          case 87: break;
           case 28:
             { return ops.token(ClaseLexica.IGUAL);
             }
             // fall through
-          case 87: break;
+          case 88: break;
           case 29:
             { return ops.token(ClaseLexica.MAYIGUAL);
             }
             // fall through
-          case 88: break;
+          case 89: break;
           case 30:
             { return ops.token(ClaseLexica.DO);
             }
             // fall through
-          case 89: break;
+          case 90: break;
           case 31:
             { return ops.token(ClaseLexica.IF);
             }
             // fall through
-          case 90: break;
+          case 91: break;
           case 32:
             { return ops.token(ClaseLexica.NL);
             }
             // fall through
-          case 91: break;
+          case 92: break;
           case 33:
             { return ops.token(ClaseLexica.OF);
             }
             // fall through
-          case 92: break;
+          case 93: break;
           case 34:
             { return ops.token(ClaseLexica.OR);
             }
             // fall through
-          case 93: break;
+          case 94: break;
           case 35:
             { return ops.token(ClaseLexica.REAL);
             }
             // fall through
-          case 94: break;
+          case 95: break;
           case 36:
             { return ops.token(ClaseLexica.AND);
             }
             // fall through
-          case 95: break;
+          case 96: break;
           case 37:
             { return ops.token(ClaseLexica.TIPOINT);
             }
             // fall through
-          case 96: break;
+          case 97: break;
           case 38:
             { return ops.token(ClaseLexica.NEW);
             }
             // fall through
-          case 97: break;
-          case 39:
-            { return ops.token(ClaseLexica.VAR);
-            }
-            // fall through
           case 98: break;
-          case 40:
-            { return ops.token(ClaseLexica.TIPOBOOL);
+          case 39:
+            { return ops.token(ClaseLexica.NOT);
             }
             // fall through
           case 99: break;
-          case 41:
-            { return ops.token(ClaseLexica.CALL);
+          case 40:
+            { return ops.token(ClaseLexica.VAR);
             }
             // fall through
           case 100: break;
-          case 42:
-            { return ops.token(ClaseLexica.ELSE);
+          case 41:
+            { return ops.token(ClaseLexica.TIPOBOOL);
             }
             // fall through
           case 101: break;
-          case 43:
-            { return ops.token(ClaseLexica.NULL);
+          case 42:
+            { return ops.token(ClaseLexica.CALL);
             }
             // fall through
           case 102: break;
-          case 44:
-            { return ops.token(ClaseLexica.PROC);
+          case 43:
+            { return ops.token(ClaseLexica.ELSE);
             }
             // fall through
           case 103: break;
-          case 45:
-            { return ops.token(ClaseLexica.READ);
+          case 44:
+            { return ops.token(ClaseLexica.NULL);
             }
             // fall through
           case 104: break;
-          case 46:
-            { return ops.token(ClaseLexica.TIPOREAL);
+          case 45:
+            { return ops.token(ClaseLexica.PROC);
             }
             // fall through
           case 105: break;
-          case 47:
-            { return ops.token(ClaseLexica.THEN);
+          case 46:
+            { return ops.token(ClaseLexica.READ);
             }
             // fall through
           case 106: break;
-          case 48:
-            { return ops.token(ClaseLexica.TRUE);
+          case 47:
+            { return ops.token(ClaseLexica.TIPOREAL);
             }
             // fall through
           case 107: break;
-          case 49:
-            { return ops.token(ClaseLexica.TYPE);
+          case 48:
+            { return ops.token(ClaseLexica.THEN);
             }
             // fall through
           case 108: break;
-          case 50:
-            { return ops.token(ClaseLexica.ARRAY);
+          case 49:
+            { return ops.token(ClaseLexica.TRUE);
             }
             // fall through
           case 109: break;
-          case 51:
-            { return ops.token(ClaseLexica.ENDIF);
+          case 50:
+            { return ops.token(ClaseLexica.TYPE);
             }
             // fall through
           case 110: break;
-          case 52:
-            { return ops.token(ClaseLexica.FALSE);
+          case 51:
+            { return ops.token(ClaseLexica.ARRAY);
             }
             // fall through
           case 111: break;
-          case 53:
-            { return ops.token(ClaseLexica.WHILE);
+          case 52:
+            { return ops.token(ClaseLexica.ENDIF);
             }
             // fall through
           case 112: break;
-          case 54:
-            { return ops.token(ClaseLexica.WRITE);
+          case 53:
+            { return ops.token(ClaseLexica.FALSE);
             }
             // fall through
           case 113: break;
-          case 55:
-            { return ops.token(ClaseLexica.DELETE);
+          case 54:
+            { return ops.token(ClaseLexica.WHILE);
             }
             // fall through
           case 114: break;
-          case 56:
-            { return ops.token(ClaseLexica.RECORD);
+          case 55:
+            { return ops.token(ClaseLexica.WRITE);
             }
             // fall through
           case 115: break;
-          case 57:
-            { return ops.token(ClaseLexica.TIPOSTRING);
+          case 56:
+            { return ops.token(ClaseLexica.DELETE);
             }
             // fall through
           case 116: break;
-          case 58:
-            { return ops.token(ClaseLexica.POINTER);
+          case 57:
+            { return ops.token(ClaseLexica.RECORD);
             }
             // fall through
           case 117: break;
-          case 59:
-            { return ops.token(ClaseLexica.ENDWHILE);
+          case 58:
+            { return ops.token(ClaseLexica.TIPOSTRING);
             }
             // fall through
           case 118: break;
+          case 59:
+            { return ops.token(ClaseLexica.POINTER);
+            }
+            // fall through
+          case 119: break;
+          case 60:
+            { return ops.token(ClaseLexica.ENDWHILE);
+            }
+            // fall through
+          case 120: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }
