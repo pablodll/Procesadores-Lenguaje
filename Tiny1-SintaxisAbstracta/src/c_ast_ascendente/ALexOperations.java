@@ -1,4 +1,4 @@
-package alex;
+package c_ast_ascendente;
 
 public class ALexOperations {
   private AnalizadorLexicoTiny1 alex;
@@ -7,7 +7,7 @@ public class ALexOperations {
   }
   public UnidadLexica token(int clase) {
 	  UnidadLexica t = new UnidadLexica(alex.fila(), alex.col(), clase, alex.lexema());
-	  alex.incCol();
+//	  alex.incCol();
 	  return t;     
   }
 }
