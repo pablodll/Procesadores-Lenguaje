@@ -362,7 +362,7 @@ public class Impresion extends ProcesamientoPorDefecto{
 	@Override
 	public void procesa(Tipos_uno ltipos) {
 		ltipos.tipo().procesa(this);
-		System.out.println(ltipos.id());
+		System.out.print(" " + ltipos.id());
 	}
 
 	@Override
@@ -370,7 +370,7 @@ public class Impresion extends ProcesamientoPorDefecto{
 		ltipos.ltipos().procesa(this);
 		System.out.println(";");
 		ltipos.tipo().procesa(this);
-		System.out.println(ltipos.id());
+		System.out.println(" " + ltipos.id());
 	}
 
 	@Override
@@ -383,7 +383,7 @@ public class Impresion extends ProcesamientoPorDefecto{
 	public void procesa(Tipo_record tipo) {
 		System.out.println("record {");
 		tipo.ltipos().procesa(this);
-		System.out.println("}");
+		System.out.print("}");
 	}
 
 	@Override
