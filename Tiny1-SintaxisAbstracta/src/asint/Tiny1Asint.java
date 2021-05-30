@@ -1,5 +1,7 @@
 package asint;
 
+import c_ast_descendente.Token;
+
 public class Tiny1Asint {
 
 	public static abstract class Exp  {
@@ -18,6 +20,10 @@ public class Tiny1Asint {
             this.s = s;
             this.fila = fila;
             this.col = col;
+        }
+        
+        public StringLocalizado(Token id) {
+        	this(id.toString(), id.beginLine, id.beginColumn);
         }
         
         public int fila() {return fila;}
@@ -492,44 +498,44 @@ public class Tiny1Asint {
     }
     public static class Inst_if extends Inst{
     	private Exp exp;
-    	private Insts inst;
+    	private Insts insts;
     	public Inst_if(Exp exp, Insts inst) {
     		super();
     		this.exp = exp;
-    		this.inst = inst;
+    		this.insts = inst;
     	}
     	public Exp exp() { return exp;}
-    	public Insts inst() {return inst;}
+    	public Insts insts() {return insts;}
     	public void procesa(Procesamiento p) {
     		p.procesa(this);
     	}
     }
     public static class Inst_if_else extends Inst{
     	private Exp exp;
-    	private Insts inst1, inst2;
+    	private Insts insts1, insts2;
     	public Inst_if_else(Exp exp, Insts inst1, Insts inst2) {
     		super();
     		this.exp = exp;
-    		this.inst1 = inst1;
-    		this.inst2 = inst2;
+    		this.insts1 = inst1;
+    		this.insts2 = inst2;
     	}
     	public Exp exp() {return exp;}
-    	public Insts inst1() {return inst1;}
-    	public Insts inst2() {return inst2;}
+    	public Insts insts1() {return insts1;}
+    	public Insts insts2() {return insts2;}
     	public void procesa(Procesamiento p) {
     		p.procesa(this);
     	}
     }
     public static class Inst_while extends Inst{
     	private Exp exp;
-    	private Inst inst;
+    	private Inst insts;
     	public Inst_while(Exp exp, Inst inst) {
     		super();
     		this.exp = exp;
-    		this.inst = inst;
+    		this.insts = inst;
     	}
     	public Exp exp() { return exp;}
-    	public Inst inst() {return inst;}
+    	public Inst insts() {return insts;}
     	public void procesa(Procesamiento p) {
     		p.procesa(this);
     	}
@@ -754,9 +760,9 @@ public class Tiny1Asint {
     	}
     }
     
-    public static class Tipo_ref extends Tipo {
+    public static class Ref extends Tipo {
     	private StringLocalizado id;
-    	public Tipo_ref(StringLocalizado id) {
+    	public Ref(StringLocalizado id) {
     		super();
     		this.id = id;
     	}
@@ -1022,8 +1028,8 @@ public class Tiny1Asint {
      public Tipo tipo_record(LTipos ltipos) {
     	 return new Tipo_record(ltipos);
      }
-     public Tipo tipo_ref(StringLocalizado id) {
-    	 return new Tipo_ref(id);
+     public Tipo ref(StringLocalizado id) {
+    	 return new Ref(id);
      }
      public LTipos tipos_uno(Tipo tipo, StringLocalizado id) {
     	 return new Tipos_uno(tipo, id);

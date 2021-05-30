@@ -1,0 +1,241 @@
+package c_ast_ascendente;
+
+import java_cup.runtime.*;
+import semops.SemOps;
+import asint.Tiny1Asint.*;
+import errors.GestionErroresTiny1;
+
+scan with {: return getScanner().next_token(); :};
+action code {:
+	private SemOps sem = new SemOps();
+:};
+parser code {:
+	private GestionErroresTiny1 errores;
+	public void syntax_error(Symbol unidadLexica) {
+		errores.errorSintactico((UnidadLexica) unidadLexica);
+	}
+:};
+init with {:
+	errores = new GestionErroresTiny1();
+	AnalizadorLexicoTiny1 alex = (AnalizadorLexicoTiny1) getScanner();
+	alex.fijaGestionErrores(errores);
+:};
+
+terminal	TIPOINT, TIPOREAL, TIPOBOOL, TIPOSTRING, AND, OR, NOT, TRUE, FALSE, 
+			VAR, TYPE, PROC, NULL, IF, THEN, ELSE, ENDIF, WHILE, DO, ENDWHILE, CALL, RECORD, 
+			ARRAY, OF, POINTER, NEW, DELETE, READ, WRITE, NL,
+			COMA, PUNTOCOMA, ASIG, SEPSEC, POR, DIV, MOD, 
+			PAP, PCIE, CAP, CCIE, LLAP, LLCIE, PUNTO, FLECHA, AMP, MENOR, MAYOR, 
+			MENIGUAL, MAYIGUAL, IGUAL, DIST;
+terminal	StringLocalizado CADENA, ID, ENTERO, REAL;
+terminal 	String MAS, MENOS;
+			
+non terminal	Prog S;
+non terminal  	LDecs Decs, LDecs;
+non terminal	Dec Dec;
+non terminal	Paramsf ParamsF;
+non terminal	Lparamsf LParamsF;
+non terminal	Paramf ParamF;
+non terminal	Tipo Tipo;
+non terminal	LTipos LTipos;
+non terminal	LInsts LInsts;
+non terminal	Inst Inst;
+non terminal	Paramsr ParamsR;
+non terminal	Lparamsr LParamsR; 
+non terminal	Insts Insts;
+non terminal	Bloque Bloque;
+non terminal	Exp E0, E1, E2, E3, E4, E5, E6, E7;
+non terminal	String OpAI1, OpAI2, OpNA3;
+				
+S			::= Decs: decs LInsts: linsts
+				{: RESULT = sem.prog(decs, linsts);:};
+				
+Decs		::= LDecs: ldecs SEPSEC
+				{: RESULT = ldecs; :};
+Decs		::= 
+				{: RESULT = null; :};
+				
+LDecs		::= Dec: dec
+				{: RESULT =  sem.decs_una(dec); :};
+LDecs		::=  LDecs: ldecs PUNTOCOMA Dec: dec
+				{: RESULT =  sem.decs_muchas(ldecs, dec); :};
+								
+Dec			::= VAR Tipo: tipo ID: id
+				{: RESULT = sem.dec_var(tipo, id); :};
+Dec			::= TYPE Tipo: tipo ID: id
+				{: RESULT = sem.dec_type(tipo, id); :};
+Dec			::= PROC ID: id PAP ParamsF: paramsf PCIE Bloque: bloque
+				{: RESULT = sem.dec_proc(id, paramsf, bloque); :};
+				
+ParamsF		::= LParamsF: lparamsf
+				{: RESULT = sem.paramsf_no_vacio(lparamsf); :};
+ParamsF		::=
+				{: RESULT = sem.paramsf_vacio(); :};
+				
+LParamsF	::= ParamF: paramf
+				{: RESULT = sem.lparamsf_uno(paramf); :};
+LParamsF	::= LParamsF: lparamsf COMA ParamF: paramf
+				{: RESULT = sem.lparamsf_muchos(lparamsf, paramf); :};
+								
+ParamF		::= Tipo: tipo AMP ID: id
+				{: RESULT = sem.paramf_referencia(tipo, id); :};
+ParamF		::= Tipo: tipo ID: id
+				{: RESULT = sem.paramf_valor(tipo, id); :};
+				
+Tipo		::= TIPOINT
+				{: RESULT = sem.tipo_int(); :};
+Tipo		::= TIPOREAL
+				{: RESULT = sem.tipo_real(); :};
+Tipo		::= TIPOBOOL
+				{: RESULT = sem.tipo_bool(); :};
+Tipo		::= TIPOSTRING
+				{: RESULT = sem.tipo_string(); :};
+Tipo		::= ID: id
+				{: RESULT = sem.ref(id); :};
+Tipo		::= ARRAY CAP ENTERO: entero CCIE OF Tipo: tipo
+				{: RESULT = sem.tipo_array(entero, tipo); :};
+Tipo		::= RECORD LLAP LTipos: ltipos LLCIE
+				{: RESULT = sem.tipo_record(ltipos); :};
+Tipo		::= POINTER Tipo: tipo
+				{: RESULT = sem.tipo_pointer(tipo); :};
+
+LTipos		::= Tipo: tipo ID: id
+				{: RESULT = sem.tipos_uno(tipo, id); :};
+LTipos 		::= LTipos: ltipos PUNTOCOMA Tipo: tipo ID: id				
+				{: RESULT = sem.tipos_muchos(ltipos, tipo, id); :};
+				
+LInsts		::= Inst: inst
+				{: RESULT = sem.insts_una(inst); :};
+LInsts		::= LInsts: linsts PUNTOCOMA Inst: inst
+				{: RESULT = sem.insts_muchas(linsts, inst); :};
+				
+Inst		::= E0: exp0 ASIG E0: exp1
+				{: RESULT = sem.inst_asig(exp0, exp1); :};
+Inst		::= IF E0: exp THEN Insts: insts ENDIF 
+				{: RESULT = sem.inst_if(exp, insts); :};
+Inst		::= IF E0: exp THEN Insts: insts0 ELSE Insts: insts1 ENDIF
+				{: RESULT = sem.inst_if_else(exp, insts0, insts1); :};
+Inst		::= WHILE E0: exp DO Insts: insts ENDWHILE
+				{: RESULT = sem.inst_while(exp, insts); :};
+Inst		::= READ E0: exp
+				{: RESULT = sem.inst_read(exp); :};
+Inst		::= WRITE E0: exp
+				{: RESULT = sem.inst_write(exp); :};
+Inst		::= NL
+				{: RESULT = sem.inst_nl(); :};
+Inst		::= NEW E0: exp
+				{: RESULT = sem.inst_new(exp); :};
+Inst		::= DELETE E0: exp
+				{: RESULT = sem.inst_delete(exp); :};
+Inst		::= CALL ID: id PAP ParamsR: paramsr PCIE 
+				{: RESULT = sem.inst_call(id, paramsr); :};
+Inst		::= Bloque: bloque 
+				{: RESULT = sem.inst_bloque(bloque); :};
+
+				
+ParamsR		::= LParamsR: lparamsr
+				{: RESULT = sem.paramsr_no_vacio(lparamsr); :};
+ParamsR		::= 
+				{: RESULT = sem.paramsr_vacio(); :};
+				
+LParamsR	::= E0: exp
+				{: RESULT = sem.lparamsr_uno(exp); :};
+LParamsR	::= LParamsR: lparamsr COMA E0: exp				
+				{: RESULT = sem.lparamsr_muchos(lparamsr, exp); :};
+				
+Insts		::= LInsts: linsts
+				{: RESULT = sem.insts_no_vacia(linsts); :};
+Insts		::= 
+				{: RESULT = sem.insts_vacia(); :};
+								
+Bloque		::= LLAP S: prog LLCIE
+				{: RESULT = sem.bloque_no_vacio(prog); :};
+Bloque		::= LLAP LLCIE
+				{: RESULT = sem.bloque_vacio(); :};
+								
+E0			::= E1: exp0 MAS: op E0: exp1
+				{: RESULT = sem.exp(op, exp0, exp1); :};
+E0			::= E1: exp0 MENOS: op E0: exp1
+				{: RESULT = sem.exp(op, exp0, exp1); :};
+E0			::= E1: exp
+				{: RESULT = exp; :};
+				
+E1			::= E1: exp0 OpAI1: op E2: exp1
+				{: RESULT = sem.exp(op, exp0, exp1); :};
+E1			::= E2: exp
+				{: RESULT = exp; :};
+				
+E2			::= E2: exp0 OpAI2: op E3: exp1
+				{: RESULT = sem.exp(op, exp0, exp1); :};
+E2 			::= E3: exp
+				{: RESULT = exp; :};
+				
+E3			::= E4: exp0 OpNA3: op E4: exp1
+				{: RESULT = sem.exp(op, exp0, exp1); :};
+E3			::= E4: exp
+				{: RESULT = exp; :};
+				
+E4			::= MENOS E5: exp
+				{: RESULT = sem.menos(exp); :};
+E4			::= NOT E4: exp
+				{: RESULT = sem.not(exp); :};
+E4			::= E5: exp
+				{: RESULT = exp; :};
+
+E5			::= E5: exp0 CAP E0: exp1 CCIE
+				{: RESULT = sem.indice(exp0, exp1); :};
+E5			::= E5: exp PUNTO ID: id
+				{: RESULT = sem.reg_punto(exp, id); :};
+E5			::= E5: exp FLECHA ID: id
+				{: RESULT = sem.reg_flecha(exp, id); :};
+E5			::= E6: exp
+				{: RESULT = exp; :};		
+				
+E6			::= POR E6: exp
+				{: RESULT = sem.indirecto(exp); :};
+E6			::= E7: exp
+				{: RESULT = exp; :};				
+				
+E7			::= ENTERO: ent
+				{: RESULT = sem.entero(ent); :};
+E7			::= REAL: re
+				{: RESULT = sem.real(re); :};
+E7			::= TRUE
+				{: RESULT = sem._true(); :};
+E7			::= FALSE
+				{: RESULT = sem._false(); :};
+E7			::= CADENA: cad
+				{: RESULT = sem.cadena(cad); :};
+E7			::= ID: id
+				{: RESULT = sem.identif(id); :};
+E7			::= NULL
+				{: RESULT = sem._null(); :};
+E7			::= PAP E0: exp PCIE
+				{: RESULT = exp; :};
+
+OpAI1		::= AND
+				{: RESULT = "and"; :};
+OpAI1		::= OR
+				{: RESULT = "or"; :};				
+				
+OpAI2		::= IGUAL
+				{: RESULT = "="; :};
+OpAI2		::= MENOR
+				{: RESULT = "<"; :};
+OpAI2		::= MAYOR
+				{: RESULT = ">"; :};								
+OpAI2		::= MENIGUAL
+				{: RESULT = "<="; :};						
+OpAI2		::= MAYIGUAL
+				{: RESULT = ">="; :};		
+OpAI2		::= DIST
+				{: RESULT = "!="; :};		
+								
+OpNA3		::= POR
+				{: RESULT = "*"; :};
+OpNA3		::= DIV
+				{: RESULT = "/"; :};				
+OpNA3		::= MOD
+				{: RESULT = "%"; :};
+
+
