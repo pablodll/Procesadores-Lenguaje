@@ -9,7 +9,8 @@ public class UnidadLexica extends Symbol{
 	private int columna;
 	
 	public UnidadLexica(int fila, int columna, int clase, String lexema) {
-		super(clase, new StringLocalizado(lexema,fila,columna));
+		super(clase, null);
+		value = new StringLocalizado(lexema,fila,columna);
 		this.fila = fila;
 		this.columna = columna;
 	}
