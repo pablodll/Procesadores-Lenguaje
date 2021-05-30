@@ -206,12 +206,13 @@ public class Impresion extends ProcesamientoPorDefecto{
 	public void procesa(Bloque_no_vacio bloque) {
 		System.out.println("{ ");
 		bloque.prog().procesa(this);
-		System.out.println("} ");
+		System.out.println();
+		System.out.print("}");
 	}
 
 	@Override
 	public void procesa(Insts_vacia insts) {
-		System.out.println();
+		
 	}
 
 	@Override
@@ -221,7 +222,7 @@ public class Impresion extends ProcesamientoPorDefecto{
 
 	@Override
 	public void procesa(Paramsr_vacio paramsr) {
-		System.out.println();
+
 	}
 
 	@Override
@@ -255,7 +256,7 @@ public class Impresion extends ProcesamientoPorDefecto{
 		System.out.println(" then");
 		inst.insts().procesa(this);
 		System.out.println();
-		System.out.println("endif");
+		System.out.print("endif");
 	}
 
 	@Override
@@ -267,7 +268,7 @@ public class Impresion extends ProcesamientoPorDefecto{
 		System.out.println("else ");
 		inst.insts2().procesa(this);
 		System.out.println();
-		System.out.println("endif");
+		System.out.print("endif");
 	}
 
 	@Override
@@ -277,7 +278,7 @@ public class Impresion extends ProcesamientoPorDefecto{
 		System.out.println(" do");
 		inst.insts().procesa(this);
 		System.out.println();
-		System.out.println("endwhile");
+		System.out.print("endwhile");
 	}
 
 	@Override
@@ -294,7 +295,7 @@ public class Impresion extends ProcesamientoPorDefecto{
 
 	@Override
 	public void procesa(Inst_nl inst) {
-		System.out.println("nl");
+		System.out.print("nl");
 	}
 
 	@Override
@@ -311,9 +312,9 @@ public class Impresion extends ProcesamientoPorDefecto{
 
 	@Override
 	public void procesa(Inst_call inst) {
-		System.out.print("call " + inst.identif() + "( ");
+		System.out.print("call " + inst.identif() + "(");
 		inst.paramsr().procesa(this);
-		System.out.println(" )");
+		System.out.print(")");
 	}
 
 	@Override
@@ -370,7 +371,7 @@ public class Impresion extends ProcesamientoPorDefecto{
 		ltipos.ltipos().procesa(this);
 		System.out.println(";");
 		ltipos.tipo().procesa(this);
-		System.out.println(" " + ltipos.id());
+		System.out.print(" " + ltipos.id());
 	}
 
 	@Override
@@ -383,24 +384,25 @@ public class Impresion extends ProcesamientoPorDefecto{
 	public void procesa(Tipo_record tipo) {
 		System.out.println("record {");
 		tipo.ltipos().procesa(this);
+		System.out.println();
 		System.out.print("}");
 	}
 
 	@Override
 	public void procesa(Ref tipo) {
-		System.out.println(tipo.id());
+		System.out.print(tipo.id());
 	}
 
 	@Override
 	public void procesa(Paramf_valor paramf) {
 		paramf.tipo().procesa(this);
-		System.out.println(paramf.id());
+		System.out.print(paramf.id());
 	}
 
 	@Override
 	public void procesa(Paramf_referencia paramf) {
 		paramf.tipo().procesa(this);
-		System.out.println(" & " + paramf.id());
+		System.out.print(" & " + paramf.id());
 	}
 
 	@Override
@@ -422,7 +424,7 @@ public class Impresion extends ProcesamientoPorDefecto{
 
 	@Override
 	public void procesa(Paramsf_vacio paramsf) {
-		System.out.println();
+		
 	}
 
 	@Override
@@ -443,7 +445,7 @@ public class Impresion extends ProcesamientoPorDefecto{
 	public void procesa(Dec_proc dec) {
 		System.out.print("proc " + dec.id() + "(");
 		dec.paramsf().procesa(this);
-		System.out.println(")");
+		System.out.print(") ");
 		dec.bloque().procesa(this);
 	}
 
