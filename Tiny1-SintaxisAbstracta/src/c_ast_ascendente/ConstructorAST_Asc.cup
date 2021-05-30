@@ -26,9 +26,8 @@ terminal	TIPOINT, TIPOREAL, TIPOBOOL, TIPOSTRING, AND, OR, NOT, TRUE, FALSE,
 			ARRAY, OF, POINTER, NEW, DELETE, READ, WRITE, NL,
 			COMA, PUNTOCOMA, ASIG, SEPSEC, POR, DIV, MOD, 
 			PAP, PCIE, CAP, CCIE, LLAP, LLCIE, PUNTO, FLECHA, AMP, MENOR, MAYOR, 
-			MENIGUAL, MAYIGUAL, IGUAL, DIST;
+			MENIGUAL, MAYIGUAL, IGUAL, DIST, MAS, MENOS;
 terminal	StringLocalizado CADENA, ID, ENTERO, REAL;
-terminal 	String MAS, MENOS;
 			
 non terminal	Prog S;
 non terminal  	LDecs Decs, LDecs;
@@ -45,7 +44,7 @@ non terminal	Lparamsr LParamsR;
 non terminal	Insts Insts;
 non terminal	Bloque Bloque;
 non terminal	Exp E0, E1, E2, E3, E4, E5, E6, E7;
-non terminal	String OpAI1, OpAI2, OpNA3;
+non terminal	String OpAD0, OpAI1, OpAI2, OpNA3;
 				
 S			::= Decs: decs LInsts: linsts
 				{: RESULT = sem.prog(decs, linsts);:};
@@ -152,11 +151,10 @@ Bloque		::= LLAP S: prog LLCIE
 				{: RESULT = sem.bloque_no_vacio(prog); :};
 Bloque		::= LLAP LLCIE
 				{: RESULT = sem.bloque_vacio(); :};
-								
-E0			::= E1: exp0 MAS: op E0: exp1
-				{: RESULT = sem.exp(op, exp0, exp1); :};
-E0			::= E1: exp0 MENOS: op E0: exp1
-				{: RESULT = sem.exp(op, exp0, exp1); :};
+				
+				
+E0			::= E1: exp0 OpAD0: op E0: exp1
+				{: RESULT = sem.exp(op, exp0, exp1); :};							
 E0			::= E1: exp
 				{: RESULT = exp; :};
 				
@@ -212,6 +210,11 @@ E7			::= NULL
 				{: RESULT = sem._null(); :};
 E7			::= PAP E0: exp PCIE
 				{: RESULT = exp; :};
+
+OpAD0		::= MAS
+				{: RESULT = "+"; :};
+OpAD0		::= MENOS
+				{: RESULT = "-"; :};
 
 OpAI1		::= AND
 				{: RESULT = "and"; :};
