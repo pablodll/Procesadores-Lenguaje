@@ -2,6 +2,7 @@ package maquinaP;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.Stack;
 
 
@@ -104,6 +105,28 @@ public class MaquinaP {
       } 
       public String toString() {return "and";};
    }
+   
+   private IRead IREAD;
+   private class IRead implements Instruccion {
+      public void ejecuta() {
+         Scanner sc = new Scanner(System.in);
+         Valor input = new ValorString(sc.next());
+         pilaEvaluacion.push(input);
+         pc++;
+      } 
+      public String toString() {return "read";};
+   }
+   
+   private IWrite IWRITE;
+   private class IWrite implements Instruccion {
+      public void ejecuta() {
+         String val = pilaEvaluacion.pop().valorString();
+         System.out.println();
+         pc++;
+      } 
+      public String toString() {return "read";};
+   }
+   
    private class IApilaInt implements Instruccion {
       private int valor;
       public IApilaInt(int valor) {
@@ -126,6 +149,30 @@ public class MaquinaP {
          pc++;
       } 
       public String toString() {return "apilaBool("+valor+")";};
+   }
+   
+   private class IApilaReal implements Instruccion {
+      private float valor;
+      public IApilaReal(float valor) {
+        this.valor = valor;  
+      }
+      public void ejecuta() {
+         pilaEvaluacion.push(new ValorReal(valor)); 
+         pc++;
+      } 
+      public String toString() {return "apilaReal("+valor+")";};
+   }
+   
+   private class IApilaString implements Instruccion {
+      private String valor;
+      public IApilaString(String valor) {
+        this.valor = valor;  
+      }
+      public void ejecuta() {
+         pilaEvaluacion.push(new ValorString(valor)); 
+         pc++;
+      } 
+      public String toString() {return "apilaString("+valor+")";};
    }
 
    private class IIrA implements Instruccion {
@@ -196,6 +243,16 @@ public class MaquinaP {
         pc++;
       } 
       public String toString() {return "desapilaind";};
+   }
+   
+   private IToReal ITOREAL;
+   private class IToReal implements Instruccion {
+      public void ejecuta() {
+        int val = pilaEvaluacion.pop().valorInt();
+        pilaEvaluacion.push(new ValorReal((float) val));
+        pc++;
+      } 
+      public String toString() {return "toreal";};
    }
 
    private class IAlloc implements Instruccion {
@@ -326,11 +383,16 @@ public class MaquinaP {
    public Instruccion suma() {return ISUMA;}
    public Instruccion mul() {return IMUL;}
    public Instruccion and() {return IAND;}
+   public Instruccion read() {return IREAD;}
+   public Instruccion write() {return IWRITE;}
    public Instruccion apilaInt(int val) {return new IApilaInt(val);}
    public Instruccion apilaBool(boolean val) {return new IApilaBool(val);}
+   public Instruccion apilaReal(float val) {return new IApilaReal(val);}
+   public Instruccion apilaString(String val) {return new IApilaString(val);}
    public Instruccion apilad(int nivel) {return new IApilad(nivel);}
    public Instruccion apilaInd() {return IAPILAIND;}
    public Instruccion desapilaInd() {return IDESAPILAIND;}
+   public Instruccion toReal() {return ITOREAL;}
    public Instruccion mueve(int tam) {return new IMueve(tam);}
    public Instruccion irA(int dir) {return new IIrA(dir);}
    public Instruccion irF(int dir) {return new IIrF(dir);}
@@ -360,8 +422,11 @@ public class MaquinaP {
       ISUMA = new ISuma();
       IAND = new IAnd();
       IMUL = new IMul();
+      IREAD = new IRead();
+      IWRITE = new IWrite();
       IAPILAIND = new IApilaind();
       IDESAPILAIND = new IDesapilaind();
+      ITOREAL = new IToReal();
       IIRIND = new IIrind();
       IDUP = new IDup();
       ISTOP = new IStop();
