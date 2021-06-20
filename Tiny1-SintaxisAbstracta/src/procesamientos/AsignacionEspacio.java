@@ -73,422 +73,422 @@ import asint.Tiny1Asint.Tipos_uno;
 import asint.Tiny1Asint.True;
 
 public class AsignacionEspacio extends ProcesamientoPorDefecto{
+	
+	private int dir_act = 0;
+	private int nivel_act = 0;
+	
 	@Override
-	public void procesa(Suma exp) {
+	public void procesa(Suma exp) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Resta exp) {
+	public void procesa(Resta exp) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(And exp) {
+	public void procesa(And exp) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Or exp) {
+	public void procesa(Or exp) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Igual exp) {
+	public void procesa(Igual exp) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Menor exp) {
+	public void procesa(Menor exp) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Mayor exp) {
+	public void procesa(Mayor exp) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Menor_igual exp) {
+	public void procesa(Menor_igual exp) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Mayor_igual exp) {
+	public void procesa(Mayor_igual exp) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Dist exp) {
+	public void procesa(Dist exp) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Mul exp) {
+	public void procesa(Mul exp) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Div exp) {
+	public void procesa(Div exp) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Mod exp) {
+	public void procesa(Mod exp) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Menos exp) {
+	public void procesa(Menos exp) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Not exp) {
+	public void procesa(Not exp) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Indirecto exp) {
+	public void procesa(Indirecto exp) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Entero exp) {
+	public void procesa(Entero exp) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Real exp) {
+	public void procesa(Real exp) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(True exp) {
+	public void procesa(True exp) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(False exp) {
+	public void procesa(False exp) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Cadena exp) {
+	public void procesa(Cadena exp) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Identif exp) {
+	public void procesa(Identif exp) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Null exp) {
+	public void procesa(Null exp) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Bloque_vacio bloque) {
+	public void procesa(Bloque_vacio bloque) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Bloque_no_vacio bloque) {
+	public void procesa(Bloque_no_vacio bloque) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Insts_vacia insts) {
+	public void procesa(Insts_vacia insts) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Insts_no_vacia insts) {
+	public void procesa(Insts_no_vacia insts) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Paramsr_vacio paramsr) {
+	public void procesa(Paramsr_vacio paramsr) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Paramsr_no_vacio paramsr) {
+	public void procesa(Paramsr_no_vacio paramsr) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Lparamsr_uno lparamsr) {
+	public void procesa(Lparamsr_uno lparamsr) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Lparamsr_muchos lparamsr) {
+	public void procesa(Lparamsr_muchos lparamsr) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Inst_asig inst) {
+	public void procesa(Inst_asig inst) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Inst_if inst) {
+	public void procesa(Inst_if inst) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Inst_if_else inst) {
+	public void procesa(Inst_if_else inst) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Inst_while inst) {
+	public void procesa(Inst_while inst) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Inst_read inst) {
+	public void procesa(Inst_read inst) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Inst_write inst) {
+	public void procesa(Inst_write inst) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Inst_nl inst) {
+	public void procesa(Inst_nl inst) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Inst_new inst) {
+	public void procesa(Inst_new inst) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Inst_delete inst) {
+	public void procesa(Inst_delete inst) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Inst_call inst) {
+	public void procesa(Inst_call inst) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Inst_bloque inst) {
+	public void procesa(Inst_bloque inst) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Insts_una linsts) {
+	public void procesa(Insts_una linsts) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Insts_muchas linsts) {
+	public void procesa(Insts_muchas linsts) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Tipo_int tipo) {
-		// TODO Auto-generated method stub
-		
+	public void procesa(Tipo_int tipo) throws Exception {
+		tipo._tam = 1;
 	}
 
 	@Override
-	public void procesa(Tipo_bool tipo) {
-		// TODO Auto-generated method stub
-		
+	public void procesa(Tipo_bool tipo) throws Exception {
+		tipo._tam = 1;
 	}
 
 	@Override
-	public void procesa(Tipo_real tipo) {
-		// TODO Auto-generated method stub
-		
+	public void procesa(Tipo_real tipo) throws Exception {
+		tipo._tam = 1;
 	}
 
 	@Override
-	public void procesa(Tipo_string tipo) {
-		// TODO Auto-generated method stub
-		
+	public void procesa(Tipo_string tipo) throws Exception {
+		tipo._tam = 1;
 	}
 
 	@Override
-	public void procesa(Tipo_array tipo) {
+	public void procesa(Tipo_array tipo) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Tipos_uno ltipos) {
+	public void procesa(Tipos_uno ltipos) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Tipos_muchos ltipos) {
+	public void procesa(Tipos_muchos ltipos) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Tipo_pointer tipo) {
+	public void procesa(Tipo_pointer tipo) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Tipo_record tipo) {
+	public void procesa(Tipo_record tipo) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Ref tipo) {
+	public void procesa(Ref tipo) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Paramf_valor paramf) {
+	public void procesa(Paramf_valor paramf) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Paramf_referencia paramf) {
+	public void procesa(Paramf_referencia paramf) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Lparamsf_muchos lparamsf) {
+	public void procesa(Lparamsf_muchos lparamsf) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Lparamsf_uno lparamsf) {
+	public void procesa(Lparamsf_uno lparamsf) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Paramsf_no_vacio paramsf) {
+	public void procesa(Paramsf_no_vacio paramsf) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Paramsf_vacio paramsf) {
+	public void procesa(Paramsf_vacio paramsf) throws Exception{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Dec_var dec) {
-		// TODO Auto-generated method stub
-		
+	public void procesa(Dec_var dec) throws Exception {
+		dec.tipo().procesa(this);
+		dec._nivel = nivel_act;
+		dec._dir = dir_act;
+		dir_act += dec.tipo()._tam;
 	}
 
 	@Override
-	public void procesa(Dec_type dec) {
+	public void procesa(Dec_type dec) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Dec_proc dec) {
+	public void procesa(Dec_proc dec) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Decs_una ldecs) {
-		// TODO Auto-generated method stub
-		
+	public void procesa(Decs_una ldecs) throws Exception {
+		ldecs.dec().procesa(this);
 	}
 
 	@Override
-	public void procesa(Decs_muchas ldecs) {
-		// TODO Auto-generated method stub
-		
+	public void procesa(Decs_muchas ldecs) throws Exception {
+		ldecs.ldecs().procesa(this);
+		ldecs.dec().procesa(this);
 	}
 
 	@Override
-	public void procesa(Prog_con_decs prog) {
-		// TODO Auto-generated method stub
-		
+	public void procesa(Prog_con_decs prog) throws Exception {
+		prog.ldecs().procesa(this);
 	}
 
 	@Override
-	public void procesa(Prog_sin_decs prog) {
+	public void procesa(Prog_sin_decs prog) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Indice exp) {
+	public void procesa(Indice exp) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Reg_punto exp) {
+	public void procesa(Reg_punto exp) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void procesa(Reg_flecha exp) {
+	public void procesa(Reg_flecha exp) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
