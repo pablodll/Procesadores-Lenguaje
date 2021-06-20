@@ -71,30 +71,94 @@ import asint.Tiny1Asint.Tipo_string;
 import asint.Tiny1Asint.Tipos_muchos;
 import asint.Tiny1Asint.Tipos_uno;
 import asint.Tiny1Asint.True;
+import maquinaP.MaquinaP;
 
 public class GenCodigo extends ProcesamientoPorDefecto{
+	
+	private MaquinaP m;
+	
+	public GenCodigo(MaquinaP m) {
+		this.m = m;
+	}
+	
 	@Override
 	public void procesa(Suma exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp.arg0().procesa(this);
+		if(exp.arg0()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
+		if(exp._tipo.equals("real")) {
+			if(exp.arg0()._tipo.equals("int")) {
+				m.ponInstruccion(m.toReal());
+			}
+		}
 		
+		exp.arg1().procesa(this);
+		if(exp.arg1()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
+		if(exp._tipo.equals("real")) {
+			if(exp.arg1()._tipo.equals("int")) {
+				m.ponInstruccion(m.toReal());
+			}
+		}
+		
+		m.ponInstruccion(m.suma());
 	}
 
 	@Override
 	public void procesa(Resta exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp.arg0().procesa(this);
+		if(exp.arg0()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
+		if(exp._tipo.equals("real")) {
+			if(exp.arg0()._tipo.equals("int")) {
+				m.ponInstruccion(m.toReal());
+			}
+		}
 		
+		exp.arg1().procesa(this);
+		if(exp.arg1()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
+		if(exp._tipo.equals("real")) {
+			if(exp.arg1()._tipo.equals("int")) {
+				m.ponInstruccion(m.toReal());
+			}
+		}
+		
+		m.ponInstruccion(m.resta());
 	}
 
 	@Override
 	public void procesa(And exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp.arg0().procesa(this);
+		if(exp.arg0()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
 		
+		exp.arg1().procesa(this);
+		if(exp.arg1()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
+		
+		m.ponInstruccion(m.and());
 	}
 
 	@Override
 	public void procesa(Or exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp.arg0().procesa(this);
+		if(exp.arg0()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
 		
+		exp.arg1().procesa(this);
+		if(exp.arg1()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
+		
+		m.ponInstruccion(m.or());
 	}
 
 	@Override
@@ -171,38 +235,32 @@ public class GenCodigo extends ProcesamientoPorDefecto{
 
 	@Override
 	public void procesa(Entero exp) throws Exception {
-		// TODO Auto-generated method stub
-		
+		m.ponInstruccion(m.apilaInt(Integer.parseInt(exp.entero().toString())));
 	}
 
 	@Override
 	public void procesa(Real exp) throws Exception {
-		// TODO Auto-generated method stub
-		
+		m.ponInstruccion(m.apilaReal(Float.parseFloat(exp.real().toString())));
 	}
 
 	@Override
 	public void procesa(True exp) throws Exception {
-		// TODO Auto-generated method stub
-		
+		m.ponInstruccion(m.apilaBool(true));
 	}
 
 	@Override
 	public void procesa(False exp) throws Exception {
-		// TODO Auto-generated method stub
-		
+		m.ponInstruccion(m.apilaBool(false));
 	}
 
 	@Override
 	public void procesa(Cadena exp) throws Exception {
-		// TODO Auto-generated method stub
-		
+		m.ponInstruccion(m.apilaString(exp.cadena().toString()));
 	}
 
 	@Override
 	public void procesa(Identif exp) throws Exception {
-		// TODO Auto-generated method stub
-		
+		m.ponInstruccion(m.apilaInt(exp._vinculo._dir));
 	}
 
 	@Override
@@ -261,8 +319,23 @@ public class GenCodigo extends ProcesamientoPorDefecto{
 
 	@Override
 	public void procesa(Inst_asig inst) throws Exception {
-		// TODO Auto-generated method stub
-		
+		inst.arg0().procesa(this);
+		inst.arg1().procesa(this);
+		if(inst.arg0()._tipo.equals("real") && inst.arg1()._tipo.equals("int")) {
+			if(inst.arg1()._desig) {
+				m.ponInstruccion(m.apilaInd());
+			}
+			m.ponInstruccion(m.toReal());
+			m.ponInstruccion(m.desapilaInd());
+		}
+		else {
+			if(inst.arg1()._desig) {
+				m.ponInstruccion(m.mueve(inst.arg1()._tam));
+			}
+			else {
+				m.ponInstruccion(m.desapilaInd());
+			}
+		}
 	}
 
 	@Override
@@ -285,14 +358,18 @@ public class GenCodigo extends ProcesamientoPorDefecto{
 
 	@Override
 	public void procesa(Inst_read inst) throws Exception {
-		// TODO Auto-generated method stub
-		
+		inst.exp().procesa(this);
+		m.ponInstruccion(m.read());
+		m.ponInstruccion(m.desapilaInd());
 	}
 
 	@Override
 	public void procesa(Inst_write inst) throws Exception {
-		// TODO Auto-generated method stub
-		
+		inst.exp().procesa(this);
+		if(inst.exp()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
+		m.ponInstruccion(m.write());
 	}
 
 	@Override
@@ -327,14 +404,13 @@ public class GenCodigo extends ProcesamientoPorDefecto{
 
 	@Override
 	public void procesa(Insts_una linsts) throws Exception {
-		// TODO Auto-generated method stub
-		
+		linsts.inst().procesa(this);
 	}
 
 	@Override
 	public void procesa(Insts_muchas linsts) throws Exception {
-		// TODO Auto-generated method stub
-		
+		linsts.linsts().procesa(this);
+		linsts.inst().procesa(this);
 	}
 
 	@Override
@@ -465,14 +541,12 @@ public class GenCodigo extends ProcesamientoPorDefecto{
 
 	@Override
 	public void procesa(Prog_con_decs prog) throws Exception {
-		// TODO Auto-generated method stub
-		
+		prog.linsts().procesa(this);
 	}
 
 	@Override
 	public void procesa(Prog_sin_decs prog) throws Exception {
-		// TODO Auto-generated method stub
-		
+		prog.linsts().procesa(this);
 	}
 
 	@Override

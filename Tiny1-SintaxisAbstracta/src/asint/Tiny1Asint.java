@@ -10,6 +10,9 @@ public class Tiny1Asint {
 		public int _nivel;
 		public String _tipo;
 		public Genero _vinculo;
+		public int _etqi;
+		public int _etqs;
+		public boolean _desig;
 	}
 	
 	

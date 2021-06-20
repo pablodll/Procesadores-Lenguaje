@@ -5,13 +5,16 @@ import c_ast_ascendente.ConstructorAST_Asc;
 import asint.Tiny1Asint.Prog;
 import c_ast_ascendente.ClaseLexica;
 import errors.GestionErroresTiny1;
+import maquinaP.MaquinaP;
 import c_ast_ascendente.UnidadLexica;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
+import procesamientos.AsignacionEspacio;
 import procesamientos.CompTiposErrorException;
 import procesamientos.ComprobacionTipos;
+import procesamientos.GenCodigo;
 import procesamientos.Impresion;
 import procesamientos.TablaSimbolos;
 import procesamientos.Vinculacion;
@@ -28,8 +31,10 @@ public class Main {
             prog = ejecuta_ascendente(args[1]);
          else if (args[0].equals("-desc"))
             prog = ejecuta_descendente(args[1]);
-         prog.procesa(new Impresion());  
+        
+//         prog.procesa(new Impresion());  
          
+         // VINCULACION
          TablaSimbolos ts = new TablaSimbolos();
          try {
         	 prog.procesa(new Vinculacion(ts));
@@ -37,11 +42,22 @@ public class Main {
         	 System.err.println("ERROR DE VINCULACION");
          }
          
+         // COMPROBACION TIPOS
          try {
         	 prog.procesa(new ComprobacionTipos());
          } catch (CompTiposErrorException e) {
         	 System.err.println("ERROR DE TIPOS");
          }
+         
+         // ASIGNACION ESPACIO
+         prog.procesa(new AsignacionEspacio());
+         
+         // ETIQUETADO
+         
+         // GENERACION CODIGO
+         MaquinaP m = new MaquinaP(100, 100, 10, 10);
+         prog.procesa(new GenCodigo(m));
+         m.muestraCodigo();
      }
    }
    

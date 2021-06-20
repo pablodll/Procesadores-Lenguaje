@@ -377,6 +377,7 @@ public class ComprobacionTipos extends ProcesamientoPorDefecto{
 	@Override
 	public void procesa(Identif exp) throws Exception {
 		exp._tipo = exp._vinculo._tipo;
+		exp._desig = true;
 	}
 
 	@Override

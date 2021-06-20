@@ -85,6 +85,16 @@ public class MaquinaP {
       } 
       public String toString() {return "suma";};
    }
+   private IResta IRESTA;
+   private class IResta implements Instruccion {
+      public void ejecuta() {
+         Valor opnd2 = pilaEvaluacion.pop(); 
+         Valor opnd1 = pilaEvaluacion.pop();
+         pilaEvaluacion.push(new ValorInt(opnd1.valorInt()-opnd2.valorInt()));
+         pc++;
+      } 
+      public String toString() {return "resta";};
+   }
    private IMul IMUL;
    private class IMul implements Instruccion {
       public void ejecuta() {
@@ -95,6 +105,26 @@ public class MaquinaP {
       } 
       public String toString() {return "mul";};
    }
+   private IDiv IDIV;
+   private class IDiv implements Instruccion {
+      public void ejecuta() {
+         Valor opnd2 = pilaEvaluacion.pop(); 
+         Valor opnd1 = pilaEvaluacion.pop();
+         pilaEvaluacion.push(new ValorInt(opnd1.valorInt()/opnd2.valorInt()));
+         pc++;
+      } 
+      public String toString() {return "div";};
+   }
+   private IMod IMOD;
+   private class IMod implements Instruccion {
+      public void ejecuta() {
+         Valor opnd2 = pilaEvaluacion.pop(); 
+         Valor opnd1 = pilaEvaluacion.pop();
+         pilaEvaluacion.push(new ValorInt(opnd1.valorInt()%opnd2.valorInt()));
+         pc++;
+      } 
+      public String toString() {return "mod";};
+   }
    private IAnd IAND;
    private class IAnd implements Instruccion {
       public void ejecuta() {
@@ -104,6 +134,46 @@ public class MaquinaP {
          pc++;
       } 
       public String toString() {return "and";};
+   }
+   private IOr IOR;
+   private class IOr implements Instruccion {
+      public void ejecuta() {
+         Valor opnd2 = pilaEvaluacion.pop(); 
+         Valor opnd1 = pilaEvaluacion.pop();
+         pilaEvaluacion.push(new ValorBool(opnd1.valorBool()||opnd2.valorBool()));
+         pc++;
+      } 
+      public String toString() {return "or";};
+   }
+   private IIgual IIGUAL;
+   private class IIgual implements Instruccion {
+      public void ejecuta() {
+         Valor opnd2 = pilaEvaluacion.pop(); 
+         Valor opnd1 = pilaEvaluacion.pop();
+         pilaEvaluacion.push(new ValorBool(opnd1.valorBool()==opnd2.valorBool()));
+         pc++;
+      } 
+      public String toString() {return "or";};
+   }
+   private IMenor IMENOR;
+   private class IMenor implements Instruccion {
+      public void ejecuta() {
+         Valor opnd2 = pilaEvaluacion.pop(); 
+         Valor opnd1 = pilaEvaluacion.pop();
+         pilaEvaluacion.push(new ValorBool(opnd1.valorBool() < opnd2.valorBool()));
+         pc++;
+      } 
+      public String toString() {return "or";};
+   }
+   private IMayor IMAYOR;
+   private class IMayor implements Instruccion {
+      public void ejecuta() {
+         Valor opnd2 = pilaEvaluacion.pop(); 
+         Valor opnd1 = pilaEvaluacion.pop();
+         pilaEvaluacion.push(new ValorBool(opnd1.valorBool() > opnd2.valorBool()));
+         pc++;
+      } 
+      public String toString() {return "or";};
    }
    
    private IRead IREAD;
@@ -124,7 +194,7 @@ public class MaquinaP {
          System.out.println();
          pc++;
       } 
-      public String toString() {return "read";};
+      public String toString() {return "write";};
    }
    
    private class IApilaInt implements Instruccion {
@@ -381,8 +451,12 @@ public class MaquinaP {
    }
 
    public Instruccion suma() {return ISUMA;}
+   public Instruccion resta() {return IRESTA;}
    public Instruccion mul() {return IMUL;}
+   public Instruccion div() {return IDIV;}
+   public Instruccion mod() {return IMOD;}
    public Instruccion and() {return IAND;}
+   public Instruccion or() {return IOR;}
    public Instruccion read() {return IREAD;}
    public Instruccion write() {return IWRITE;}
    public Instruccion apilaInt(int val) {return new IApilaInt(val);}
@@ -420,8 +494,12 @@ public class MaquinaP {
       datos = new Valor[tamdatos+tampila+tamheap];
       this.pc = 0;
       ISUMA = new ISuma();
+      IRESTA = new IResta();
       IAND = new IAnd();
+      IOR = new IOr();
       IMUL = new IMul();
+      IDIV = new IDiv();
+      IMOD = new IMod();
       IREAD = new IRead();
       IWRITE = new IWrite();
       IAPILAIND = new IApilaind();
