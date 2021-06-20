@@ -9,7 +9,13 @@ import c_ast_ascendente.UnidadLexica;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+
+import procesamientos.CompTiposErrorException;
+import procesamientos.ComprobacionTipos;
 import procesamientos.Impresion;
+import procesamientos.TablaSimbolos;
+import procesamientos.Vinculacion;
+import procesamientos.VinculacionErrorException;
 
 public class Main {
    public static void main(String[] args) throws Exception {
@@ -23,6 +29,19 @@ public class Main {
          else if (args[0].equals("-desc"))
             prog = ejecuta_descendente(args[1]);
          prog.procesa(new Impresion());  
+         
+         TablaSimbolos ts = new TablaSimbolos();
+         try {
+        	 prog.procesa(new Vinculacion(ts));
+         } catch (VinculacionErrorException e) {
+        	 System.err.println("ERROR DE VINCULACION");
+         }
+         
+         try {
+        	 prog.procesa(new ComprobacionTipos());
+         } catch (CompTiposErrorException e) {
+        	 System.err.println("ERROR DE TIPOS");
+         }
      }
    }
    

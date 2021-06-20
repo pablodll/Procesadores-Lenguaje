@@ -3,12 +3,21 @@ package asint;
 import c_ast_descendente.Token;
 
 public class Tiny1Asint {
-
-	public static abstract class Exp  {
+	
+	public static abstract class Genero {
+		public int _dir;
+		public int _tam;
+		public int _nivel;
+		public String _tipo;
+		public Genero _vinculo;
+	}
+	
+	
+	public static abstract class Exp  extends Genero{
         public Exp() {
         }   
         public abstract int prioridad();
-        public abstract void procesa(Procesamiento procesamiento);
+        public abstract void procesa(Procesamiento procesamiento) throws Exception;
      }
 	
     public static class StringLocalizado {
@@ -68,7 +77,7 @@ public class Tiny1Asint {
     	public Suma(Exp arg0, Exp arg1) {
     		super(arg0, arg1);
     	}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
@@ -76,7 +85,7 @@ public class Tiny1Asint {
     	public Resta(Exp arg0, Exp arg1) {
     		super(arg0, arg1);
     	}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
@@ -93,7 +102,7 @@ public class Tiny1Asint {
     	public And(Exp arg0, Exp arg1) {
     		super(arg0, arg1);
     	}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
@@ -101,7 +110,7 @@ public class Tiny1Asint {
     	public Or(Exp arg0, Exp arg1) {
     		super(arg0, arg1);
     	}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
@@ -118,7 +127,7 @@ public class Tiny1Asint {
         public Igual(Exp arg0, Exp arg1) {
             super(arg0,arg1);
         }
-        public void procesa(Procesamiento p) {
+        public void procesa(Procesamiento p) throws Exception {
            p.procesa(this); 
         }     
     }
@@ -126,7 +135,7 @@ public class Tiny1Asint {
         public Menor(Exp arg0, Exp arg1) {
             super(arg0,arg1);
         }
-        public void procesa(Procesamiento p) {
+        public void procesa(Procesamiento p) throws Exception {
            p.procesa(this); 
         }     
     }
@@ -134,7 +143,7 @@ public class Tiny1Asint {
         public Mayor(Exp arg0, Exp arg1) {
             super(arg0,arg1);
         }
-        public void procesa(Procesamiento p) {
+        public void procesa(Procesamiento p) throws Exception {
            p.procesa(this); 
         }     
     }
@@ -142,7 +151,7 @@ public class Tiny1Asint {
         public Menor_igual(Exp arg0, Exp arg1) {
             super(arg0,arg1);
         }
-        public void procesa(Procesamiento p) {
+        public void procesa(Procesamiento p) throws Exception {
            p.procesa(this); 
         }     
     }
@@ -150,7 +159,7 @@ public class Tiny1Asint {
         public Mayor_igual(Exp arg0, Exp arg1) {
             super(arg0,arg1);
         }
-        public void procesa(Procesamiento p) {
+        public void procesa(Procesamiento p) throws Exception {
            p.procesa(this); 
         }     
     }
@@ -158,7 +167,7 @@ public class Tiny1Asint {
         public Dist(Exp arg0, Exp arg1) {
             super(arg0,arg1);
         }
-        public void procesa(Procesamiento p) {
+        public void procesa(Procesamiento p) throws Exception {
            p.procesa(this); 
         }     
     }
@@ -175,7 +184,7 @@ public class Tiny1Asint {
         public Mul(Exp arg0, Exp arg1) {
             super(arg0,arg1);
         }
-        public void procesa(Procesamiento p) {
+        public void procesa(Procesamiento p) throws Exception {
            p.procesa(this); 
         }     
     }
@@ -183,7 +192,7 @@ public class Tiny1Asint {
         public Div(Exp arg0, Exp arg1) {
             super(arg0,arg1);
         }
-        public void procesa(Procesamiento p) {
+        public void procesa(Procesamiento p) throws Exception {
            p.procesa(this); 
         }     
     }
@@ -191,7 +200,7 @@ public class Tiny1Asint {
         public Mod(Exp arg0, Exp arg1) {
             super(arg0,arg1);
         }
-        public void procesa(Procesamiento p) {
+        public void procesa(Procesamiento p) throws Exception {
            p.procesa(this); 
         }     
     }
@@ -216,7 +225,7 @@ public class Tiny1Asint {
 		public Menos(Exp arg) {
 			super(arg);
 		}
-        public void procesa(Procesamiento p) {
+        public void procesa(Procesamiento p) throws Exception {
             p.procesa(this); 
          }    
     }
@@ -224,7 +233,7 @@ public class Tiny1Asint {
 		public Not(Exp arg) {
 			super(arg);
 		}
-        public void procesa(Procesamiento p) {
+        public void procesa(Procesamiento p) throws Exception {
             p.procesa(this); 
          }    
     }
@@ -234,7 +243,7 @@ public class Tiny1Asint {
     	public Indirecto(Exp arg) {
     		super(arg);
     	}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     	public final int prioridad() {
@@ -246,7 +255,7 @@ public class Tiny1Asint {
 		public Indice(Exp arg0, Exp arg1) {
 			super(arg0, arg1);
 		}
-		public void procesa(Procesamiento p) {
+		public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     	public final int prioridad() {
@@ -271,7 +280,7 @@ public class Tiny1Asint {
     	public Reg_punto(Exp arg, StringLocalizado id) {
     		super(arg, id);
     	}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
@@ -279,7 +288,7 @@ public class Tiny1Asint {
     	public Reg_flecha(Exp arg, StringLocalizado id) {
     		super(arg, id);
     	}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
@@ -291,7 +300,7 @@ public class Tiny1Asint {
     		this.entero = entero;
     	}
     	public StringLocalizado entero() {return entero;}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     	public final int prioridad() {
@@ -305,7 +314,7 @@ public class Tiny1Asint {
     		this.real = real;
     	}
     	public StringLocalizado real() {return real;}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     	public final int prioridad() {
@@ -317,7 +326,7 @@ public class Tiny1Asint {
     	public True() {
     		super();
     	}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     	public final int prioridad() {
@@ -328,7 +337,7 @@ public class Tiny1Asint {
     	public False() {
     		super();
     	}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     	public final int prioridad() {
@@ -343,7 +352,7 @@ public class Tiny1Asint {
     		this.cadena = cadena;
     	}
     	public StringLocalizado cadena() {return cadena;}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     	public final int prioridad() {
@@ -358,7 +367,7 @@ public class Tiny1Asint {
     		this.id = id;
     	}
     	public StringLocalizado id() {return id;}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     	public final int prioridad() {
@@ -370,7 +379,7 @@ public class Tiny1Asint {
     	public Null() {
     		super();
     	}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     	public final int prioridad() {
@@ -378,9 +387,9 @@ public class Tiny1Asint {
     	}
     }
     
-    public static abstract class Bloque{
+    public static abstract class Bloque extends Genero{
     	public Bloque() {}
-    	public abstract void procesa(Procesamiento p);
+    	public abstract void procesa(Procesamiento p) throws Exception;
     }
     public static class Bloque_no_vacio extends Bloque{
     	private Prog prog;
@@ -389,7 +398,7 @@ public class Tiny1Asint {
     		this.prog = prog;
     	}
     	public Prog prog() {return prog;}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
@@ -397,14 +406,14 @@ public class Tiny1Asint {
     	public Bloque_vacio() {
     		super();
     	}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
         
-    public static abstract class Insts{
+    public static abstract class Insts extends Genero{
     	public Insts() {}
-    	public abstract void procesa(Procesamiento p);
+    	public abstract void procesa(Procesamiento p) throws Exception;
     }
     public static class Insts_no_vacia extends Insts{
     	private LInsts linsts;
@@ -413,7 +422,7 @@ public class Tiny1Asint {
     		this.linsts = linsts;
     	}
     	public LInsts linsts() {return linsts;}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
@@ -421,14 +430,14 @@ public class Tiny1Asint {
     	public Insts_vacia() {
     		super();
     	}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
 
-    public static abstract class Lparamsr {
+    public static abstract class Lparamsr  extends Genero{
     	public Lparamsr() {}
-    	public abstract void procesa(Procesamiento p);
+    	public abstract void procesa(Procesamiento p) throws Exception;
     }
     public static class Lparamsr_uno extends Lparamsr {
         private Exp exp; 
@@ -437,7 +446,7 @@ public class Tiny1Asint {
         	this.exp = exp;
         }   
         public Exp exp() {return exp;}
-        public void procesa(Procesamiento p) {
+        public void procesa(Procesamiento p)  throws Exception{
             p.procesa(this); 
          }     
      }
@@ -450,20 +459,20 @@ public class Tiny1Asint {
         }
         public Exp exp() {return exp;}
         public Lparamsr lparams() {return lparams;}
-        public void procesa(Procesamiento p) {
+        public void procesa(Procesamiento p) throws Exception {
             p.procesa(this); 
          }     
      }
     
-     public static abstract class Paramsr{
+     public static abstract class Paramsr extends Genero{
     	 public Paramsr() {}
-    	 public abstract void procesa(Procesamiento p);
+    	 public abstract void procesa(Procesamiento p) throws Exception;
      }
     public static class Paramsr_vacio extends Paramsr{
     	public Paramsr_vacio() {
     		super();
     	}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p)  throws Exception{
     		p.procesa(this);
     	}
     }
@@ -474,14 +483,14 @@ public class Tiny1Asint {
     		this.lparams = lparams;
     	}
     	public Lparamsr lparams() {return lparams;}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p)  throws Exception{
     		p.procesa(this);
     	}
     }
     
-    public static abstract class Inst {
+    public static abstract class Inst  extends Genero{
     	public Inst() {}
-    	public abstract void procesa(Procesamiento p);
+    	public abstract void procesa(Procesamiento p) throws Exception;
     }
     public static class Inst_asig extends Inst{
     	private Exp arg0, arg1;
@@ -492,7 +501,7 @@ public class Tiny1Asint {
     	}
     	public Exp arg0() {return arg0;}
     	public Exp arg1() {return arg1;}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p)  throws Exception{
     		p.procesa(this);
     	}
     }
@@ -506,7 +515,7 @@ public class Tiny1Asint {
     	}
     	public Exp exp() { return exp;}
     	public Insts insts() {return insts;}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
@@ -522,7 +531,7 @@ public class Tiny1Asint {
     	public Exp exp() {return exp;}
     	public Insts insts1() {return insts1;}
     	public Insts insts2() {return insts2;}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
@@ -536,7 +545,7 @@ public class Tiny1Asint {
     	}
     	public Exp exp() { return exp;}
     	public Insts insts() {return insts;}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
@@ -547,7 +556,7 @@ public class Tiny1Asint {
     		this.exp = exp;
     	}
     	public Exp exp() {return exp;}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
@@ -558,7 +567,7 @@ public class Tiny1Asint {
     		this.exp = exp;
     	}
     	public Exp exp() {return exp;}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
@@ -566,7 +575,7 @@ public class Tiny1Asint {
     	public Inst_nl() {
     		super();
     	}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
@@ -577,7 +586,7 @@ public class Tiny1Asint {
     		this.exp = exp;
     	}
     	public Exp exp() {return exp;}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
@@ -588,7 +597,7 @@ public class Tiny1Asint {
     		this.exp = exp;
     	}
     	public Exp exp() {return exp;}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
@@ -602,7 +611,7 @@ public class Tiny1Asint {
     	}
     	public StringLocalizado identif() {return identif;}
     	public Paramsr paramsr() {return paramsr;}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
@@ -613,14 +622,14 @@ public class Tiny1Asint {
     		this.bloque = bloque;
     	}
     	public Bloque bloque() {return bloque;}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
-    public static abstract class LInsts {
+    public static abstract class LInsts  extends Genero{
     	public LInsts() {
     	}
-    	public abstract void procesa(Procesamiento p);
+    	public abstract void procesa(Procesamiento p) throws Exception;
     }
     public static class Insts_una extends LInsts {
     	private Inst inst;
@@ -629,7 +638,7 @@ public class Tiny1Asint {
     		this.inst = inst;
     	}
     	public Inst inst() {return inst;}
-		public void procesa(Procesamiento p) {
+		public void procesa(Procesamiento p) throws Exception {
 			p.procesa(this);
 		}
     }
@@ -643,21 +652,21 @@ public class Tiny1Asint {
     	}
     	public Inst inst() {return inst;}
     	public LInsts linsts() {return linsts;}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
     
-    public static abstract class Tipo {
+    public static abstract class Tipo extends Genero{
     	public Tipo() {
     	}
-    	public abstract void procesa(Procesamiento p);
+    	public abstract void procesa(Procesamiento p) throws Exception;
     }
     public static class Tipo_int extends Tipo {
     	public Tipo_int() {
     		super();
     	}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
@@ -665,7 +674,7 @@ public class Tiny1Asint {
     	public Tipo_bool() {
     		super();
     	}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
@@ -673,7 +682,7 @@ public class Tiny1Asint {
     	public Tipo_real() {
     		super();
     	}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
@@ -681,7 +690,7 @@ public class Tiny1Asint {
     	public Tipo_string() {
     		super();
     	}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
@@ -696,7 +705,7 @@ public class Tiny1Asint {
     	}
     	public StringLocalizado entero() {return tam;}
     	public Tipo tipo() {return tipo;}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
@@ -707,14 +716,14 @@ public class Tiny1Asint {
     		this.tipo = tipo;
     	}
     	public Tipo tipo() {return tipo;}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception  {
     		p.procesa(this);
     	}
     }
     
-    public static abstract class LTipos{
+    public static abstract class LTipos extends Genero{
     	public LTipos() {}
-    	public abstract void procesa(Procesamiento p);
+    	public abstract void procesa(Procesamiento p) throws Exception;
     }
     public static class Tipos_uno extends LTipos {
         private Tipo tipo; 
@@ -726,7 +735,7 @@ public class Tiny1Asint {
         }   
         public Tipo tipo() {return tipo;}
         public StringLocalizado id() {return id;}
-        public void procesa(Procesamiento p) {
+        public void procesa(Procesamiento p) throws Exception {
             p.procesa(this); 
         }     
      }
@@ -743,7 +752,7 @@ public class Tiny1Asint {
         public Tipo tipo() {return tipo;}
         public LTipos ltipos() {return ltipos;}
         public StringLocalizado id() {return id;}
-        public void procesa(Procesamiento p) {
+        public void procesa(Procesamiento p) throws Exception {
             p.procesa(this); 
         }     
      }
@@ -755,7 +764,7 @@ public class Tiny1Asint {
     		this.ltipos = ltipos;
     	}
     	public LTipos ltipos() {return ltipos;}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception  {
     		p.procesa(this);
     	}
     }
@@ -767,12 +776,12 @@ public class Tiny1Asint {
     		this.id = id;
     	}
     	public StringLocalizado id() {return id;}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
     
-    public static abstract class Paramf{
+    public static abstract class Paramf extends Genero{
     	private Tipo tipo;
     	private StringLocalizado id;
     	public Paramf(Tipo tipo, StringLocalizado id) {
@@ -781,13 +790,13 @@ public class Tiny1Asint {
     	}
     	public Tipo tipo() {return tipo;}
     	public StringLocalizado id() {return id;}
-    	public abstract void procesa(Procesamiento p);
+    	public abstract void procesa(Procesamiento p) throws Exception;
     }
     public static class Paramf_valor extends Paramf{
     	public Paramf_valor(Tipo tipo, StringLocalizado id) {
     		super(tipo, id);
     	}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
@@ -795,15 +804,15 @@ public class Tiny1Asint {
     	public Paramf_referencia(Tipo tipo, StringLocalizado id) {
     		super(tipo, id);
     	}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
 
-    public static abstract class Lparamsf {
+    public static abstract class Lparamsf  extends Genero{
     	public Lparamsf() {
     	}
-    	public abstract void procesa(Procesamiento p);
+    	public abstract void procesa(Procesamiento p) throws Exception;
     }
     public static class Lparamsf_uno extends Lparamsf {
         private Paramf paramf; 
@@ -812,7 +821,7 @@ public class Tiny1Asint {
            this.paramf = paramf;
         }   
         public Paramf paramf() {return paramf;}
-        public void procesa(Procesamiento p) {
+        public void procesa(Procesamiento p) throws Exception {
             p.procesa(this); 
          }     
      }
@@ -826,20 +835,20 @@ public class Tiny1Asint {
         }
         public Paramf paramf() {return paramf;}
         public Lparamsf lparams() {return lparams;}
-        public void procesa(Procesamiento p) {
+        public void procesa(Procesamiento p) throws Exception {
             p.procesa(this); 
          }     
      }
     
-     public static abstract class Paramsf{
+     public static abstract class Paramsf extends Genero{
     	 public Paramsf() {}
-     	public abstract void procesa(Procesamiento p);
+     	public abstract void procesa(Procesamiento p) throws Exception;
      }
     public static class Paramsf_vacio extends Paramsf{
     	public Paramsf_vacio() {
     		super();
     	}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
@@ -850,14 +859,14 @@ public class Tiny1Asint {
     		this.lparams = lparams;
     	}
     	public Lparamsf lparams() {return lparams;}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
     
-    public abstract static class Dec{
+    public abstract static class Dec extends Genero{
     	public Dec() {}
-    	public abstract void procesa(Procesamiento p);
+    	public abstract void procesa(Procesamiento p) throws Exception;
     }
     
     public abstract static class Dec_id extends Dec{
@@ -874,7 +883,7 @@ public class Tiny1Asint {
     	public Dec_var(Tipo tipo, StringLocalizado variable) {
     		super(tipo,variable);
     	}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
@@ -882,7 +891,7 @@ public class Tiny1Asint {
     	public Dec_type(Tipo tipo, StringLocalizado variable) {
     		super(tipo,variable);
     	}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
@@ -900,14 +909,14 @@ public class Tiny1Asint {
     	public StringLocalizado id(){return id;}
     	public Paramsf paramsf() {return paramsf;}
     	public Bloque bloque() {return bloque;}
-    	public void procesa(Procesamiento p) {
+    	public void procesa(Procesamiento p) throws Exception {
     		p.procesa(this);
     	}
     }
     
-    public static abstract class LDecs {
+    public static abstract class LDecs  extends Genero{
     	public LDecs() {}
-    	public abstract void procesa(Procesamiento p);
+    	public abstract void procesa(Procesamiento p) throws Exception;
     }
     public static class Decs_una extends LDecs {
         private Dec dec; 
@@ -916,7 +925,7 @@ public class Tiny1Asint {
            this.dec = dec;
         }   
         public Dec dec() {return dec;}
-        public void procesa(Procesamiento p) {
+        public void procesa(Procesamiento p) throws Exception {
             p.procesa(this); 
          }     
      }
@@ -930,7 +939,7 @@ public class Tiny1Asint {
         }
         public Dec dec() {return dec;}
         public LDecs ldecs() {return ldecs;}
-        public void procesa(Procesamiento p) {
+        public void procesa(Procesamiento p) throws Exception {
             p.procesa(this); 
          }     
      }
@@ -945,7 +954,7 @@ public class Tiny1Asint {
     	 }
     	 public LDecs ldecs() {return ldecs;}
     	 public LInsts linsts() {return linsts;}
-    	 public void procesa(Procesamiento p) {
+    	 public void procesa(Procesamiento p) throws Exception {
     		 p.procesa(this);
     	 }
      }
@@ -958,13 +967,13 @@ public class Tiny1Asint {
     		 this.linsts = linsts;
     	 }
     	 public LInsts linsts() {return linsts;}
-    	 public void procesa(Procesamiento p) {
+    	 public void procesa(Procesamiento p) throws Exception {
     		 p.procesa(this);
     	 }
      }
      
-     public static abstract class Prog {
-    	 public abstract void procesa(Procesamiento p);
+     public static abstract class Prog  extends Genero{
+    	 public abstract void procesa(Procesamiento p) throws Exception;
      }
      
      // Constructoras

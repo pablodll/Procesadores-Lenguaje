@@ -37,74 +37,74 @@ import asint.Tiny1Asint.Mod;
 import asint.Tiny1Asint.*;
 
 public interface Procesamiento {
-	void procesa(Suma exp);
-	void procesa(Resta exp);
-	void procesa(And exp);
-	void procesa(Or exp);
-	void procesa(Igual exp);
-	void procesa(Menor exp);
-	void procesa(Mayor exp);
-	void procesa(Menor_igual exp);
-	void procesa(Mayor_igual exp);
-	void procesa(Dist exp);
-	void procesa(Mul exp);
-	void procesa(Div exp);
-	void procesa(Mod exp);	//
-	void procesa(Menos exp);
-	void procesa(Not exp);
-	void procesa(Indirecto exp);	//
-	void procesa(Indice exp);	//
-	void procesa(Reg_punto exp);	//
-	void procesa(Reg_flecha exp);	//
-	void procesa(Entero exp);
-	void procesa(Real exp);
-	void procesa(True exp);
-	void procesa(False exp);
-	void procesa(Cadena exp);	//
-	void procesa(Identif exp);	//
-	void procesa(Null exp);	//
-	void procesa(Bloque_vacio bloque);	//
-	void procesa(Bloque_no_vacio bloque);	//
-	void procesa(Insts_vacia insts);	//
-	void procesa(Insts_no_vacia insts);	//
-	void procesa(Paramsr_vacio paramsr);	//
-	void procesa(Paramsr_no_vacio paramsr);	//
-	void procesa(Lparamsr_uno lparamsr);	//
-	void procesa(Lparamsr_muchos lparamsr);	//
-	void procesa(Inst_asig inst);	//
-	void procesa(Inst_if inst);	//
-	void procesa(Inst_if_else inst);	//
-	void procesa(Inst_while inst);	//
-	void procesa(Inst_read inst);	//
-	void procesa(Inst_write inst);	//
-	void procesa(Inst_nl inst);	//
-	void procesa(Inst_new inst);	//
-	void procesa(Inst_delete inst);	//
-	void procesa(Inst_call inst);	//
-	void procesa(Inst_bloque inst);	//
-	void procesa(Insts_una linsts);
-	void procesa(Insts_muchas linsts);
-	void procesa(Tipo_int tipo);
-	void procesa(Tipo_bool tipo);
-	void procesa(Tipo_real tipo);
-	void procesa(Tipo_string tipo);  //
-	void procesa(Tipo_array tipo);	//
-	void procesa(Tipos_uno ltipos);
-	void procesa(Tipos_muchos ltipos);
-	void procesa(Tipo_pointer tipo);	//
-	void procesa(Tipo_record tipo);	//
-	void procesa(Ref tipo);	//
-	void procesa(Paramf_valor paramf);	//
-	void procesa(Paramf_referencia paramf);	//
-	void procesa(Lparamsf_muchos lparamsf);	//
-	void procesa(Lparamsf_uno lparamsf);		//
-	void procesa(Paramsf_no_vacio paramsf);	//
-	void procesa(Paramsf_vacio paramsf);	//
-	void procesa(Dec_var dec);	//
-	void procesa(Dec_type dec);	//
-	void procesa(Dec_proc dec);	//
-	void procesa(Decs_una ldecs);
-	void procesa(Decs_muchas ldecs);
-	void procesa(Prog_con_decs prog);	//
-	void procesa(Prog_sin_decs prog);	//
+	void procesa(Suma exp) throws Exception;;
+	void procesa(Resta exp) throws Exception;;
+	void procesa(And exp) throws Exception;;
+	void procesa(Or exp) throws Exception;;
+	void procesa(Igual exp) throws Exception;;
+	void procesa(Menor exp) throws Exception;;
+	void procesa(Mayor exp) throws Exception;;
+	void procesa(Menor_igual exp) throws Exception;;
+	void procesa(Mayor_igual exp) throws Exception;;
+	void procesa(Dist exp) throws Exception;;
+	void procesa(Mul exp) throws Exception;;
+	void procesa(Div exp) throws Exception;
+	void procesa(Mod exp) throws Exception;;	//
+	void procesa(Menos exp) throws Exception;;
+	void procesa(Not exp) throws Exception;;
+	void procesa(Indirecto exp) throws Exception;;	//
+	void procesa(Indice exp) throws Exception;;	//
+	void procesa(Reg_punto exp) throws Exception;;	//
+	void procesa(Reg_flecha exp) throws Exception;;	//
+	void procesa(Entero exp) throws Exception;;
+	void procesa(Real exp) throws Exception;;
+	void procesa(True exp) throws Exception;;
+	void procesa(False exp) throws Exception;;
+	void procesa(Cadena exp) throws Exception;;	//
+	void procesa(Identif exp) throws Exception;;	//
+	void procesa(Null exp) throws Exception;;	//
+	void procesa(Bloque_vacio bloque) throws Exception;;	//
+	void procesa(Bloque_no_vacio bloque) throws Exception;;	//
+	void procesa(Insts_vacia insts) throws Exception;;	//
+	void procesa(Insts_no_vacia insts) throws Exception;;	//
+	void procesa(Paramsr_vacio paramsr) throws Exception;;	//
+	void procesa(Paramsr_no_vacio paramsr) throws Exception;;	//
+	void procesa(Lparamsr_uno lparamsr) throws Exception;;	//
+	void procesa(Lparamsr_muchos lparamsr) throws Exception;;	//
+	void procesa(Inst_asig inst) throws Exception;;	//
+	void procesa(Inst_if inst) throws Exception;;	//
+	void procesa(Inst_if_else inst) throws Exception;;	//
+	void procesa(Inst_while inst) throws Exception;;	//
+	void procesa(Inst_read inst) throws Exception;;	//
+	void procesa(Inst_write inst) throws Exception;;	//
+	void procesa(Inst_nl inst) throws Exception;;	//
+	void procesa(Inst_new inst) throws Exception;;	//
+	void procesa(Inst_delete inst) throws Exception;;	//
+	void procesa(Inst_call inst) throws Exception;;	//
+	void procesa(Inst_bloque inst) throws Exception;;	//
+	void procesa(Insts_una linsts) throws Exception;;
+	void procesa(Insts_muchas linsts) throws Exception;;
+	void procesa(Tipo_int tipo) throws Exception;;
+	void procesa(Tipo_bool tipo) throws Exception;;
+	void procesa(Tipo_real tipo) throws Exception;;
+	void procesa(Tipo_string tipo) throws Exception;;  //
+	void procesa(Tipo_array tipo) throws Exception;;	//
+	void procesa(Tipos_uno ltipos) throws Exception;;
+	void procesa(Tipos_muchos ltipos) throws Exception;;
+	void procesa(Tipo_pointer tipo) throws Exception;;	//
+	void procesa(Tipo_record tipo) throws Exception;;	//
+	void procesa(Ref tipo) throws Exception;;	//
+	void procesa(Paramf_valor paramf) throws Exception;;	//
+	void procesa(Paramf_referencia paramf) throws Exception;;	//
+	void procesa(Lparamsf_muchos lparamsf) throws Exception;;	//
+	void procesa(Lparamsf_uno lparamsf) throws Exception;;		//
+	void procesa(Paramsf_no_vacio paramsf) throws Exception;;	//
+	void procesa(Paramsf_vacio paramsf) throws Exception;;	//
+	void procesa(Dec_var dec) throws Exception;	//
+	void procesa(Dec_type dec) throws Exception;;	//
+	void procesa(Dec_proc dec) throws Exception;;	//
+	void procesa(Decs_una ldecs) throws Exception;;
+	void procesa(Decs_muchas ldecs) throws Exception;;
+	void procesa(Prog_con_decs prog) throws Exception;;	//
+	void procesa(Prog_sin_decs prog) throws Exception;;	//
 }

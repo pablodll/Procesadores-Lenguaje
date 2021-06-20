@@ -1,8 +1,6 @@
 package procesamientos;
 
-
 import asint.ProcesamientoPorDefecto;
-import asint.Tiny1Asint.Exp;
 import asint.Tiny1Asint.And;
 import asint.Tiny1Asint.Bloque_no_vacio;
 import asint.Tiny1Asint.Bloque_vacio;
@@ -74,252 +72,260 @@ import asint.Tiny1Asint.Tipos_muchos;
 import asint.Tiny1Asint.Tipos_uno;
 import asint.Tiny1Asint.True;
 
-public class Impresion extends ProcesamientoPorDefecto{
+public class Vinculacion extends ProcesamientoPorDefecto{
 	
-	public Impresion() {
+	private TablaSimbolos ts;
+	private int nivel_act = 0;
+	
+	public Vinculacion(TablaSimbolos ts) throws Exception {
+		this.ts = ts;
 	}
 	
+	@Override
 	public void procesa(Suma exp) throws Exception {
-		imprime_arg(exp.arg0(), 1);
-	   	System.out.print(" + ");
-	   	imprime_arg(exp.arg1(), 0);
-	} 
+		exp.arg0().procesa(this);
+		exp.arg1().procesa(this);
+	}
+
+	@Override
 	public void procesa(Resta exp) throws Exception {
-		imprime_arg(exp.arg0(), 1);
-		System.out.print(" - ");
-		imprime_arg(exp.arg1(), 1);
+		exp.arg0().procesa(this);
+		exp.arg1().procesa(this);
 	}
+
+	@Override
 	public void procesa(And exp) throws Exception {
-		imprime_arg(exp.arg0(), 1);
-		System.out.print(" and ");
-		imprime_arg(exp.arg1(), 2);
+		exp.arg0().procesa(this);
+		exp.arg1().procesa(this);
 	}
+
+	@Override
 	public void procesa(Or exp) throws Exception {
-		imprime_arg(exp.arg0(), 1);
-		System.out.print(" or ");
-		imprime_arg(exp.arg1(), 2);
+		exp.arg0().procesa(this);
+		exp.arg1().procesa(this);
 	}
+
+	@Override
 	public void procesa(Igual exp) throws Exception {
-		imprime_arg(exp.arg0(), 2);
-		System.out.print(" == ");
-		imprime_arg(exp.arg1(), 3);
+		exp.arg0().procesa(this);
+		exp.arg1().procesa(this);
 	}
+
+	@Override
 	public void procesa(Menor exp) throws Exception {
-		imprime_arg(exp.arg0(), 2);
-		System.out.print(" < ");
-		imprime_arg(exp.arg1(), 3);
+		exp.arg0().procesa(this);
+		exp.arg1().procesa(this);
 	}
+
+	@Override
 	public void procesa(Mayor exp) throws Exception {
-		imprime_arg(exp.arg0(), 2);
-		System.out.print(" > ");
-		imprime_arg(exp.arg1(), 3);
+		exp.arg0().procesa(this);
+		exp.arg1().procesa(this);
 	}
+
+	@Override
 	public void procesa(Menor_igual exp) throws Exception {
-		imprime_arg(exp.arg0(), 2);
-		System.out.print(" <= ");
-		imprime_arg(exp.arg1(), 3);
+		exp.arg0().procesa(this);
+		exp.arg1().procesa(this);
 	}
+
+	@Override
 	public void procesa(Mayor_igual exp) throws Exception {
-		imprime_arg(exp.arg0(), 2);
-		System.out.print(" >= ");
-		imprime_arg(exp.arg1(), 3);
+		exp.arg0().procesa(this);
+		exp.arg1().procesa(this);
 	}
+
+	@Override
 	public void procesa(Dist exp) throws Exception {
-		imprime_arg(exp.arg0(), 2);
-		System.out.print(" != ");
-		imprime_arg(exp.arg1(), 3);
+		exp.arg0().procesa(this);
+		exp.arg1().procesa(this);
 	}
+
+	@Override
 	public void procesa(Mul exp) throws Exception {
-		imprime_arg(exp.arg0(), 4);
-		System.out.print(" * ");
-		imprime_arg(exp.arg1(), 4);
+		exp.arg0().procesa(this);
+		exp.arg1().procesa(this);
 	}
+
+	@Override
 	public void procesa(Div exp) throws Exception {
-		imprime_arg(exp.arg0(), 4);
-		System.out.print(" / ");
-		imprime_arg(exp.arg1(), 4);
+		exp.arg0().procesa(this);
+		exp.arg1().procesa(this);
 	}
+
+	@Override
 	public void procesa(Mod exp) throws Exception {
-		imprime_arg(exp.arg0(), 4);
-		System.out.print(" % ");
-		imprime_arg(exp.arg1(), 4);
+		exp.arg0().procesa(this);
+		exp.arg1().procesa(this);
 	}
-	
+
+	@Override
 	public void procesa(Menos exp) throws Exception {
-		System.out.print(" -");
-		imprime_arg(exp.arg(), 5);
+		exp.arg().procesa(this);
 	}
+
+	@Override
 	public void procesa(Not exp) throws Exception {
-		System.out.print(" not ");
-		imprime_arg(exp.arg(), 4);
+		exp.arg().procesa(this);
 	}
 
 	@Override
 	public void procesa(Indirecto exp) throws Exception {
-		System.out.print(" *");
-		imprime_arg(exp.arg(), 6);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Entero exp) throws Exception {
-	   System.out.print(exp.entero());
+
 	}
 
 	@Override
 	public void procesa(Real exp) throws Exception {
-		System.out.print(exp.real());
 	}
 
 	@Override
 	public void procesa(True exp) throws Exception {
-		System.out.print("true");
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(False exp) throws Exception {
-		System.out.print("false");
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Cadena exp) throws Exception {
-		System.out.print(exp.cadena());
 	}
 
 	@Override
 	public void procesa(Identif exp) throws Exception {
-		System.out.print(exp.id());
+		if(!ts.contiene(exp.id().toString())) {
+			throw new VinculacionErrorException();
+		}
+		else {
+			exp._vinculo = ts.valorPara(exp.id().toString());
+		}
 	}
 
 	@Override
 	public void procesa(Null exp) throws Exception {
-		System.out.print("null");
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Bloque_vacio bloque) throws Exception {
-		System.out.println("{ ");
+		// TODO Auto-generated method stub
 		
-		System.out.println("} ");
 	}
 
 	@Override
 	public void procesa(Bloque_no_vacio bloque) throws Exception {
-		System.out.println("{ ");
-		bloque.prog().procesa(this);
-		System.out.println();
-		System.out.print("}");
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Insts_vacia insts) throws Exception {
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void procesa(Insts_no_vacia insts) throws Exception {
-		insts.linsts().procesa(this);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Paramsr_vacio paramsr) throws Exception {
-
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Paramsr_no_vacio paramsr) throws Exception {
-		paramsr.lparams().procesa(this);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Lparamsr_uno lparamsr) throws Exception {
-		lparamsr.exp().procesa(this);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Lparamsr_muchos lparamsr) throws Exception {
-		lparamsr.lparams().procesa(this);
-		System.out.print(", ");
-		lparamsr.exp().procesa(this);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Inst_asig inst) throws Exception {
 		inst.arg0().procesa(this);
-		System.out.print(" = ");
 		inst.arg1().procesa(this);
 	}
 
 	@Override
 	public void procesa(Inst_if inst) throws Exception {
-		System.out.print("if ");
-		inst.exp().procesa(this);
-		System.out.println(" then");
-		inst.insts().procesa(this);
-		System.out.println();
-		System.out.print("endif");
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Inst_if_else inst) throws Exception {
-		System.out.print("if ");
-		inst.exp().procesa(this);
-		System.out.println(" then");
-		inst.insts1().procesa(this);
-		System.out.println("else ");
-		inst.insts2().procesa(this);
-		System.out.println();
-		System.out.print("endif");
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Inst_while inst) throws Exception {
-		System.out.print("while ");
-		inst.exp().procesa(this);
-		System.out.println(" do");
-		inst.insts().procesa(this);
-		System.out.println();
-		System.out.print("endwhile");
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Inst_read inst) throws Exception {
-		System.out.print("read ");
 		inst.exp().procesa(this);
 	}
 
 	@Override
 	public void procesa(Inst_write inst) throws Exception {
-		System.out.print("write ");
 		inst.exp().procesa(this);
 	}
 
 	@Override
 	public void procesa(Inst_nl inst) throws Exception {
-		System.out.print("nl");
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Inst_new inst) throws Exception {
-		System.out.print("new ");
-		inst.exp().procesa(this);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Inst_delete inst) throws Exception {
-		System.out.print("delete ");
-		inst.exp().procesa(this);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Inst_call inst) throws Exception {
-		System.out.print("call " + inst.identif() + "(");
-		inst.paramsr().procesa(this);
-		System.out.print(")");
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Inst_bloque inst) throws Exception {
-		inst.bloque().procesa(this);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -330,123 +336,126 @@ public class Impresion extends ProcesamientoPorDefecto{
 	@Override
 	public void procesa(Insts_muchas linsts) throws Exception {
 		linsts.linsts().procesa(this);
-		System.out.println(";");
 		linsts.inst().procesa(this);
 	}
 
 	@Override
 	public void procesa(Tipo_int tipo) throws Exception {
-		System.out.print("int");
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Tipo_bool tipo) throws Exception {
-		System.out.print("bool");
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Tipo_real tipo) throws Exception {
-		System.out.print("real");
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Tipo_string tipo) throws Exception {
-		System.out.print("string");
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Tipo_array tipo) throws Exception {
-		System.out.print("array [" + tipo.entero() + "] of ");
-		tipo.tipo().procesa(this);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Tipos_uno ltipos) throws Exception {
-		ltipos.tipo().procesa(this);
-		System.out.print(" " + ltipos.id());
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Tipos_muchos ltipos) throws Exception {
-		ltipos.ltipos().procesa(this);
-		System.out.println(";");
-		ltipos.tipo().procesa(this);
-		System.out.print(" " + ltipos.id());
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Tipo_pointer tipo) throws Exception {
-		System.out.print("pointer ");
-		tipo.tipo().procesa(this);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Tipo_record tipo) throws Exception {
-		System.out.println("record {");
-		tipo.ltipos().procesa(this);
-		System.out.println();
-		System.out.print("}");
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Ref tipo) throws Exception {
-		System.out.print(tipo.id());
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Paramf_valor paramf) throws Exception {
-		paramf.tipo().procesa(this);
-		System.out.print(paramf.id());
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Paramf_referencia paramf) throws Exception {
-		paramf.tipo().procesa(this);
-		System.out.print(" & " + paramf.id());
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Lparamsf_muchos lparamsf) throws Exception {
-		lparamsf.lparams().procesa(this);
-		System.out.print(", ");
-		lparamsf.paramf().procesa(this);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Lparamsf_uno lparamsf) throws Exception {
-		lparamsf.paramf().procesa(this);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Paramsf_no_vacio paramsf) throws Exception {
-		paramsf.lparams().procesa(this);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Paramsf_vacio paramsf) throws Exception {
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void procesa(Dec_var dec) throws Exception {
-		System.out.print("var ");
 		dec.tipo().procesa(this);
-		System.out.print(" " + dec.variable());
+		if(ts.contiene(dec.variable().toString())) {
+			throw new VinculacionErrorException();
+		}
+		else {
+			ts.add(dec.variable().toString(), dec);
+		}
 	}
 
 	@Override
 	public void procesa(Dec_type dec) throws Exception {
-		System.out.print("type ");
-		dec.tipo().procesa(this);
-		System.out.print(" " + dec.variable());
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Dec_proc dec) throws Exception {
-		System.out.print("proc " + dec.id() + "(");
-		dec.paramsf().procesa(this);
-		System.out.print(") ");
-		dec.bloque().procesa(this);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -457,54 +466,35 @@ public class Impresion extends ProcesamientoPorDefecto{
 	@Override
 	public void procesa(Decs_muchas ldecs) throws Exception {
 		ldecs.ldecs().procesa(this);
-		System.out.println(";");
 		ldecs.dec().procesa(this);
 	}
 
 	@Override
 	public void procesa(Prog_con_decs prog) throws Exception {
 		prog.ldecs().procesa(this);
-		System.out.println();
-		System.out.println("&&");
 		prog.linsts().procesa(this);
-		System.out.println();
 	}
 
 	@Override
 	public void procesa(Prog_sin_decs prog) throws Exception {
 		prog.linsts().procesa(this);
-		System.out.println();
 	}
 
 	@Override
 	public void procesa(Indice exp) throws Exception {
-		exp.arg0().procesa(this);
-		System.out.print("[");
-		exp.arg1().procesa(this);
-		System.out.print("]");
+		
+	
 	}
 
 	@Override
 	public void procesa(Reg_punto exp) throws Exception {
-		exp.arg().procesa(this);
-		System.out.print("." + exp.id());
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void procesa(Reg_flecha exp) throws Exception {
-		exp.arg().procesa(this);
-		System.out.print("->" + exp.id());
+		// TODO Auto-generated method stub
+		
 	}
-	
-   private void imprime_arg(Exp arg, int p) throws Exception {
-	   if(arg.prioridad() < p) {
-		   System.out.print("(");
-		   arg.procesa(this);
-		   System.out.print(")");
-	   }
-	   else {
-		   arg.procesa(this);
-	   }
-   }
-	
 }
