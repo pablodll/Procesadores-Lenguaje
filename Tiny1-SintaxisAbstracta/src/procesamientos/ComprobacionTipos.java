@@ -73,6 +73,10 @@ import asint.Tiny1Asint.Tipos_uno;
 import asint.Tiny1Asint.True;
 
 public class ComprobacionTipos extends ProcesamientoPorDefecto{
+	
+	private boolean error = false;
+	private int num_inst = 1;
+	
 	@Override
 	public void procesa(Suma exp) throws Exception {
 		exp.arg0().procesa(this);
@@ -90,7 +94,8 @@ public class ComprobacionTipos extends ProcesamientoPorDefecto{
 		}
 		else {
 			exp._tipo = "error";
-			throw new CompTiposErrorException();
+			System.err.println("Error tipos: Instruccion " + num_inst);
+			error = true;
 		}
 	}
 
@@ -111,7 +116,8 @@ public class ComprobacionTipos extends ProcesamientoPorDefecto{
 		}
 		else {
 			exp._tipo = "error";
-			throw new CompTiposErrorException();
+			System.err.println("Error tipos: Instruccion " + num_inst);
+			error = true;
 		}
 	}
 
@@ -124,7 +130,8 @@ public class ComprobacionTipos extends ProcesamientoPorDefecto{
 		}
 		else {
 			exp._tipo = "error";
-			throw new CompTiposErrorException();
+			System.err.println("Error tipos: Instruccion " + num_inst);
+			error = true;
 		}
 	}
 
@@ -137,7 +144,8 @@ public class ComprobacionTipos extends ProcesamientoPorDefecto{
 		}
 		else {
 			exp._tipo = "error";
-			throw new CompTiposErrorException();
+			System.err.println("Error tipos: Instruccion " + num_inst);
+			error = true;
 		}
 	}
 
@@ -157,7 +165,8 @@ public class ComprobacionTipos extends ProcesamientoPorDefecto{
 		}
 		else {
 			exp._tipo = "error";
-			throw new CompTiposErrorException();
+			System.err.println("Error tipos: Instruccion " + num_inst);
+			error = true;
 		}
 	}
 
@@ -177,7 +186,8 @@ public class ComprobacionTipos extends ProcesamientoPorDefecto{
 		}
 		else {
 			exp._tipo = "error";
-			throw new CompTiposErrorException();
+			System.err.println("Error tipos: Instruccion " + num_inst);
+			error = true;
 		}
 	}
 
@@ -197,7 +207,8 @@ public class ComprobacionTipos extends ProcesamientoPorDefecto{
 		}
 		else {
 			exp._tipo = "error";
-			throw new CompTiposErrorException();
+			System.err.println("Error tipos: Instruccion " + num_inst);
+			error = true;
 		}
 	}
 
@@ -217,7 +228,8 @@ public class ComprobacionTipos extends ProcesamientoPorDefecto{
 		}
 		else {
 			exp._tipo = "error";
-			throw new CompTiposErrorException();
+			System.err.println("Error tipos: Instruccion " + num_inst);
+			error = true;
 		}
 	}
 
@@ -237,7 +249,8 @@ public class ComprobacionTipos extends ProcesamientoPorDefecto{
 		}
 		else {
 			exp._tipo = "error";
-			throw new CompTiposErrorException();
+			System.err.println("Error tipos: Instruccion " + num_inst);
+			error = true;
 		}
 	}
 
@@ -257,7 +270,8 @@ public class ComprobacionTipos extends ProcesamientoPorDefecto{
 		}
 		else {
 			exp._tipo = "error";
-			throw new CompTiposErrorException();
+			System.err.println("Error tipos: Instruccion " + num_inst);
+			error = true;
 		}
 	}
 
@@ -278,7 +292,8 @@ public class ComprobacionTipos extends ProcesamientoPorDefecto{
 		}
 		else {
 			exp._tipo = "error";
-			throw new CompTiposErrorException();
+			System.err.println("Error tipos: Instruccion " + num_inst);
+			error = true;
 		}
 	}
 
@@ -299,7 +314,8 @@ public class ComprobacionTipos extends ProcesamientoPorDefecto{
 		}
 		else {
 			exp._tipo = "error";
-			throw new CompTiposErrorException();
+			System.err.println("Error tipos: Instruccion " + num_inst);
+			error = true;
 		}
 	}
 
@@ -312,7 +328,8 @@ public class ComprobacionTipos extends ProcesamientoPorDefecto{
 		}
 		else {
 			exp._tipo = "error";
-			throw new CompTiposErrorException();
+			System.err.println("Error tipos: Instruccion " + num_inst);
+			error = true;
 		}
 	}
 
@@ -327,7 +344,8 @@ public class ComprobacionTipos extends ProcesamientoPorDefecto{
 		}
 		else {
 			exp._tipo = "error";
-			throw new CompTiposErrorException();
+			System.err.println("Error tipos: Instruccion " + num_inst);
+			error = true;
 		}
 	}
 
@@ -339,7 +357,8 @@ public class ComprobacionTipos extends ProcesamientoPorDefecto{
 		}
 		else {
 			exp._tipo = "error";
-			throw new CompTiposErrorException();
+			System.err.println("Error tipos: Instruccion " + num_inst);
+			error = true;
 		}
 	}
 
@@ -448,7 +467,8 @@ public class ComprobacionTipos extends ProcesamientoPorDefecto{
 		}
 		else {
 			inst._tipo = "error";
-			throw new CompTiposErrorException();
+//			throw new CompTiposErrorException();
+			error = true;
 		}
 	}
 
@@ -479,7 +499,8 @@ public class ComprobacionTipos extends ProcesamientoPorDefecto{
 		}
 		else {
 			inst._tipo = "error";
-			throw new CompTiposErrorException();
+//			throw new CompTiposErrorException();
+			error = true;
 		}
 	}
 
@@ -492,7 +513,8 @@ public class ComprobacionTipos extends ProcesamientoPorDefecto{
 		}
 		else {
 			inst._tipo = "error";
-			throw new CompTiposErrorException();
+//			throw new CompTiposErrorException();
+			error = true;
 		}
 	}
 
@@ -529,12 +551,14 @@ public class ComprobacionTipos extends ProcesamientoPorDefecto{
 	@Override
 	public void procesa(Insts_una linsts) throws Exception {
 		linsts.inst().procesa(this);
+		num_inst++;
 		if(linsts.inst()._tipo.equals("ok")) {
 			linsts._tipo = "ok";
 		}
 		else {
 			linsts._tipo = "error";
-			throw new CompTiposErrorException();
+//			throw new CompTiposErrorException();
+			error = true;
 		}
 	}
 
@@ -542,12 +566,14 @@ public class ComprobacionTipos extends ProcesamientoPorDefecto{
 	public void procesa(Insts_muchas linsts) throws Exception {
 		linsts.linsts().procesa(this);
 		linsts.inst().procesa(this);
+		num_inst++;
 		if(linsts.inst()._tipo.equals("ok") && linsts.linsts()._tipo.equals("ok")) {
 			linsts._tipo = "ok";
 		}
 		else {
 			linsts._tipo = "error";
-			throw new CompTiposErrorException();
+//			throw new CompTiposErrorException();
+			error = true;
 		}
 	}
 
@@ -681,8 +707,11 @@ public class ComprobacionTipos extends ProcesamientoPorDefecto{
 		}
 		else {
 			prog._tipo = "error";
+			error = true;
 			throw new CompTiposErrorException();
 		}
+		
+		if(error) throw new CompTiposErrorException();;
 	}
 
 	@Override
@@ -693,8 +722,11 @@ public class ComprobacionTipos extends ProcesamientoPorDefecto{
 		}
 		else {
 			prog._tipo = "error";
+			error = true;
 			throw new CompTiposErrorException();
 		}
+		
+		if(error) throw new CompTiposErrorException();;
 	}
 
 	@Override
