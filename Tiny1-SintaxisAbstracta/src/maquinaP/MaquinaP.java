@@ -479,8 +479,8 @@ public class MaquinaP {
    private IWrite IWRITE;
    private class IWrite implements Instruccion {
       public void ejecuta() {
-         String val = pilaEvaluacion.pop().valorString();
-         System.out.println(val);
+         Valor val = pilaEvaluacion.pop();
+         System.out.println(val.toString());
          pc++;
       } 
       public String toString() {return "write";};

@@ -177,27 +177,30 @@ public class GenCodigo extends ProcesamientoPorDefecto{
 		if(exp.arg0()._desig) {
 			m.ponInstruccion(m.apilaInd());
 		}
-		if(exp._tipo.equals("real")) {
-			if(exp.arg0()._tipo.equals("int")) {
-				m.ponInstruccion(m.toReal());
-			}
+		if(exp.arg1()._tipo.equals("real") && exp.arg0()._tipo.equals("int")) {
+			m.ponInstruccion(m.toReal());
 		}
 		
 		exp.arg1().procesa(this);
 		if(exp.arg1()._desig) {
 			m.ponInstruccion(m.apilaInd());
 		}
-		if(exp._tipo.equals("real")) {
-			if(exp.arg1()._tipo.equals("int")) {
-				m.ponInstruccion(m.toReal());
-			}
+		if(exp.arg0()._tipo.equals("real") && exp.arg1()._tipo.equals("int")) {
+			m.ponInstruccion(m.toReal());
 		}
 		
-		if(exp._tipo.equals("int")) {
-			m.ponInstruccion(m.restaInt());
+		
+		if(exp.arg0()._tipo.equals("real")) {
+			m.ponInstruccion(m.igualReal());
 		}
-		else if(exp._tipo.equals("real")) {
-			m.ponInstruccion(m.restaReal());
+		else if(exp.arg0()._tipo.equals("bool")){
+			m.ponInstruccion(m.igualBool());
+		}
+		else if(exp.arg0()._tipo.equals("string")) {
+			m.ponInstruccion(m.igualString());
+		}
+		else {
+			m.ponInstruccion(m.igualInt());
 		}
 	}
 
@@ -220,74 +223,251 @@ public class GenCodigo extends ProcesamientoPorDefecto{
 		}
 		
 		
-		if(exp.arg0().equals("real")) {
+		if(exp.arg0()._tipo.equals("real")) {
 			m.ponInstruccion(m.menorReal());
 		}
-		else if(exp.arg0().equals("bool")){
+		else if(exp.arg0()._tipo.equals("bool")){
 			m.ponInstruccion(m.menorBool());
 		}
-		else if(exp.arg0().equals("string")) {
+		else if(exp.arg0()._tipo.equals("string")) {
 			m.ponInstruccion(m.menorString());
 		}
 		else {
 			m.ponInstruccion(m.menorInt());
-		}
-		
-		
+		}		
 	}
 
 	@Override
 	public void procesa(Mayor exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp.arg0().procesa(this);
+		if(exp.arg0()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
+		if(exp.arg1()._tipo.equals("real") && exp.arg0()._tipo.equals("int")) {
+			m.ponInstruccion(m.toReal());
+		}
 		
+		exp.arg1().procesa(this);
+		if(exp.arg1()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
+		if(exp.arg0()._tipo.equals("real") && exp.arg1()._tipo.equals("int")) {
+			m.ponInstruccion(m.toReal());
+		}
+		
+		
+		if(exp.arg0()._tipo.equals("real")) {
+			m.ponInstruccion(m.mayorReal());
+		}
+		else if(exp.arg0()._tipo.equals("bool")){
+			m.ponInstruccion(m.mayorBool());
+		}
+		else if(exp.arg0()._tipo.equals("string")) {
+			m.ponInstruccion(m.mayorString());
+		}
+		else {
+			m.ponInstruccion(m.mayorInt());
+		}	
 	}
 
 	@Override
 	public void procesa(Menor_igual exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp.arg0().procesa(this);
+		if(exp.arg0()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
+		if(exp.arg1()._tipo.equals("real") && exp.arg0()._tipo.equals("int")) {
+			m.ponInstruccion(m.toReal());
+		}
 		
+		exp.arg1().procesa(this);
+		if(exp.arg1()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
+		if(exp.arg0()._tipo.equals("real") && exp.arg1()._tipo.equals("int")) {
+			m.ponInstruccion(m.toReal());
+		}
+		
+		
+		if(exp.arg0()._tipo.equals("real")) {
+			m.ponInstruccion(m.menorIgualReal());
+		}
+		else if(exp.arg0()._tipo.equals("bool")){
+			m.ponInstruccion(m.menorIgualBool());
+		}
+		else if(exp.arg0()._tipo.equals("string")) {
+			m.ponInstruccion(m.menorIgualString());
+		}
+		else {
+			m.ponInstruccion(m.menorIgualInt());
+		}
 	}
 
 	@Override
 	public void procesa(Mayor_igual exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp.arg0().procesa(this);
+		if(exp.arg0()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
+		if(exp.arg1()._tipo.equals("real") && exp.arg0()._tipo.equals("int")) {
+			m.ponInstruccion(m.toReal());
+		}
 		
+		exp.arg1().procesa(this);
+		if(exp.arg1()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
+		if(exp.arg0()._tipo.equals("real") && exp.arg1()._tipo.equals("int")) {
+			m.ponInstruccion(m.toReal());
+		}
+		
+		
+		if(exp.arg0()._tipo.equals("real")) {
+			m.ponInstruccion(m.mayorIgualReal());
+		}
+		else if(exp.arg0()._tipo.equals("bool")){
+			m.ponInstruccion(m.mayorIgualBool());
+		}
+		else if(exp.arg0()._tipo.equals("string")) {
+			m.ponInstruccion(m.mayorIgualString());
+		}
+		else {
+			m.ponInstruccion(m.mayorIgualInt());
+		}
 	}
 
 	@Override
 	public void procesa(Dist exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp.arg0().procesa(this);
+		if(exp.arg0()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
+		if(exp.arg1()._tipo.equals("real") && exp.arg0()._tipo.equals("int")) {
+			m.ponInstruccion(m.toReal());
+		}
 		
+		exp.arg1().procesa(this);
+		if(exp.arg1()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
+		if(exp.arg0()._tipo.equals("real") && exp.arg1()._tipo.equals("int")) {
+			m.ponInstruccion(m.toReal());
+		}
+		
+		
+		if(exp.arg0()._tipo.equals("real")) {
+			m.ponInstruccion(m.distReal());
+		}
+		else if(exp.arg0()._tipo.equals("bool")){
+			m.ponInstruccion(m.distBool());
+		}
+		else if(exp.arg0()._tipo.equals("string")) {
+			m.ponInstruccion(m.distString());
+		}
+		else {
+			m.ponInstruccion(m.distInt());
+		}
 	}
 
 	@Override
 	public void procesa(Mul exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp.arg0().procesa(this);
+		if(exp.arg0()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
+		if(exp._tipo.equals("real")) {
+			if(exp.arg0()._tipo.equals("int")) {
+				m.ponInstruccion(m.toReal());
+			}
+		}
 		
+		exp.arg1().procesa(this);
+		if(exp.arg1()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
+		if(exp._tipo.equals("real")) {
+			if(exp.arg1()._tipo.equals("int")) {
+				m.ponInstruccion(m.toReal());
+			}
+		}
+		
+		if(exp._tipo.equals("int")) {
+			m.ponInstruccion(m.mulInt());
+		}
+		else if(exp._tipo.equals("real")) {
+			m.ponInstruccion(m.mulReal());
+		}
 	}
 
 	@Override
 	public void procesa(Div exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp.arg0().procesa(this);
+		if(exp.arg0()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
+		if(exp._tipo.equals("real")) {
+			if(exp.arg0()._tipo.equals("int")) {
+				m.ponInstruccion(m.toReal());
+			}
+		}
 		
+		exp.arg1().procesa(this);
+		if(exp.arg1()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
+		if(exp._tipo.equals("real")) {
+			if(exp.arg1()._tipo.equals("int")) {
+				m.ponInstruccion(m.toReal());
+			}
+		}
+		
+		if(exp._tipo.equals("int")) {
+			m.ponInstruccion(m.divInt());
+		}
+		else if(exp._tipo.equals("real")) {
+			m.ponInstruccion(m.divReal());
+		}
 	}
 
 	@Override
 	public void procesa(Mod exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp.arg0().procesa(this);
+		if(exp.arg0()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
 		
+		exp.arg1().procesa(this);
+		if(exp.arg1()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
+		
+		m.ponInstruccion(m.mod());
 	}
 
 	@Override
 	public void procesa(Menos exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp.arg().procesa(this);
+		if(exp.arg()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
+		
+		if(exp._tipo.equals("int")) {
+			m.ponInstruccion(m.menosInt());
+		}
+		else if(exp._tipo.equals("real")) {
+			m.ponInstruccion(m.menosReal());
+		}
 		
 	}
 
 	@Override
 	public void procesa(Not exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp.arg().procesa(this);
+		if(exp.arg()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
 		
+		m.ponInstruccion(m.not());
 	}
 
 	@Override
