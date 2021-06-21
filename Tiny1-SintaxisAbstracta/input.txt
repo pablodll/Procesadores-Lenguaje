@@ -1,0 +1,12 @@
+var int sum;
+var real N;
+var bool b;
+var string s
+
+&&
+N = 200.5;
+sum = 0;
+sum = sum + 1;
+N = sum;
+b = false and true;
+write sum
