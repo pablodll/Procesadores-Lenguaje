@@ -526,14 +526,12 @@ public class GenCodigo extends ProcesamientoPorDefecto{
 
 	@Override
 	public void procesa(Insts_vacia insts) throws Exception {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void procesa(Insts_no_vacia insts) throws Exception {
-		// TODO Auto-generated method stub
-		
+		insts.linsts().procesa(this);
 	}
 
 	@Override
@@ -583,20 +581,36 @@ public class GenCodigo extends ProcesamientoPorDefecto{
 
 	@Override
 	public void procesa(Inst_if inst) throws Exception {
-		// TODO Auto-generated method stub
-		
+		inst.exp().procesa(this);
+		if(inst.exp()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
+		m.ponInstruccion(m.irF(inst._etqs));
+		inst.insts().procesa(this);
 	}
 
 	@Override
 	public void procesa(Inst_if_else inst) throws Exception {
-		// TODO Auto-generated method stub
+		inst.exp().procesa(this);
+		if(inst.exp()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
+		m.ponInstruccion(m.irF(inst.insts2()._etqi));
+		inst.insts1().procesa(this);
 		
+		m.ponInstruccion(m.irA(inst._etqs));
+		inst.insts2().procesa(this);
 	}
 
 	@Override
 	public void procesa(Inst_while inst) throws Exception {
-		// TODO Auto-generated method stub
-		
+		inst.exp().procesa(this);
+		if(inst.exp()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
+		m.ponInstruccion(m.irF(inst._etqs));
+		inst.insts().procesa(this);
+		m.ponInstruccion(m.irA(inst._etqi));
 	}
 
 	@Override

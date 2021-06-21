@@ -551,7 +551,7 @@ public class MaquinaP {
         this.dir = dir;  
       }
       public void ejecuta() {
-         if(! pilaEvaluacion.pop().valorBool()) { 
+         if(!pilaEvaluacion.pop().valorBool()) { 
             pc=dir;
          }   
          else {

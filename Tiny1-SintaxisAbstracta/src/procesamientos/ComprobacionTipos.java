@@ -419,14 +419,20 @@ public class ComprobacionTipos extends ProcesamientoPorDefecto{
 
 	@Override
 	public void procesa(Insts_vacia insts) throws Exception {
-		// TODO Auto-generated method stub
-		
+		insts._tipo = "ok";
 	}
 
 	@Override
 	public void procesa(Insts_no_vacia insts) throws Exception {
-		// TODO Auto-generated method stub
-		
+		insts.linsts().procesa(this);
+		if(insts.linsts()._tipo == "ok") {
+			insts._tipo = "ok";
+		}
+		else {
+			insts._tipo = "error";
+			System.err.println("Error tipos: Instruccion " + num_inst);
+			error = true;
+		}
 	}
 
 	@Override
@@ -467,27 +473,52 @@ public class ComprobacionTipos extends ProcesamientoPorDefecto{
 		}
 		else {
 			inst._tipo = "error";
-//			throw new CompTiposErrorException();
+			System.err.println("Error tipos: Instruccion " + num_inst);
 			error = true;
 		}
 	}
 
 	@Override
 	public void procesa(Inst_if inst) throws Exception {
-		// TODO Auto-generated method stub
-		
+		inst.exp().procesa(this);
+		inst.insts().procesa(this);
+		if(inst.exp()._tipo.equals("bool") && inst.insts()._tipo.equals("ok")) {
+			inst._tipo = "ok";
+		}
+		else {
+			inst._tipo = "error";
+			System.err.println("Error tipos: Instruccion " + num_inst);
+			error = true;
+		}
 	}
 
 	@Override
 	public void procesa(Inst_if_else inst) throws Exception {
-		// TODO Auto-generated method stub
-		
+		inst.exp().procesa(this);
+		inst.insts1().procesa(this);
+		inst.insts2().procesa(this);
+		if(inst.exp()._tipo.equals("bool") && inst.insts1()._tipo.equals("ok") && inst.insts2()._tipo.equals("ok")) {
+			inst._tipo = "ok";
+		}
+		else {
+			inst._tipo = "error";
+			System.err.println("Error tipos: Instruccion " + num_inst);
+			error = true;
+		}
 	}
 
 	@Override
 	public void procesa(Inst_while inst) throws Exception {
-		// TODO Auto-generated method stub
-		
+		inst.exp().procesa(this);
+		inst.insts().procesa(this);
+		if(inst.exp()._tipo.equals("bool") && inst.insts()._tipo.equals("ok")) {
+			inst._tipo = "ok";
+		}
+		else {
+			inst._tipo = "error";
+			System.err.println("Error tipos: Instruccion " + num_inst);
+			error = true;
+		}
 	}
 
 	@Override

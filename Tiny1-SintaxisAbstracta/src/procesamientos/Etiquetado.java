@@ -73,94 +73,339 @@ import asint.Tiny1Asint.Tipos_uno;
 import asint.Tiny1Asint.True;
 
 public class Etiquetado extends ProcesamientoPorDefecto{
+	
+	private int etq = 0;
+	
 	@Override
 	public void procesa(Suma exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp._etqi = etq;
+		exp.arg0().procesa(this);
+		if(exp.arg0()._desig) {
+			etq++;
+		}
+		if(exp._tipo.equals("real")) {
+			if(exp.arg0()._tipo.equals("int")) {
+				etq++;
+			}
+		}
 		
+		exp.arg1().procesa(this);
+		if(exp.arg1()._desig) {
+			etq++;
+		}
+		if(exp._tipo.equals("real")) {
+			if(exp.arg1()._tipo.equals("int")) {
+				etq++;
+			}
+		}
+		
+		etq++;
+		exp._etqs = etq;
 	}
 
 	@Override
 	public void procesa(Resta exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp._etqi = etq;
+		exp.arg0().procesa(this);
+		if(exp.arg0()._desig) {
+			etq++;
+		}
+		if(exp._tipo.equals("real")) {
+			if(exp.arg0()._tipo.equals("int")) {
+				etq++;
+			}
+		}
 		
+		exp.arg1().procesa(this);
+		if(exp.arg1()._desig) {
+			etq++;
+		}
+		if(exp._tipo.equals("real")) {
+			if(exp.arg1()._tipo.equals("int")) {
+				etq++;
+			}
+		}
+		
+		etq++;
+		exp._etqs = etq;
 	}
 
 	@Override
 	public void procesa(And exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp._etqi = etq;
+		exp.arg0().procesa(this);
+		if(exp.arg0()._desig) {
+			etq++;
+		}
 		
+		exp.arg1().procesa(this);
+		if(exp.arg1()._desig) {
+			etq++;
+		}
+		
+		etq++;
+		exp._etqs = etq;
 	}
 
 	@Override
 	public void procesa(Or exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp._etqi = etq;
+		exp.arg0().procesa(this);
+		if(exp.arg0()._desig) {
+			etq++;
+		}
 		
+		exp.arg1().procesa(this);
+		if(exp.arg1()._desig) {
+			etq++;
+		}
+		
+		etq++;
+		exp._etqs = etq;
 	}
 
 	@Override
 	public void procesa(Igual exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp._etqi = etq;
+		exp.arg0().procesa(this);
+		if(exp.arg0()._desig) {
+			etq++;
+		}
+		if(exp.arg1()._tipo.equals("real") && exp.arg0()._tipo.equals("int")) {
+			etq++;
+		}
 		
+		exp.arg1().procesa(this);
+		if(exp.arg1()._desig) {
+			etq++;;
+		}
+		if(exp.arg0()._tipo.equals("real") && exp.arg1()._tipo.equals("int")) {
+			etq++;
+		}
+		
+		
+		etq++;
+		exp._etqs = etq;
 	}
 
 	@Override
 	public void procesa(Menor exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp._etqi = etq;
+		exp.arg0().procesa(this);
+		if(exp.arg0()._desig) {
+			etq++;
+		}
+		if(exp.arg1()._tipo.equals("real") && exp.arg0()._tipo.equals("int")) {
+			etq++;
+		}
 		
+		exp.arg1().procesa(this);
+		if(exp.arg1()._desig) {
+			etq++;;
+		}
+		if(exp.arg0()._tipo.equals("real") && exp.arg1()._tipo.equals("int")) {
+			etq++;
+		}
+		
+		
+		etq++;
+		exp._etqs = etq;
 	}
 
 	@Override
 	public void procesa(Mayor exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp._etqi = etq;
+		exp.arg0().procesa(this);
+		if(exp.arg0()._desig) {
+			etq++;
+		}
+		if(exp.arg1()._tipo.equals("real") && exp.arg0()._tipo.equals("int")) {
+			etq++;
+		}
 		
+		exp.arg1().procesa(this);
+		if(exp.arg1()._desig) {
+			etq++;;
+		}
+		if(exp.arg0()._tipo.equals("real") && exp.arg1()._tipo.equals("int")) {
+			etq++;
+		}
+		
+		
+		etq++;
+		exp._etqs = etq;
 	}
 
 	@Override
 	public void procesa(Menor_igual exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp._etqi = etq;
+		exp.arg0().procesa(this);
+		if(exp.arg0()._desig) {
+			etq++;
+		}
+		if(exp.arg1()._tipo.equals("real") && exp.arg0()._tipo.equals("int")) {
+			etq++;
+		}
 		
+		exp.arg1().procesa(this);
+		if(exp.arg1()._desig) {
+			etq++;;
+		}
+		if(exp.arg0()._tipo.equals("real") && exp.arg1()._tipo.equals("int")) {
+			etq++;
+		}
+		
+		
+		etq++;
+		exp._etqs = etq;
 	}
 
 	@Override
 	public void procesa(Mayor_igual exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp._etqi = etq;
+		exp.arg0().procesa(this);
+		if(exp.arg0()._desig) {
+			etq++;
+		}
+		if(exp.arg1()._tipo.equals("real") && exp.arg0()._tipo.equals("int")) {
+			etq++;
+		}
 		
+		exp.arg1().procesa(this);
+		if(exp.arg1()._desig) {
+			etq++;;
+		}
+		if(exp.arg0()._tipo.equals("real") && exp.arg1()._tipo.equals("int")) {
+			etq++;
+		}
+		
+		
+		etq++;
+		exp._etqs = etq;
 	}
 
 	@Override
 	public void procesa(Dist exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp._etqi = etq;
+		exp.arg0().procesa(this);
+		if(exp.arg0()._desig) {
+			etq++;
+		}
+		if(exp.arg1()._tipo.equals("real") && exp.arg0()._tipo.equals("int")) {
+			etq++;
+		}
 		
+		exp.arg1().procesa(this);
+		if(exp.arg1()._desig) {
+			etq++;;
+		}
+		if(exp.arg0()._tipo.equals("real") && exp.arg1()._tipo.equals("int")) {
+			etq++;
+		}
+		
+		
+		etq++;
+		exp._etqs = etq;
 	}
 
 	@Override
 	public void procesa(Mul exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp._etqi = etq;
+		exp.arg0().procesa(this);
+		if(exp.arg0()._desig) {
+			etq++;
+		}
+		if(exp._tipo.equals("real")) {
+			if(exp.arg0()._tipo.equals("int")) {
+				etq++;
+			}
+		}
 		
+		exp.arg1().procesa(this);
+		if(exp.arg1()._desig) {
+			etq++;
+		}
+		if(exp._tipo.equals("real")) {
+			if(exp.arg1()._tipo.equals("int")) {
+				etq++;
+			}
+		}
+		
+		etq++;
+		exp._etqs = etq;
 	}
 
 	@Override
 	public void procesa(Div exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp._etqi = etq;
+		exp.arg0().procesa(this);
+		if(exp.arg0()._desig) {
+			etq++;
+		}
+		if(exp._tipo.equals("real")) {
+			if(exp.arg0()._tipo.equals("int")) {
+				etq++;
+			}
+		}
 		
+		exp.arg1().procesa(this);
+		if(exp.arg1()._desig) {
+			etq++;
+		}
+		if(exp._tipo.equals("real")) {
+			if(exp.arg1()._tipo.equals("int")) {
+				etq++;
+			}
+		}
+		
+		etq++;
+		exp._etqs = etq;
 	}
 
 	@Override
 	public void procesa(Mod exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp._etqi = etq;
+		exp.arg0().procesa(this);
+		if(exp.arg0()._desig) {
+			etq++;
+		}
 		
+		exp.arg1().procesa(this);
+		if(exp.arg1()._desig) {
+			etq++;
+		}
+		
+		etq++;
+		exp._etqs = etq;
 	}
 
 	@Override
 	public void procesa(Menos exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp._etqi = etq;
+		exp.arg().procesa(this);
+		if(exp.arg()._desig) {
+			etq++;
+		}
 		
+		if(exp._tipo.equals("int")) {
+			etq++;
+		}
+		else if(exp._tipo.equals("real")) {
+			etq++;
+		}
+		exp._etqs = etq;
 	}
 
 	@Override
 	public void procesa(Not exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp._etqi = etq;
+		exp.arg().procesa(this);
+		if(exp.arg()._desig) {
+			etq++;
+		}
 		
+		etq++;
+		exp._etqs = etq;
 	}
 
 	@Override
@@ -171,38 +416,32 @@ public class Etiquetado extends ProcesamientoPorDefecto{
 
 	@Override
 	public void procesa(Entero exp) throws Exception {
-		// TODO Auto-generated method stub
-		
+		etq++;
 	}
 
 	@Override
 	public void procesa(Real exp) throws Exception {
-		// TODO Auto-generated method stub
-		
+		etq++;
 	}
 
 	@Override
 	public void procesa(True exp) throws Exception {
-		// TODO Auto-generated method stub
-		
+		etq++;
 	}
 
 	@Override
 	public void procesa(False exp) throws Exception {
-		// TODO Auto-generated method stub
-		
+		etq++;
 	}
 
 	@Override
 	public void procesa(Cadena exp) throws Exception {
-		// TODO Auto-generated method stub
-		
+		etq++;
 	}
 
 	@Override
 	public void procesa(Identif exp) throws Exception {
-		// TODO Auto-generated method stub
-		
+		etq++;
 	}
 
 	@Override
@@ -225,14 +464,14 @@ public class Etiquetado extends ProcesamientoPorDefecto{
 
 	@Override
 	public void procesa(Insts_vacia insts) throws Exception {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void procesa(Insts_no_vacia insts) throws Exception {
-		// TODO Auto-generated method stub
-		
+		insts._etqi = etq;
+		insts.linsts().procesa(this);
+		insts._etqs = etq;
 	}
 
 	@Override
@@ -261,38 +500,69 @@ public class Etiquetado extends ProcesamientoPorDefecto{
 
 	@Override
 	public void procesa(Inst_asig inst) throws Exception {
-		// TODO Auto-generated method stub
-		
+		inst._etqi = etq;
+		inst.arg0().procesa(this);
+		inst.arg1().procesa(this);
+		if(inst.arg0()._tipo.equals("real") && inst.arg1()._tipo.equals("int")) {
+			if(inst.arg0()._desig) etq++;
+			etq++;
+			etq++;
+		}
+		else {
+			etq++;
+		}
+		inst._etqs = etq;
 	}
 
 	@Override
 	public void procesa(Inst_if inst) throws Exception {
-		// TODO Auto-generated method stub
-		
+		inst._etqi = etq;
+		inst.exp().procesa(this);
+		if(inst.exp()._desig) etq++;
+		etq++;
+		inst.insts().procesa(this);
+		inst._etqs = etq;
 	}
 
 	@Override
 	public void procesa(Inst_if_else inst) throws Exception {
-		// TODO Auto-generated method stub
-		
+		inst._etqi = etq;
+		inst.exp().procesa(this);
+		if(inst.exp()._desig) etq++;
+		etq++;
+		inst.insts1().procesa(this);
+		etq++;
+		inst.insts2().procesa(this);
+		inst._etqs = etq;
 	}
 
 	@Override
 	public void procesa(Inst_while inst) throws Exception {
-		// TODO Auto-generated method stub
-		
+		inst._etqi = etq;
+		inst.exp().procesa(this);
+		if(inst.exp()._desig) etq++;
+		etq++;
+		inst.insts().procesa(this);
+		etq++;
+		inst._etqs = etq;
 	}
 
 	@Override
 	public void procesa(Inst_read inst) throws Exception {
-		// TODO Auto-generated method stub
-		
+		inst._etqi = etq;
+		inst.exp().procesa(this);
+		etq++;
+		etq++;
+		inst._etqs = etq;
 	}
 
 	@Override
 	public void procesa(Inst_write inst) throws Exception {
-		// TODO Auto-generated method stub
-		
+		inst._etqi = etq;
+		inst.exp().procesa(this);
+		if(inst.exp()._desig) etq++;
+		etq++;
+		inst._etqs = etq;
 	}
 
 	@Override
@@ -327,14 +597,17 @@ public class Etiquetado extends ProcesamientoPorDefecto{
 
 	@Override
 	public void procesa(Insts_una linsts) throws Exception {
-		// TODO Auto-generated method stub
-		
+		linsts._etqi = etq;
+		linsts.inst().procesa(this);
+		linsts._etqs = etq;
 	}
 
 	@Override
 	public void procesa(Insts_muchas linsts) throws Exception {
-		// TODO Auto-generated method stub
-		
+		linsts._etqi = etq;
+		linsts.linsts().procesa(this);
+		linsts.inst().procesa(this);
+		linsts._etqs = etq;
 	}
 
 	@Override
@@ -465,14 +738,16 @@ public class Etiquetado extends ProcesamientoPorDefecto{
 
 	@Override
 	public void procesa(Prog_con_decs prog) throws Exception {
-		// TODO Auto-generated method stub
-		
+		prog._etqi = etq;
+		prog.linsts().procesa(this);
+		prog._etqs = etq;
 	}
 
 	@Override
 	public void procesa(Prog_sin_decs prog) throws Exception {
-		// TODO Auto-generated method stub
-		
+		prog._etqi = etq;
+		prog.linsts().procesa(this);
+		prog._etqs = etq;
 	}
 
 	@Override

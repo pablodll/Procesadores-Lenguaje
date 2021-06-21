@@ -1,12 +1,9 @@
-var int sum;
-var real N;
-var bool b;
-var string s
+var int sum
 
 &&
-N = 200.5;
 sum = 0;
-sum = sum + 1;
-N = sum;
-b = false and true;
+while sum < 10 do
+	write "hola";
+	sum = sum + 1
+endwhile;
 write sum

@@ -14,6 +14,7 @@ import java.io.Reader;
 import procesamientos.AsignacionEspacio;
 import procesamientos.CompTiposErrorException;
 import procesamientos.ComprobacionTipos;
+import procesamientos.Etiquetado;
 import procesamientos.GenCodigo;
 import procesamientos.Impresion;
 import procesamientos.TablaSimbolos;
@@ -52,6 +53,7 @@ public class Main {
          prog.procesa(new AsignacionEspacio());
          
          // ETIQUETADO
+         prog.procesa(new Etiquetado());
          
          // GENERACION CODIGO
          MaquinaP m = new MaquinaP(100, 100, 10, 10);
