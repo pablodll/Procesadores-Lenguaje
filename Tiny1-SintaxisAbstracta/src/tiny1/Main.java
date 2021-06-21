@@ -57,7 +57,7 @@ public class Main {
          // GENERACION CODIGO
          MaquinaP m = new MaquinaP(100, 100, 10, 10);
          prog.procesa(new GenCodigo(m));
-         m.muestraCodigo();
+         m.ejecuta();
      }
    }
    

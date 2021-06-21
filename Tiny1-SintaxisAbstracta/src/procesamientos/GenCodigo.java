@@ -103,7 +103,12 @@ public class GenCodigo extends ProcesamientoPorDefecto{
 			}
 		}
 		
-		m.ponInstruccion(m.suma());
+		if(exp._tipo.equals("int")) {
+			m.ponInstruccion(m.sumaInt());
+		}
+		else if(exp._tipo.equals("real")) {
+			m.ponInstruccion(m.sumaReal());
+		}
 	}
 
 	@Override
@@ -128,7 +133,12 @@ public class GenCodigo extends ProcesamientoPorDefecto{
 			}
 		}
 		
-		m.ponInstruccion(m.resta());
+		if(exp._tipo.equals("int")) {
+			m.ponInstruccion(m.restaInt());
+		}
+		else if(exp._tipo.equals("real")) {
+			m.ponInstruccion(m.restaReal());
+		}
 	}
 
 	@Override
@@ -163,13 +173,66 @@ public class GenCodigo extends ProcesamientoPorDefecto{
 
 	@Override
 	public void procesa(Igual exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp.arg0().procesa(this);
+		if(exp.arg0()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
+		if(exp._tipo.equals("real")) {
+			if(exp.arg0()._tipo.equals("int")) {
+				m.ponInstruccion(m.toReal());
+			}
+		}
 		
+		exp.arg1().procesa(this);
+		if(exp.arg1()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
+		if(exp._tipo.equals("real")) {
+			if(exp.arg1()._tipo.equals("int")) {
+				m.ponInstruccion(m.toReal());
+			}
+		}
+		
+		if(exp._tipo.equals("int")) {
+			m.ponInstruccion(m.restaInt());
+		}
+		else if(exp._tipo.equals("real")) {
+			m.ponInstruccion(m.restaReal());
+		}
 	}
 
 	@Override
 	public void procesa(Menor exp) throws Exception {
-		// TODO Auto-generated method stub
+		exp.arg0().procesa(this);
+		if(exp.arg0()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
+		if(exp.arg1()._tipo.equals("real") && exp.arg0()._tipo.equals("int")) {
+			m.ponInstruccion(m.toReal());
+		}
+		
+		exp.arg1().procesa(this);
+		if(exp.arg1()._desig) {
+			m.ponInstruccion(m.apilaInd());
+		}
+		if(exp.arg0()._tipo.equals("real") && exp.arg1()._tipo.equals("int")) {
+			m.ponInstruccion(m.toReal());
+		}
+		
+		
+		if(exp.arg0().equals("real")) {
+			m.ponInstruccion(m.menorReal());
+		}
+		else if(exp.arg0().equals("bool")){
+			m.ponInstruccion(m.menorBool());
+		}
+		else if(exp.arg0().equals("string")) {
+			m.ponInstruccion(m.menorString());
+		}
+		else {
+			m.ponInstruccion(m.menorInt());
+		}
+		
 		
 	}
 
