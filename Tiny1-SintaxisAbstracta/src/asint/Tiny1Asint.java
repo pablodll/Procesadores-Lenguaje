@@ -947,6 +947,10 @@ public class Tiny1Asint {
          }     
      }
      
+     public static abstract class Prog  extends Genero{
+    	 public abstract void procesa(Procesamiento p) throws Exception;
+     }
+     
      public static class Prog_con_decs extends Prog{
     	 private LDecs ldecs;
     	 private LInsts linsts;
@@ -973,10 +977,6 @@ public class Tiny1Asint {
     	 public void procesa(Procesamiento p) throws Exception {
     		 p.procesa(this);
     	 }
-     }
-     
-     public static abstract class Prog  extends Genero{
-    	 public abstract void procesa(Procesamiento p) throws Exception;
      }
      
      // Constructoras

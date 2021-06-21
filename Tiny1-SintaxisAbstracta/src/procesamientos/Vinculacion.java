@@ -77,8 +77,10 @@ public class Vinculacion extends ProcesamientoPorDefecto{
 	private TablaSimbolos ts;
 	private int nivel_act = 0;
 	
-	public Vinculacion(TablaSimbolos ts) throws Exception {
-		this.ts = ts;
+	private boolean error = false;
+	
+	public Vinculacion() throws Exception {
+		this.ts = new TablaSimbolos();
 	}
 	
 	@Override
@@ -203,7 +205,8 @@ public class Vinculacion extends ProcesamientoPorDefecto{
 	@Override
 	public void procesa(Identif exp) throws Exception {
 		if(!ts.contiene(exp.id().toString())) {
-			throw new VinculacionErrorException();
+			System.err.println("Error vinculacion: fila " + exp.id().fila() + ", columna: " + exp.id().col());
+			error = true;
 		}
 		else {
 			exp._vinculo = ts.valorPara(exp.id().toString());
@@ -439,7 +442,8 @@ public class Vinculacion extends ProcesamientoPorDefecto{
 	public void procesa(Dec_var dec) throws Exception {
 		dec.tipo().procesa(this);
 		if(ts.contiene(dec.variable().toString())) {
-			throw new VinculacionErrorException();
+			System.err.println("Error vinculacion: fila " + dec.variable().fila() + ", columna: " + dec.variable().col());
+			error = true;
 		}
 		else {
 			ts.add(dec.variable().toString(), dec);
@@ -473,11 +477,13 @@ public class Vinculacion extends ProcesamientoPorDefecto{
 	public void procesa(Prog_con_decs prog) throws Exception {
 		prog.ldecs().procesa(this);
 		prog.linsts().procesa(this);
+		if(error) throw new VinculacionErrorException();
 	}
 
 	@Override
 	public void procesa(Prog_sin_decs prog) throws Exception {
 		prog.linsts().procesa(this);
+		if(error) throw new VinculacionErrorException();
 	}
 
 	@Override

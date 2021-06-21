@@ -35,18 +35,17 @@ public class Main {
 //         prog.procesa(new Impresion());  
          
          // VINCULACION
-         TablaSimbolos ts = new TablaSimbolos();
          try {
-        	 prog.procesa(new Vinculacion(ts));
+        	 prog.procesa(new Vinculacion());
          } catch (VinculacionErrorException e) {
-        	 System.err.println("ERROR DE VINCULACION");
+        	 return;
          }
          
          // COMPROBACION TIPOS
          try {
         	 prog.procesa(new ComprobacionTipos());
          } catch (CompTiposErrorException e) {
-        	 System.err.println("ERROR DE TIPOS");
+        	 return;
          }
          
          // ASIGNACION ESPACIO
