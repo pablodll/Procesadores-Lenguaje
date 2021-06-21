@@ -1,0 +1,13 @@
+var int i;
+var real n;
+var bool r
+&&
+i = 2;
+r = false;
+while r == false do
+	i = i + 1;
+	if i > 10 then
+		r = true
+	endif
+endwhile;
+write i

@@ -1,0 +1,10 @@
+var int sum;
+var real n
+&&
+sum = 2;
+n = 0.5 * 2;
+write n;
+sum = 10 - sum;
+n = (10 / 5);
+write sum;
+write n
